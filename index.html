@@ -1,866 +1,1354 @@
-<meta>
-    <meta>
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mathletica — Master Mathematics. Interactive lessons, adaptive practice, and powerful tools for every level.">
     <title>Mathletica - Master Mathematics</title>
-    <link>
-    <link>
-    <link>
-    <link>
-    <script></script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- MathJax -->
     <script>
+        MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
 
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    
-    
-        
-            ∑
-            Mathletica
-            
-        
-    
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
 
-    
-    <nav>
-        
-            
-                ∑
-                Mathletica
-            
-            
-                
-                    
-                         Home
-                    
-                
-                
-                    
-                         Courses 
-                    
-                    
-                        Arithmetic
-                        Algebra
-                        Geometry
-                        Trigonometry
-                        Calculus
-                        Statistics
-                        Linear Algebra
-                        Discrete Math
-                    
-                
-                
-                    
-                         Practice
-                    
-                
-                
-                    
-                         Tools
-                    
-                
-                
-                    
-                         Progress
-                    
-                
-                
-                    
-                         Community
-                    
-                
-            
-            
-                
-                    
-                
-                
-                    
-                    0
-                
-                
-                     Sign In
-                
-            
-            
-                
-            
-        
+    <!-- ============================
+         LOADER
+         ============================ -->
+    <div class="loader" id="loader">
+        <div class="loader-content">
+            <div class="loader-logo">∑</div>
+            <div class="loader-text">Mathletica</div>
+            <div class="loader-bar">
+                <div class="loader-progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================
+         NAVBAR
+         ============================ -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#home" class="nav-logo">
+                <div class="logo-icon">∑</div>
+                <span>Mathletica</span>
+            </a>
+
+            <ul class="nav-menu" id="navMenu">
+                <li>
+                    <a href="#home" class="nav-link active">
+                        <i class="fas fa-home"></i> Home
+                    </a>
+                </li>
+                <li class="dropdown">
+                    <a href="#courses" class="nav-link">
+                        <i class="fas fa-book-open"></i> Courses <i class="fas fa-chevron-down" style="font-size:11px;"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#courses">Arithmetic</a></li>
+                        <li><a href="#courses">Algebra</a></li>
+                        <li><a href="#courses">Geometry</a></li>
+                        <li><a href="#courses">Trigonometry</a></li>
+                        <li><a href="#courses">Calculus</a></li>
+                        <li><a href="#courses">Statistics</a></li>
+                        <li><a href="#courses">Linear Algebra</a></li>
+                        <li><a href="#courses">Discrete Math</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#practice" class="nav-link">
+                        <i class="fas fa-pencil-alt"></i> Practice
+                    </a>
+                </li>
+                <li>
+                    <a href="#tools" class="nav-link">
+                        <i class="fas fa-calculator"></i> Tools
+                    </a>
+                </li>
+                <li>
+                    <a href="#progress" class="nav-link">
+                        <i class="fas fa-chart-line"></i> Progress
+                    </a>
+                </li>
+                <li>
+                    <a href="#community" class="nav-link">
+                        <i class="fas fa-users"></i> Community
+                    </a>
+                </li>
+            </ul>
+
+            <div class="nav-actions">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <div class="nav-streak">
+                    <i class="fas fa-fire"></i>
+                    <span id="navStreak">0</span>
+                </div>
+                <button class="btn btn-primary nav-btn" onclick="openModal()">
+                    <i class="fas fa-user"></i> Sign In
+                </button>
+            </div>
+
+            <button class="nav-toggle" id="navToggle" aria-label="Open menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
     </nav>
 
-    
-    <section>
-        
-            
-        
-        
-            
-                 #1 Mathematics Learning Platform
-            
-            
-                Master Mathematics
-                One Problem at a Time
-            
-            
-                From basic arithmetic to advanced calculus — interactive lessons, 
-                adaptive practice, and powerful tools to transform your mathematical journey.
-            
-            
-                
-                    0+
-                    Lessons
-                
-                
-                    0+
-                    Problems
-                
-                
-                    0+
-                    Students
-                
-                
-                    0
-                    Subjects
-                
-            
-            
-                
-                     Start Learning Free
-                
-                
-                     Watch Demo
-                
-            
-            
-                $ e^{i\pi} + 1 = 0 $
-            
-        
-        
-            
-                
-            
-            Scroll to explore
-        
+    <!-- ============================
+         HERO
+         ============================ -->
+    <section class="hero section" id="home">
+        <div class="hero-bg"></div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-star"></i> #1 Mathematics Learning Platform
+                </div>
+                <h1 class="hero-title">
+                    Master Mathematics<br>
+                    <span class="gradient-text">One Problem at a Time</span>
+                </h1>
+                <p class="hero-subtitle">
+                    From basic arithmetic to advanced calculus — interactive lessons,
+                    adaptive practice, and powerful tools to transform your mathematical journey.
+                </p>
+
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <span class="stat-number" data-target="395">0+</span>
+                        <span class="stat-label">Lessons</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="stat-number" data-target="9700">0+</span>
+                        <span class="stat-label">Problems</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="stat-number" data-target="50000">0+</span>
+                        <span class="stat-label">Students</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="stat-number" data-target="8">0</span>
+                        <span class="stat-label">Subjects</span>
+                    </div>
+                </div>
+
+                <div class="hero-actions">
+                    <button class="btn btn-primary btn-lg" onclick="openModal()">
+                        <i class="fas fa-rocket"></i> Start Learning Free
+                    </button>
+                    <a href="#lessons" class="btn btn-outline btn-lg">
+                        <i class="fas fa-play"></i> Watch Demo
+                    </a>
+                </div>
+
+                <div class="hero-formula">
+                    $ e^{i\pi} + 1 = 0 $
+                </div>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <i class="fas fa-chevron-down"></i>
+            <span>Scroll to explore</span>
+        </div>
     </section>
 
-    
-    <section>
-        
-            
-                📚 Comprehensive Curriculum
-                Explore Our Courses
-                
+    <!-- ============================
+         COURSES
+         ============================ -->
+    <section class="section" id="courses">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-tag">📚 Comprehensive Curriculum</div>
+                <h2 class="section-title">Explore Our Courses</h2>
+                <p class="section-subtitle">
                     Structured learning paths covering all major areas of mathematics,
                     from foundations to advanced topics.
-                
-            
-            
-            
-                All Courses
-                Beginner
-                Intermediate
-                Advanced
-            
+                </p>
+            </div>
 
-            
-                
-            
-        
-    
+            <div class="filter-tabs" id="courseFilters">
+                <button class="filter-tab active" data-filter="all">All Courses</button>
+                <button class="filter-tab" data-filter="beginner">Beginner</button>
+                <button class="filter-tab" data-filter="intermediate">Intermediate</button>
+                <button class="filter-tab" data-filter="advanced">Advanced</button>
+            </div>
 
-    
-    <section>
-        
-            
-                🎯 Interactive Learning
-                Experience Our Lessons
-                Try an interactive lesson right here — no sign-up required!
-            
-            
-            
-                
-                    Lesson Topics
-                    
-                        
-                             Quadratic Equations
-                        
-                        
-                             Pythagorean Theorem
-                        
-                        
-                             Introduction to Derivatives
-                        
-                        
-                             Basic Probability
-                        
-                    
-                
-                
-                    
-                
-            
-        
-    
-
-    
-    <section>
-        
-            
-                ✏️ Adaptive Practice
-                Practice Makes Perfect
-                
-                    AI-powered problem generation that adapts to your skill level.
-                
-            
-
-            
-                
-                    
-                        Subject
-                        
-                            Arithmetic
-                            Algebra
-                            Geometry
-                            Trigonometry
-                            Calculus
-                            Statistics
-                        
-                    
-                    
-                        Difficulty
-                        
-                            
-                                 Easy
-                            
-                            
-                                 Medium
-                            
-                            
-                                 Hard
-                            
-                        
-                    
-                    
-                         Generate Problem
-                    
-                
-
-                
-                    
-                        
-                        Ready to Practice?
-                        Select a subject and difficulty, then click "Generate Problem" to begin!
-                    
-                
-
-                
-                     Session Stats
-                    
-                        
-                            0
-                            Correct
-                        
-                        
-                            0
-                            Total
-                        
-                        
-                            0%
-                            Accuracy
-                        
-                        
-                            0
-                            Streak
-                        
-                    
-                    
-                        XP Progress
-                        
-                            
-                        
-                        0 / 100 XP
-                    
-                
-            
-        
-    
-
-    
-    <section>
-        
-            
-                🔧 Powerful Tools
-                Mathematical Toolkit
-                
-                    Professional-grade calculators and visualization tools at your fingertips.
-                
-            
-
-            
-                
-                
-                    
-                         Scientific Calculator
-                        
-                            
-                        
-                    
-                    
-                        
-                            
-                            0
-                        
-                        
-                            sin
-                            cos
-                            tan
-                            log
-                            ln
-                            √
-                            x^y
-                            π
-                            e
-                            |x|
-                             (
-                            )
-                            7
-                            8
-                            9
-                            ÷
-                            4
-                            5
-                            6
-                            ×
-                            1
-                            2
-                            3
-                            −
-                            0
-                            .
-                            C
-                            +
-                            =
-                            ⌫
-                            n!
-                            %
-                        
-                    
-                
-
-                
-                
-                    
-                         Function Grapher
-                        
-                            
-                        
-                    
-                    
-                        
-                            
-                                f(x) = 
-                                
-                                
-                                    Plot
-                                
-                            
-                            
-                                g(x) = 
-                                
-                                
-                                    Plot
-                                
-                            
-                            
-                                
-                                    X: 
-                                    
-                                    to
-                                    
-                                
-                                
-                                    Y: 
-                                    
-                                    to
-                                    
-                                
-                            
-                        
-                        
-                        
-                    
-                
-
-                
-                
-                    
-                         Unit Circle
-                        
-                            
-                        
-                    
-                    
-                        
-                        
-                            
-                                Angle:
-                                0°
-                            
-                            
-                                Radians:
-                                0
-                            
-                            
-                                sin(θ):
-                                0
-                            
-                            
-                                cos(θ):
-                                1
-                            
-                            
-                                tan(θ):
-                                0
-                            
-                        
-                        
-                    
-                
-
-                
-                
-                    
-                         Matrix Calculator
-                        
-                            
-                        
-                    
-                    
-                        
-                            Size:
-                            
-                                2×2
-                                3×3
-                                4×4
-                            
-                        
-                        
-                            
-                                Matrix A
-                                
-                            
-                            
-                                A + B
-                                A − B
-                                A × B
-                                det(A)
-                                A⁻¹
-                                Aᵀ
-                            
-                            
-                                Matrix B
-                                
-                            
-                        
-                        
-                            Result
-                            
-                        
-                    
-                
-
-                
-                
-                    
-                         Equation Solver
-                    
-                    
-                        
-                            Linear
-                            Quadratic
-                            System
-                        
-                        
-                            
-                        
-                        
-                             Solve
-                        
-                        
-                    
-                
-
-                
-                
-                    
-                         Number Base Converter
-                    
-                    
-                        
-                            Input Number:
-                            
-                        
-                        
-                            From Base:
-                            
-                                Binary (2)
-                                Octal (8)
-                                Decimal (10)
-                                Hexadecimal (16)
-                            
-                        
-                        
-                            
-                                Binary:
-                                11111111
-                            
-                            
-                                Octal:
-                                377
-                            
-                            
-                                Decimal:
-                                255
-                            
-                            
-                                Hexadecimal:
-                                FF
-                            
-                        
-                    
-                
-            
-        
+            <div class="courses-grid" id="coursesGrid">
+                <!-- Populated by app.js -->
+            </div>
+        </div>
     </section>
 
-    
-    <section>
-        
-            
-                📊 Track Your Growth
-                Your Learning Dashboard
-                
+    <!-- ============================
+         LESSONS
+         ============================ -->
+    <section class="section" id="lessons">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-tag">🎯 Interactive Learning</div>
+                <h2 class="section-title">Experience Our Lessons</h2>
+                <p class="section-subtitle">Try an interactive lesson right here — no sign-up required!</p>
+            </div>
+
+            <div class="lesson-container">
+                <div class="lesson-sidebar">
+                    <h3 class="sidebar-title">Lesson Topics</h3>
+                    <ul class="lesson-topics" id="lessonTopics">
+                        <li>
+                            <button class="lesson-topic active" data-lesson="quadratic">
+                                <i class="fas fa-superscript"></i> Quadratic Equations
+                            </button>
+                        </li>
+                        <li>
+                            <button class="lesson-topic" data-lesson="pythagorean">
+                                <i class="fas fa-ruler-combined"></i> Pythagorean Theorem
+                            </button>
+                        </li>
+                        <li>
+                            <button class="lesson-topic" data-lesson="derivatives">
+                                <i class="fas fa-chart-area"></i> Introduction to Derivatives
+                            </button>
+                        </li>
+                        <li>
+                            <button class="lesson-topic" data-lesson="probability">
+                                <i class="fas fa-dice"></i> Basic Probability
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+                <div class="lesson-content" id="lessonContent">
+                    <!-- Populated by app.js -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================
+         PRACTICE
+         ============================ -->
+    <section class="section" id="practice">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-tag">✏️ Adaptive Practice</div>
+                <h2 class="section-title">Practice Makes Perfect</h2>
+                <p class="section-subtitle">
+                    AI-powered problem generation that adapts to your skill level.
+                </p>
+            </div>
+
+            <div class="practice-container">
+                <div class="practice-controls">
+                    <div class="control-group">
+                        <label for="practiceSubject">Subject</label>
+                        <select id="practiceSubject" class="input">
+                            <option value="arithmetic">Arithmetic</option>
+                            <option value="algebra">Algebra</option>
+                            <option value="geometry">Geometry</option>
+                            <option value="trigonometry">Trigonometry</option>
+                            <option value="calculus">Calculus</option>
+                            <option value="statistics">Statistics</option>
+                        </select>
+                    </div>
+                    <div class="control-group">
+                        <label>Difficulty</label>
+                        <div class="difficulty-btns">
+                            <button class="difficulty-btn active" data-difficulty="easy">
+                                <i class="fas fa-seedling"></i> Easy
+                            </button>
+                            <button class="difficulty-btn" data-difficulty="medium">
+                                <i class="fas fa-fire"></i> Medium
+                            </button>
+                            <button class="difficulty-btn" data-difficulty="hard">
+                                <i class="fas fa-bolt"></i> Hard
+                            </button>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary btn-full" id="generateBtn" onclick="generateProblem()">
+                        <i class="fas fa-dice"></i> Generate Problem
+                    </button>
+                </div>
+
+                <div class="practice-main">
+                    <div class="problem-card" id="problemCard">
+                        <div class="problem-placeholder">
+                            <i class="fas fa-graduation-cap"></i>
+                            <h3>Ready to Practice?</h3>
+                            <p>Select a subject and difficulty, then click "Generate Problem" to begin!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="practice-sidebar">
+                    <div class="session-stats">
+                        <h3 class="sidebar-title"><i class="fas fa-chart-bar"></i> Session Stats</h3>
+                        <div class="stats-grid">
+                            <div class="stat-box">
+                                <span class="stat-val" id="statCorrect">0</span>
+                                <span class="stat-lbl">Correct</span>
+                            </div>
+                            <div class="stat-box">
+                                <span class="stat-val" id="statTotal">0</span>
+                                <span class="stat-lbl">Total</span>
+                            </div>
+                            <div class="stat-box">
+                                <span class="stat-val" id="statAccuracy">0%</span>
+                                <span class="stat-lbl">Accuracy</span>
+                            </div>
+                            <div class="stat-box">
+                                <span class="stat-val" id="statStreak">0</span>
+                                <span class="stat-lbl">Streak</span>
+                            </div>
+                        </div>
+                        <div class="xp-section">
+                            <div class="xp-label">XP Progress</div>
+                            <div class="xp-bar">
+                                <div class="xp-fill" id="xpFill" style="width: 0%"></div>
+                            </div>
+                            <div class="xp-text" id="xpText">0 / 100 XP</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================
+         TOOLS
+         ============================ -->
+    <section class="section" id="tools">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-tag">🔧 Powerful Tools</div>
+                <h2 class="section-title">Mathematical Toolkit</h2>
+                <p class="section-subtitle">
+                    Professional-grade calculators and visualization tools at your fingertips.
+                </p>
+            </div>
+
+            <div class="tools-tabs">
+                <button class="tool-tab active" data-tool="calculator">
+                    <i class="fas fa-calculator"></i> Scientific Calculator
+                </button>
+                <button class="tool-tab" data-tool="grapher">
+                    <i class="fas fa-chart-line"></i> Function Grapher
+                </button>
+                <button class="tool-tab" data-tool="matrix">
+                    <i class="fas fa-th"></i> Matrix Calculator
+                </button>
+                <button class="tool-tab" data-tool="converter">
+                    <i class="fas fa-exchange-alt"></i> Unit Converter
+                </button>
+            </div>
+
+            <div class="tools-grid">
+
+                <!-- Scientific Calculator -->
+                <div class="tool-panel active" id="tool-calculator">
+                    <div class="calculator">
+                        <div class="calc-display">
+                            <div class="calc-history" id="calcHistory"></div>
+                            <div class="calc-input" id="calcInput">0</div>
+                        </div>
+                        <div class="calc-buttons">
+                            <button class="calc-btn fn" onclick="calcFn('sin')">sin</button>
+                            <button class="calc-btn fn" onclick="calcFn('cos')">cos</button>
+                            <button class="calc-btn fn" onclick="calcFn('tan')">tan</button>
+                            <button class="calc-btn fn" onclick="calcFn('log')">log</button>
+                            <button class="calc-btn fn" onclick="calcFn('ln')">ln</button>
+                            <button class="calc-btn fn" onclick="calcFn('sqrt')">√</button>
+                            <button class="calc-btn fn" onclick="calcOp('^')">x^y</button>
+                            <button class="calc-btn fn" onclick="calcConst('π')">π</button>
+                            <button class="calc-btn fn" onclick="calcConst('e')">e</button>
+                            <button class="calc-btn fn" onclick="calcFn('abs')">|x|</button>
+                            <button class="calc-btn fn" onclick="calcInput('(')"> (</button>
+                            <button class="calc-btn fn" onclick="calcInput(')')">)</button>
+                            <button class="calc-btn num" onclick="calcInput('7')">7</button>
+                            <button class="calc-btn num" onclick="calcInput('8')">8</button>
+                            <button class="calc-btn num" onclick="calcInput('9')">9</button>
+                            <button class="calc-btn op" onclick="calcOp('÷')">÷</button>
+                            <button class="calc-btn num" onclick="calcInput('4')">4</button>
+                            <button class="calc-btn num" onclick="calcInput('5')">5</button>
+                            <button class="calc-btn num" onclick="calcInput('6')">6</button>
+                            <button class="calc-btn op" onclick="calcOp('×')">×</button>
+                            <button class="calc-btn num" onclick="calcInput('1')">1</button>
+                            <button class="calc-btn num" onclick="calcInput('2')">2</button>
+                            <button class="calc-btn num" onclick="calcInput('3')">3</button>
+                            <button class="calc-btn op" onclick="calcOp('−')">−</button>
+                            <button class="calc-btn num" onclick="calcInput('0')">0</button>
+                            <button class="calc-btn num" onclick="calcInput('.')">.</button>
+                            <button class="calc-btn clear" onclick="calcClear()">C</button>
+                            <button class="calc-btn op" onclick="calcOp('+')">+</button>
+                            <button class="calc-btn equals" onclick="calcEquals()">=</button>
+                            <button class="calc-btn clear" onclick="calcBackspace()">⌫</button>
+                            <button class="calc-btn fn" onclick="calcFn('fact')">n!</button>
+                            <button class="calc-btn fn" onclick="calcOp('%')">%</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Function Grapher -->
+                <div class="tool-panel" id="tool-grapher">
+                    <div class="grapher">
+                        <div class="grapher-input">
+                            <label for="graphFn">f(x) =</label>
+                            <input type="text" id="graphFn" class="input" placeholder="e.g. x^2 - 3*x + 2" value="x^2">
+                            <button class="btn btn-primary" onclick="plotGraph()">
+                                <i class="fas fa-chart-line"></i> Plot
+                            </button>
+                        </div>
+                        <canvas id="graphCanvas" width="600" height="350"></canvas>
+                    </div>
+                </div>
+
+                <!-- Matrix Calculator -->
+                <div class="tool-panel" id="tool-matrix">
+                    <div class="matrix-calc">
+                        <h3>Matrix A</h3>
+                        <div class="matrix-inputs" id="matrixA">
+                            <div class="matrix-row">
+                                <input type="number" class="matrix-cell input" value="1">
+                                <input type="number" class="matrix-cell input" value="2">
+                            </div>
+                            <div class="matrix-row">
+                                <input type="number" class="matrix-cell input" value="3">
+                                <input type="number" class="matrix-cell input" value="4">
+                            </div>
+                        </div>
+                        <div class="matrix-ops">
+                            <button class="btn btn-outline" onclick="matrixOp('det')">Determinant</button>
+                            <button class="btn btn-outline" onclick="matrixOp('inv')">Inverse</button>
+                            <button class="btn btn-outline" onclick="matrixOp('trans')">Transpose</button>
+                        </div>
+                        <div class="matrix-result" id="matrixResult"></div>
+                    </div>
+                </div>
+
+                <!-- Unit Converter -->
+                <div class="tool-panel" id="tool-converter">
+                    <div class="converter">
+                        <div class="converter-group">
+                            <label>Category</label>
+                            <select id="converterCategory" class="input" onchange="updateConverterUnits()">
+                                <option value="length">Length</option>
+                                <option value="mass">Mass</option>
+                                <option value="temperature">Temperature</option>
+                                <option value="area">Area</option>
+                                <option value="speed">Speed</option>
+                            </select>
+                        </div>
+                        <div class="converter-row">
+                            <div class="converter-group">
+                                <label>From</label>
+                                <input type="number" id="converterInput" class="input" value="1" oninput="convert()">
+                                <select id="converterFrom" class="input" onchange="convert()"></select>
+                            </div>
+                            <div class="converter-equals"><i class="fas fa-equals"></i></div>
+                            <div class="converter-group">
+                                <label>To</label>
+                                <input type="number" id="converterOutput" class="input" readonly>
+                                <select id="converterTo" class="input" onchange="convert()"></select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================
+         PROGRESS / DASHBOARD
+         ============================ -->
+    <section class="section" id="progress">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-tag">📊 Track Your Growth</div>
+                <h2 class="section-title">Your Learning Dashboard</h2>
+                <p class="section-subtitle">
                     Monitor your progress, earn achievements, and stay motivated.
-                
-            
+                </p>
+            </div>
 
-            
-                
-                    
-                        
-                            
-                        
-                        
-                            0
-                            Day Streak
-                        
-                    
-                    
-                        
-                            
-                        
-                        
-                            0
-                            Total XP
-                        
-                    
-                    
-                        
-                            
-                        
-                        
-                            0
-                            Problems Solved
-                        
-                    
-                    
-                        
-                            
-                        
-                        
-                            1
-                            Level
-                        
-                    
-                
+            <div class="dash-stats">
+                <div class="dash-stat">
+                    <div class="dash-stat-icon"><i class="fas fa-fire"></i></div>
+                    <div class="dash-stat-info">
+                        <span class="dash-stat-val" id="dashStreak">0</span>
+                        <span class="dash-stat-lbl">Day Streak</span>
+                    </div>
+                </div>
+                <div class="dash-stat">
+                    <div class="dash-stat-icon"><i class="fas fa-star"></i></div>
+                    <div class="dash-stat-info">
+                        <span class="dash-stat-val" id="dashXP">0</span>
+                        <span class="dash-stat-lbl">Total XP</span>
+                    </div>
+                </div>
+                <div class="dash-stat">
+                    <div class="dash-stat-icon"><i class="fas fa-check-circle"></i></div>
+                    <div class="dash-stat-info">
+                        <span class="dash-stat-val" id="dashProblems">0</span>
+                        <span class="dash-stat-lbl">Problems Solved</span>
+                    </div>
+                </div>
+                <div class="dash-stat">
+                    <div class="dash-stat-icon"><i class="fas fa-trophy"></i></div>
+                    <div class="dash-stat-info">
+                        <span class="dash-stat-val" id="dashLevel">1</span>
+                        <span class="dash-stat-lbl">Level</span>
+                    </div>
+                </div>
+            </div>
 
-                
-                    
-                        Weekly Activity
-                        
-                    
-                    
-                        Subject Mastery
-                        
-                            
-                        
-                    
-                
+            <div class="dash-charts">
+                <div class="dash-chart-card">
+                    <h3>Weekly Activity</h3>
+                    <canvas id="weeklyChart" height="200"></canvas>
+                </div>
+                <div class="dash-chart-card">
+                    <h3>Subject Mastery</h3>
+                    <div class="mastery-bars" id="masteryBars">
+                        <!-- Populated by app.js -->
+                    </div>
+                </div>
+            </div>
 
-                
-                     Achievements
-                    
-                        
-                    
-                
-            
-        
-    
+            <div class="achievements-section">
+                <h3><i class="fas fa-medal"></i> Achievements</h3>
+                <div class="achievements-grid" id="achievementsGrid">
+                    <!-- Populated by app.js -->
+                </div>
+            </div>
+        </div>
+    </section>
 
-    
-    <section>
-        
-            
-                📋 Quick Reference
-                Formula Sheet
-                Essential formulas at your fingertips.
-            
+    <!-- ============================
+         FORMULA SHEET
+         ============================ -->
+    <section class="section" id="formulas">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-tag">📋 Quick Reference</div>
+                <h2 class="section-title">Formula Sheet</h2>
+                <p class="section-subtitle">Essential formulas at your fingertips.</p>
+            </div>
 
-            
-                
-                
-            
+            <div class="formula-search">
+                <i class="fas fa-search"></i>
+                <input type="text" id="formulaSearch" class="input" placeholder="Search formulas..." oninput="searchFormulas(this.value)">
+            </div>
 
-            
-                Algebra
-                Geometry
-                Trigonometry
-                Calculus
-                Statistics
-            
+            <div class="formula-tabs">
+                <button class="formula-tab active" data-subject="algebra">Algebra</button>
+                <button class="formula-tab" data-subject="geometry">Geometry</button>
+                <button class="formula-tab" data-subject="trigonometry">Trigonometry</button>
+                <button class="formula-tab" data-subject="calculus">Calculus</button>
+                <button class="formula-tab" data-subject="statistics">Statistics</button>
+            </div>
 
-            
-                
-            
-        
-    
+            <div class="formula-content" id="formulaContent">
+                <!-- Populated by app.js -->
+            </div>
+        </div>
+    </section>
 
-    
-    <section>
-        
-            
-                🌐 Learn Together
-                Community Hub
-                Connect with fellow learners and share knowledge.
-            
+    <!-- ============================
+         COMMUNITY
+         ============================ -->
+    <section class="section" id="community">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-tag">🌐 Learn Together</div>
+                <h2 class="section-title">Community Hub</h2>
+                <p class="section-subtitle">Connect with fellow learners and share knowledge.</p>
+            </div>
 
-            
-                
-                    
-                    Discussion Forums
-                    Ask questions, share solutions, and engage in mathematical discussions.
-                    
-                         2,341 posts today
-                    
-                
-                
-                    
-                    Weekly Challenges
-                    Compete in weekly math challenges and climb the leaderboard.
-                    
-                         New challenge in 3 days
-                    
-                
-                
-                    
-                    Study Groups
-                    Join or create study groups to learn collaboratively.
-                    
-                         156 active groups
-                    
-                
-                
-                    
-                    Leaderboard
-                    See where you rank among other students worldwide.
-                    
-                         50,000+ students
-                    
-                
-            
+            <div class="community-grid">
+                <div class="community-card">
+                    <div class="community-icon"><i class="fas fa-comments"></i></div>
+                    <h3>Discussion Forums</h3>
+                    <p>Ask questions, share solutions, and engage in mathematical discussions.</p>
+                    <div class="community-stat"><i class="fas fa-circle" style="color:#10b981;font-size:8px;"></i> 2,341 posts today</div>
+                </div>
+                <div class="community-card">
+                    <div class="community-icon"><i class="fas fa-trophy"></i></div>
+                    <h3>Weekly Challenges</h3>
+                    <p>Compete in weekly math challenges and climb the leaderboard.</p>
+                    <div class="community-stat"><i class="fas fa-clock"></i> New challenge in 3 days</div>
+                </div>
+                <div class="community-card">
+                    <div class="community-icon"><i class="fas fa-users"></i></div>
+                    <h3>Study Groups</h3>
+                    <p>Join or create study groups to learn collaboratively.</p>
+                    <div class="community-stat"><i class="fas fa-circle" style="color:#10b981;font-size:8px;"></i> 156 active groups</div>
+                </div>
+                <div class="community-card">
+                    <div class="community-icon"><i class="fas fa-chart-bar"></i></div>
+                    <h3>Leaderboard</h3>
+                    <p>See where you rank among other students worldwide.</p>
+                    <div class="community-stat"><i class="fas fa-users"></i> 50,000+ students</div>
+                </div>
+            </div>
 
-            
-            
-                 Top Learners This Week
-                
-                    
-                
-            
-        
-    
+            <div class="leaderboard-section">
+                <h3><i class="fas fa-crown"></i> Top Learners This Week</h3>
+                <div class="leaderboard" id="leaderboard">
+                    <!-- Populated by app.js -->
+                </div>
+            </div>
+        </div>
+    </section>
 
-    
-    <section>
-        
-            
-                💬 What Students Say
-                Success Stories
-            
-            
-                
-                    
-                
-                
-            
-        
-    
+    <!-- ============================
+         TESTIMONIALS
+         ============================ -->
+    <section class="section" id="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-tag">💬 What Students Say</div>
+                <h2 class="section-title">Success Stories</h2>
+            </div>
+            <div class="testimonials-slider">
+                <div class="testimonials-track" id="testimonialsTrack">
+                    <!-- Populated by app.js -->
+                </div>
+                <div class="testimonial-dots" id="testimonialDots"></div>
+            </div>
+        </div>
+    </section>
 
-    
-    <section>
-        
-            
-                Ready to Transform Your Math Skills?
-                Join 50,000+ students who are mastering mathematics with Mathletica.
-                
-                    
-                         Get Started Free
-                    
-                
-                
-                     Free forever plan
-                     No credit card required
-                     500+ free lessons
-                
-            
-        
-    
+    <!-- ============================
+         CTA
+         ============================ -->
+    <section class="section cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Transform Your Math Skills?</h2>
+                <p>Join 50,000+ students who are mastering mathematics with Mathletica.</p>
+                <div class="cta-actions">
+                    <button class="btn btn-primary btn-lg" onclick="openModal()">
+                        <i class="fas fa-rocket"></i> Get Started Free
+                    </button>
+                </div>
+                <div class="cta-features">
+                    <span><i class="fas fa-check"></i> Free forever plan</span>
+                    <span><i class="fas fa-check"></i> No credit card required</span>
+                    <span><i class="fas fa-check"></i> 500+ free lessons</span>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    
-    <footer>
-        
-            
-                
-                    
-                        ∑
-                        Mathletica
-                    
-                    Making mathematics accessible, engaging, and enjoyable for everyone.
-                    
-                        
-                        
-                        
-                        
-                        
-                    
-                
-                
-                    Courses
-                    
-                        Arithmetic
-                        Algebra
-                        Geometry
-                        Calculus
-                        Statistics
-                    
-                
-                
-                    Resources
-                    
-                        Formula Sheets
-                        Practice Problems
-                        Video Tutorials
-                        Blog
-                        Glossary
-                    
-                
-                
-                    Company
-                    
-                        About Us
-                        Careers
-                        Privacy Policy
-                        Terms of Service
-                        Contact
-                    
-                
-            
-            
-                © 2024 Mathletica. All rights reserved. Made with ∑ and ❤️
-            
-        
+    <!-- ============================
+         FOOTER
+         ============================ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="nav-logo" style="margin-bottom:12px;">
+                        <div class="logo-icon">∑</div>
+                        <span>Mathletica</span>
+                    </div>
+                    <p>Making mathematics accessible, engaging, and enjoyable for everyone.</p>
+                    <div class="footer-socials">
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" aria-label="Discord"><i class="fab fa-discord"></i></a>
+                        <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Courses</h4>
+                    <ul>
+                        <li><a href="#courses">Arithmetic</a></li>
+                        <li><a href="#courses">Algebra</a></li>
+                        <li><a href="#courses">Geometry</a></li>
+                        <li><a href="#courses">Calculus</a></li>
+                        <li><a href="#courses">Statistics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#formulas">Formula Sheets</a></li>
+                        <li><a href="#practice">Practice Problems</a></li>
+                        <li><a href="#">Video Tutorials</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Glossary</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 Mathletica. All rights reserved. Made with ∑ and ❤️</p>
+            </div>
+        </div>
     </footer>
 
-    
-    
-        
-        
-            <button>
-                
+    <!-- ============================
+         MODAL (Auth)
+         ============================ -->
+    <div class="modal" id="authModal">
+        <div class="modal-overlay" onclick="closeModal()"></div>
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">
+                <i class="fas fa-times"></i>
             </button>
-            
-                
-                    <button>
-                        Sign In
-                    
-                    <button>
-                        Sign Up
-                    
-                
-                <form>
-                    
-                         Email
-                        
-                    
-                    
-                         Password
-                        
-                    
-                    
-                         Sign In
-                    
-                    or continue with
-                    
-                        
-                             Google
-                        
-                        
-                             GitHub
-                        
-                    
-                </form>
-                <form>
-                    
-                         Full Name
-                        
-                    
-                    
-                         Email
-                        
-                    
-                    
-                         Password
-                        
-                    
-                    
-                         Math Level
-                        
-                            Elementary
-                            Middle School
-                            High School
-                            College
-                            Graduate
-                        
-                    
-                    
-                         Create Account
-                    
-                    or continue with
-                    
-                        
-                             Google
-                        
-                        
-                             GitHub
-                        
-                    
-                
-            
-        
-    
+            <div class="auth-tabs">
+                <button class="auth-tab active" onclick="switchAuthTab('signin')">Sign In</button>
+                <button class="auth-tab" onclick="switchAuthTab('signup')">Sign Up</button>
+            </div>
+            <form class="auth-form" id="signinForm" onsubmit="handleSignIn(event)">
+                <div class="form-group">
+                    <label for="signinEmail"><i class="fas fa-envelope"></i> Email</label>
+                    <input type="email" id="signinEmail" class="input" placeholder="you@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="signinPassword"><i class="fas fa-lock"></i> Password</label>
+                    <input type="password" id="signinPassword" class="input" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full"><i class="fas fa-sign-in-alt"></i> Sign In</button>
+                <div class="auth-divider"><span>or continue with</span></div>
+                <div class="social-auth">
+                    <button type="button" class="btn btn-outline btn-full"><i class="fab fa-google"></i> Google</button>
+                    <button type="button" class="btn btn-outline btn-full"><i class="fab fa-github"></i> GitHub</button>
+                </div>
+            </form>
+            <form class="auth-form hidden" id="signupForm" onsubmit="handleSignUp(event)">
+                <div class="form-group">
+                    <label for="signupName"><i class="fas fa-user"></i> Full Name</label>
+                    <input type="text" id="signupName" class="input" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupEmail"><i class="fas fa-envelope"></i> Email</label>
+                    <input type="email" id="signupEmail" class="input" placeholder="you@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword"><i class="fas fa-lock"></i> Password</label>
+                    <input type="password" id="signupPassword" class="input" placeholder="••••••••" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupLevel"><i class="fas fa-graduation-cap"></i> Math Level</label>
+                    <select id="signupLevel" class="input">
+                        <option>Elementary</option>
+                        <option>Middle School</option>
+                        <option selected>High School</option>
+                        <option>College</option>
+                        <option>Graduate</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full"><i class="fas fa-user-plus"></i> Create Account</button>
+                <div class="auth-divider"><span>or continue with</span></div>
+                <div class="social-auth">
+                    <button type="button" class="btn btn-outline btn-full"><i class="fab fa-google"></i> Google</button>
+                    <button type="button" class="btn btn-outline btn-full"><i class="fab fa-github"></i> GitHub</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
-    
-    
+    <!-- Toast container -->
+    <div class="toast-container" id="toastContainer"></div>
 
-    
-    <button>
-        
-    
+    <!-- Back to top -->
+    <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
 
+    <!-- ============================
+         INLINE BOOTSTRAP JS
+         (minimal helpers so the page
+          works even before app.js loads)
+         ============================ -->
     <script>
+        // --- Theme ---
+        const savedTheme = localStorage.getItem('mathletica-theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+
+        function openModal() {
+            document.getElementById('authModal').classList.add('active');
+        }
+        function closeModal() {
+            document.getElementById('authModal').classList.remove('active');
+        }
+        function switchAuthTab(tab) {
+            document.querySelectorAll('.auth-tab').forEach((t,i)=>t.classList.toggle('active', (tab==='signin'&&i===0)||(tab==='signup'&&i===1)));
+            document.getElementById('signinForm').classList.toggle('hidden', tab!=='signin');
+            document.getElementById('signupForm').classList.toggle('hidden', tab!=='signup');
+        }
+        function handleSignIn(e) { e.preventDefault(); showToast('Welcome back!','success'); closeModal(); }
+        function handleSignUp(e) { e.preventDefault(); showToast('Account created — welcome!','success'); closeModal(); }
+
+        // --- Toast ---
+        function showToast(msg, type='info') {
+            const icons = {success:'fa-check-circle',error:'fa-times-circle',info:'fa-info-circle',warning:'fa-exclamation-triangle'};
+            const t = document.createElement('div');
+            t.className = `toast ${type}`;
+            t.innerHTML = `<i class="fas ${icons[type]} toast-icon"></i><span class="toast-message">${msg}</span>`;
+            document.getElementById('toastContainer').appendChild(t);
+            setTimeout(()=>{ t.classList.add('removing'); setTimeout(()=>t.remove(),300); }, 3000);
+        }
+
+        // --- Navbar scroll ---
+        window.addEventListener('scroll', () => {
+            document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
+            document.getElementById('backToTop').classList.toggle('visible', window.scrollY > 400);
+        });
+
+        // --- Mobile nav toggle ---
+        document.getElementById('navToggle').addEventListener('click', () => {
+            document.getElementById('navMenu').classList.toggle('active');
+        });
+
+        // --- Theme toggle ---
+        document.getElementById('themeToggle').addEventListener('click', () => {
+            const current = document.documentElement.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', next);
+            localStorage.setItem('mathletica-theme', next);
+            document.getElementById('themeToggle').innerHTML = next === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        });
+        if (savedTheme === 'dark') document.getElementById('themeToggle').innerHTML = '<i class="fas fa-sun"></i>';
+
+        // --- Loader ---
+        window.addEventListener('load', () => {
+            setTimeout(() => document.getElementById('loader').classList.add('hidden'), 1500);
+        });
+
+        // --- Calculator ---
+        let calcState = { input: '0', history: '', newInput: true };
+        function calcInput(v) {
+            if (calcState.newInput) { calcState.input = v; calcState.newInput = false; }
+            else { calcState.input = calcState.input === '0' ? v : calcState.input + v; }
+            document.getElementById('calcInput').textContent = calcState.input;
+        }
+        function calcOp(op) {
+            calcState.history = calcState.input + ' ' + op;
+            calcState.newInput = true;
+            document.getElementById('calcHistory').textContent = calcState.history;
+        }
+        function calcFn(fn) {
+            let v = parseFloat(calcState.input);
+            const map = { sin: ()=>Math.sin(v*Math.PI/180), cos: ()=>Math.cos(v*Math.PI/180), tan: ()=>Math.tan(v*Math.PI/180),
+                log: ()=>Math.log10(v), ln: ()=>Math.log(v), sqrt: ()=>Math.sqrt(v), abs: ()=>Math.abs(v),
+                fact: ()=>{ let r=1; for(let i=2;i<=v;i++) r*=i; return r; } };
+            if (map[fn]) { calcState.input = String(+map[fn]().toFixed(10)); calcState.newInput = true; document.getElementById('calcInput').textContent = calcState.input; }
+        }
+        function calcConst(c) { calcState.input = c==='π' ? String(Math.PI) : String(Math.E); calcState.newInput = true; document.getElementById('calcInput').textContent = calcState.input; }
+        function calcClear() { calcState = { input:'0', history:'', newInput:true }; document.getElementById('calcInput').textContent='0'; document.getElementById('calcHistory').textContent=''; }
+        function calcBackspace() { calcState.input = calcState.input.length>1 ? calcState.input.slice(0,-1) : '0'; document.getElementById('calcInput').textContent = calcState.input; }
+        function calcEquals() {
+            try {
+                let expr = calcState.history.replace(/÷/g,'/').replace(/×/g,'*').replace(/−/g,'-') + calcState.input;
+                let result = Function('"use strict"; return (' + expr + ')')();
+                document.getElementById('calcHistory').textContent = expr + ' =';
+                calcState.input = String(+result.toFixed(10));
+                document.getElementById('calcInput').textContent = calcState.input;
+                calcState.newInput = true;
+            } catch(e) { document.getElementById('calcInput').textContent = 'Error'; calcState.newInput = true; }
+        }
+
+        // --- Tool tabs ---
+        document.querySelectorAll('.tool-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.tool-tab').forEach(t=>t.classList.remove('active'));
+                document.querySelectorAll('.tool-panel').forEach(p=>p.classList.remove('active'));
+                tab.classList.add('active');
+                document.getElementById('tool-' + tab.dataset.tool).classList.add('active');
+            });
+        });
+
+        // --- Course filter tabs ---
+        document.querySelectorAll('.filter-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.filter-tab').forEach(t=>t.classList.remove('active'));
+                tab.classList.add('active');
+                const filter = tab.dataset.filter;
+                document.querySelectorAll('.course-card').forEach(card => {
+                    card.style.display = (filter==='all' || card.dataset.level===filter) ? '' : 'none';
+                });
+            });
+        });
+
+        // --- Formula tabs ---
+        document.querySelectorAll('.formula-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.formula-tab').forEach(t=>t.classList.remove('active'));
+                tab.classList.add('active');
+                renderFormulas(tab.dataset.subject);
+            });
+        });
+
+        // --- Lesson topics ---
+        document.querySelectorAll('.lesson-topic').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.lesson-topic').forEach(b=>b.classList.remove('active'));
+                btn.classList.add('active');
+                renderLesson(btn.dataset.lesson);
+            });
+        });
+
+        // --- Courses ---
+        const courses = [
+            { id:'arithmetic', title:'Arithmetic', description:'Master the fundamentals: addition, subtraction, multiplication, division, fractions, and decimals.', icon:'🔢', level:'beginner', lessons:45, problems:800, gradient:'linear-gradient(135deg, #10b981, #06b6d4)' },
+            { id:'algebra', title:'Algebra', description:'Variables, equations, inequalities, polynomials, and functions — the language of mathematics.', icon:'📐', level:'beginner', lessons:65, problems:1500, gradient:'linear-gradient(135deg, #6366f1, #8b5cf6)' },
+            { id:'geometry', title:'Geometry', description:'Shapes, angles, proofs, area, volume, and the beauty of spatial reasoning.', icon:'📏', level:'intermediate', lessons:55, problems:1200, gradient:'linear-gradient(135deg, #f59e0b, #ef4444)' },
+            { id:'trigonometry', title:'Trigonometry', description:'Sine, cosine, tangent — understand triangles and circular functions.', icon:'🔺', level:'intermediate', lessons:40, problems:900, gradient:'linear-gradient(135deg, #ec4899, #8b5cf6)' },
+            { id:'calculus', title:'Calculus', description:'Limits, derivatives, integrals — the mathematics of change and motion.', icon:'∫', level:'advanced', lessons:80, problems:2000, gradient:'linear-gradient(135deg, #3b82f6, #06b6d4)' },
+            { id:'statistics', title:'Statistics & Probability', description:'Data analysis, probability distributions, hypothesis testing, and more.', icon:'📊', level:'intermediate', lessons:50, problems:1100, gradient:'linear-gradient(135deg, #14b8a6, #10b981)' },
+            { id:'linear-algebra', title:'Linear Algebra', description:'Vectors, matrices, transformations, and eigenvalues — the backbone of modern math.', icon:'🔳', level:'advanced', lessons:60, problems:1200, gradient:'linear-gradient(135deg, #8b5cf6, #6366f1)' },
+            { id:'discrete', title:'Discrete Mathematics', description:'Logic, sets, combinatorics, graph theory, and number theory.', icon:'🎯', level:'advanced', lessons:55, problems:1000, gradient:'linear-gradient(135deg, #ef4444, #f59e0b)' }
+        ];
+
+        const levelLabels = { beginner:'Beginner', intermediate:'Intermediate', advanced:'Advanced' };
+        const grid = document.getElementById('coursesGrid');
+        courses.forEach(c => {
+            grid.innerHTML += `
+            <div class="course-card" data-level="${c.level}">
+                <div class="course-header" style="background:${c.gradient}">
+                    <span class="course-icon">${c.icon}</span>
+                    <span class="course-level">${levelLabels[c.level]}</span>
+                </div>
+                <div class="course-body">
+                    <h3 class="course-title">${c.title}</h3>
+                    <p class="course-desc">${c.description}</p>
+                    <div class="course-meta">
+                        <span><i class="fas fa-book"></i> ${c.lessons} lessons</span>
+                        <span><i class="fas fa-pencil-alt"></i> ${c.problems.toLocaleString()} problems</span>
+                    </div>
+                    <div class="course-progress">
+                        <div class="course-progress-bar" style="width:0%"></div>
+                    </div>
+                    <button class="btn btn-primary btn-full" onclick="showToast('Starting ${c.title} — sign in to save progress!','info')">
+                        <i class="fas fa-play"></i> Start Course
+                    </button>
+                </div>
+            </div>`;
+        });
+
+        // --- Lesson content ---
+        const lessonData = {
+            quadratic: {
+                title: 'Quadratic Equations',
+                content: `
+                <h2>Quadratic Equations</h2>
+                <p>A quadratic equation is a second-degree polynomial in a single variable of the form:</p>
+                <div class="math-block">$$ ax^2 + bx + c = 0 $$</div>
+                <p>where $a \\neq 0$. To find solutions (roots), use the <strong>quadratic formula</strong>:</p>
+                <div class="math-block">$$ x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a} $$</div>
+                <p>The expression $b^2 - 4ac$ is called the <strong>discriminant</strong> (Δ):</p>
+                <ul style="margin:12px 0 12px 24px;">
+                    <li>Δ &gt; 0 → two distinct real roots</li>
+                    <li>Δ = 0 → one repeated real root</li>
+                    <li>Δ &lt; 0 → two complex roots</li>
+                </ul>
+                <h3 style="margin-top:20px;">Example</h3>
+                <p>Solve $x^2 - 5x + 6 = 0$</p>
+                <div class="math-block">$$ x = \\frac{5 \\pm \\sqrt{25-24}}{2} = \\frac{5 \\pm 1}{2} $$</div>
+                <p>So $x = 3$ or $x = 2$. ✓</p>`
+            },
+            pythagorean: {
+                title: 'Pythagorean Theorem',
+                content: `
+                <h2>Pythagorean Theorem</h2>
+                <p>In any right triangle with legs $a$, $b$ and hypotenuse $c$:</p>
+                <div class="math-block">$$ a^2 + b^2 = c^2 $$</div>
+                <p>This means you can always find the missing side:</p>
+                <div class="math-block">$$ c = \\sqrt{a^2 + b^2} \\quad a = \\sqrt{c^2 - b^2} $$</div>
+                <h3 style="margin-top:20px;">Common Pythagorean Triples</h3>
+                <p>3-4-5, 5-12-13, 8-15-17, 7-24-25 — memorising these speeds up many problems.</p>
+                <h3 style="margin-top:20px;">Example</h3>
+                <p>A right triangle has legs 6 and 8. Find the hypotenuse.</p>
+                <div class="math-block">$$ c = \\sqrt{6^2 + 8^2} = \\sqrt{36+64} = \\sqrt{100} = 10 $$</div>`
+            },
+            derivatives: {
+                title: 'Introduction to Derivatives',
+                content: `
+                <h2>Introduction to Derivatives</h2>
+                <p>The derivative of $f(x)$ measures the instantaneous rate of change:</p>
+                <div class="math-block">$$ f'(x) = \\lim_{h \\to 0} \\frac{f(x+h)-f(x)}{h} $$</div>
+                <h3 style="margin-top:20px;">Basic Rules</h3>
+                <div class="math-block">$$ \\frac{d}{dx}[x^n] = nx^{n-1} \\quad \\text{(Power Rule)} $$</div>
+                <div class="math-block">$$ \\frac{d}{dx}[\\sin x] = \\cos x \\quad \\frac{d}{dx}[\\cos x] = -\\sin x $$</div>
+                <div class="math-block">$$ \\frac{d}{dx}[e^x] = e^x \\quad \\frac{d}{dx}[\\ln x] = \\frac{1}{x} $$</div>
+                <h3 style="margin-top:20px;">Example</h3>
+                <p>Find $f'(x)$ where $f(x) = 3x^4 - 2x^2 + 7$</p>
+                <div class="math-block">$$ f'(x) = 12x^3 - 4x $$</div>`
+            },
+            probability: {
+                title: 'Basic Probability',
+                content: `
+                <h2>Basic Probability</h2>
+                <p>Probability measures how likely an event is to occur:</p>
+                <div class="math-block">$$ P(A) = \\frac{\\text{favourable outcomes}}{\\text{total outcomes}} $$</div>
+                <p>Probability always satisfies $0 \\leq P(A) \\leq 1$.</p>
+                <h3 style="margin-top:20px;">Key Rules</h3>
+                <div class="math-block">$$ P(A \\cup B) = P(A) + P(B) - P(A \\cap B) $$</div>
+                <div class="math-block">$$ P(A^c) = 1 - P(A) $$</div>
+                <p>For independent events: $P(A \\cap B) = P(A) \\cdot P(B)$</p>
+                <h3 style="margin-top:20px;">Example</h3>
+                <p>Rolling a fair die: $P(\\text{even}) = \\frac{3}{6} = \\frac{1}{2}$</p>`
+            }
+        };
+
+        function renderLesson(key) {
+            const lesson = lessonData[key] || lessonData.quadratic;
+            document.getElementById('lessonContent').innerHTML = `<div class="lesson-body">${lesson.content}</div>`;
+            if (window.MathJax) MathJax.typesetPromise();
+        }
+        renderLesson('quadratic');
+
+        // --- Practice ---
+        const problems = {
+            arithmetic: {
+                easy: () => { const a=Math.floor(Math.random()*20)+1, b=Math.floor(Math.random()*20)+1; return { q:`What is ${a} + ${b}?`, a:a+b }; },
+                medium: () => { const a=Math.floor(Math.random()*50)+10, b=Math.floor(Math.random()*50)+10; return { q:`What is ${a} × ${b}?`, a:a*b }; },
+                hard: () => { const a=Math.floor(Math.random()*100)+50, b=Math.floor(Math.random()*20)+2; return { q:`What is ${a*b} ÷ ${b}?`, a:a }; }
+            },
+            algebra: {
+                easy: () => { const a=Math.floor(Math.random()*10)+1, b=Math.floor(Math.random()*20)+1; return { q:`Solve for x: ${a}x = ${a*b}`, a:b }; },
+                medium: () => { const a=Math.floor(Math.random()*5)+2, b=Math.floor(Math.random()*10)+1, c=Math.floor(Math.random()*20)+5; return { q:`Solve: ${a}x + ${b} = ${a*c+b}`, a:c }; },
+                hard: () => { const r1=Math.floor(Math.random()*10)-5, r2=Math.floor(Math.random()*10)-5; const b=-(r1+r2), cc=r1*r2; return { q:`Solve: x² ${b>=0?'+':''} ${b}x ${cc>=0?'+':''} ${cc} = 0`, a:`x = ${r1} or x = ${r2}` }; }
+            },
+            geometry: {
+                easy: () => { const r=Math.floor(Math.random()*10)+1; return { q:`Find the area of a circle with radius ${r}. (Use π ≈ 3.14)`, a:(3.14*r*r).toFixed(2) }; },
+                medium: () => { const b=Math.floor(Math.random()*10)+2, h=Math.floor(Math.random()*10)+2; return { q:`Find the area of a triangle with base ${b} and height ${h}.`, a:0.5*b*h }; },
+                hard: () => { const a=Math.floor(Math.random()*8)+3, b=Math.floor(Math.random()*8)+3; return { q:`A right triangle has legs ${a} and ${b}. Find the hypotenuse (to 2 decimal places).`, a:Math.sqrt(a*a+b*b).toFixed(2) }; }
+            },
+            trigonometry: {
+                easy: () => { const angles=[0,30,45,60,90], a=angles[Math.floor(Math.random()*5)]; const vals={0:'0',30:'0.5',45:'√2/2 ≈ 0.707',60:'√3/2 ≈ 0.866',90:'1'}; return { q:`What is sin(${a}°)?`, a:vals[a] }; },
+                medium: () => { const a=Math.floor(Math.random()*80)+10; return { q:`In a right triangle, the opposite side is 5 and hypotenuse is 10. What is the angle? (in degrees)`, a:'30°' }; },
+                hard: () => { return { q:`Prove or find: If sin θ = 3/5 and θ is in Q1, what is cos(2θ)?`, a:'-7/25' }; }
+            },
+            calculus: {
+                easy: () => { const n=Math.floor(Math.random()*5)+2; return { q:`Find d/dx [x^${n}]`, a:`${n}x^${n-1}` }; },
+                medium: () => { const a=Math.floor(Math.random()*5)+2, b=Math.floor(Math.random()*5)+1; return { q:`Find d/dx [${a}x^${b} + 3x - 7]`, a:`${a*b}x^${b-1} + 3` }; },
+                hard: () => { return { q:`Find ∫(2x + 3)dx`, a:'x² + 3x + C' }; }
+            },
+            statistics: {
+                easy: () => { const arr=[...Array(5)].map(()=>Math.floor(Math.random()*20)+1); const mean=(arr.reduce((a,b)=>a+b,0)/arr.length).toFixed(1); return { q:`Find the mean of: ${arr.join(', ')}`, a:mean }; },
+                medium: () => { const arr=[...Array(6)].map(()=>Math.floor(Math.random()*20)+1).sort((a,b)=>a-b); const median=(arr[2]+arr[3])/2; return { q:`Find the median of: ${arr.join(', ')}`, a:median }; },
+                hard: () => { return { q:`In a normal distribution, what % of data falls within 2 standard deviations of the mean?`, a:'~95.45%' }; }
+            }
+        };
+
+        let currentProblem = null;
+        let difficulty = 'easy';
+        let sessionStats = { correct:0, total:0, streak:0 };
+
+        document.querySelectorAll('.difficulty-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.difficulty-btn').forEach(b=>b.classList.remove('active'));
+                btn.classList.add('active');
+                difficulty = btn.dataset.difficulty;
+            });
+        });
+
+        function generateProblem() {
+            const subject = document.getElementById('practiceSubject').value;
+            const pool = problems[subject] || problems.arithmetic;
+            const gen = pool[difficulty] || pool.easy;
+            currentProblem = gen();
+            document.getElementById('problemCard').innerHTML = `
+                <div class="problem-question">
+                    <div class="problem-label"><i class="fas fa-question-circle"></i> Problem</div>
+                    <p class="problem-text">${currentProblem.q}</p>
+                    <div class="problem-input-row">
+                        <input type="text" id="answerInput" class="input" placeholder="Your answer..." onkeydown="if(event.key==='Enter')checkAnswer()">
+                        <button class="btn btn-primary" onclick="checkAnswer()"><i class="fas fa-check"></i> Check</button>
+                    </div>
+                    <button class="btn btn-outline" style="margin-top:10px;" onclick="showHint()"><i class="fas fa-lightbulb"></i> Show Answer</button>
+                </div>`;
+            if (window.MathJax) MathJax.typesetPromise();
+        }
+
+        function checkAnswer() {
+            if (!currentProblem) return;
+            const input = document.getElementById('answerInput').value.trim();
+            const correct = String(currentProblem.a).toLowerCase().replace(/\s/g,'');
+            const userAns = input.toLowerCase().replace(/\s/g,'');
+            sessionStats.total++;
+            if (userAns === correct || parseFloat(userAns) === parseFloat(correct)) {
+                sessionStats.correct++;
+                sessionStats.streak++;
+                showToast('Correct! 🎉', 'success');
+            } else {
+                sessionStats.streak = 0;
+                showToast(`Not quite. Answer: ${currentProblem.a}`, 'error');
+            }
+            updateSessionStats();
+        }
+
+        function showHint() {
+            if (currentProblem) showToast(`Answer: ${currentProblem.a}`, 'info');
+        }
+
+        function updateSessionStats() {
+            document.getElementById('statCorrect').textContent = sessionStats.correct;
+            document.getElementById('statTotal').textContent = sessionStats.total;
+            document.getElementById('statAccuracy').textContent = sessionStats.total ? Math.round(sessionStats.correct/sessionStats.total*100)+'%' : '0%';
+            document.getElementById('statStreak').textContent = sessionStats.streak;
+            const xp = sessionStats.correct * 10;
+            const pct = Math.min((xp%100), 100);
+            document.getElementById('xpFill').style.width = pct + '%';
+            document.getElementById('xpText').textContent = `${xp%100} / 100 XP`;
+        }
+
+        // --- Formula sheets ---
+        const formulaData = {
+            algebra: [
+                { name: 'Quadratic Formula', formula: '$$x = \\frac{-b \\pm \\sqrt{b^2-4ac}}{2a}$$' },
+                { name: 'Difference of Squares', formula: '$$a^2 - b^2 = (a+b)(a-b)$$' },
+                { name: 'Perfect Square', formula: '$$(a+b)^2 = a^2 + 2ab + b^2$$' },
+                { name: 'Slope-Intercept Form', formula: '$$y = mx + b$$' },
+            ],
+            geometry: [
+                { name: 'Circle Area', formula: '$$A = \\pi r^2$$' },
+                { name: 'Pythagorean Theorem', formula: '$$a^2 + b^2 = c^2$$' },
+                { name: 'Triangle Area', formula: '$$A = \\frac{1}{2}bh$$' },
+                { name: 'Sphere Volume', formula: '$$V = \\frac{4}{3}\\pi r^3$$' },
+            ],
+            trigonometry: [
+                { name: 'Pythagorean Identity', formula: '$$\\sin^2\\theta + \\cos^2\\theta = 1$$' },
+                { name: 'Double Angle (sin)', formula: '$$\\sin(2\\theta) = 2\\sin\\theta\\cos\\theta$$' },
+                { name: 'Law of Cosines', formula: '$$c^2 = a^2 + b^2 - 2ab\\cos C$$' },
+                { name: 'Euler\'s Formula', formula: '$$e^{i\\theta} = \\cos\\theta + i\\sin\\theta$$' },
+            ],
+            calculus: [
+                { name: 'Power Rule', formula: '$$\\frac{d}{dx}[x^n] = nx^{n-1}$$' },
+                { name: 'Chain Rule', formula: '$$\\frac{d}{dx}[f(g(x))] = f\'(g(x)) \\cdot g\'(x)$$' },
+                { name: 'Fundamental Theorem', formula: '$$\\int_a^b f(x)\\,dx = F(b) - F(a)$$' },
+                { name: 'Integration by Parts', formula: '$$\\int u\\,dv = uv - \\int v\\,du$$' },
+            ],
+            statistics: [
+                { name: 'Mean', formula: '$$\\bar{x} = \\frac{\\sum x_i}{n}$$' },
+                { name: 'Standard Deviation', formula: '$$\\sigma = \\sqrt{\\frac{\\sum(x_i-\\bar{x})^2}{n}}$$' },
+                { name: 'Bayes\' Theorem', formula: '$$P(A|B) = \\frac{P(B|A)P(A)}{P(B)}$$' },
+                { name: 'Normal Distribution', formula: '$$f(x) = \\frac{1}{\\sigma\\sqrt{2\\pi}}e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}$$' },
+            ]
+        };
+
+        function renderFormulas(subject) {
+            const data = formulaData[subject] || formulaData.algebra;
+            document.getElementById('formulaContent').innerHTML = data.map(f => `
+                <div class="formula-card">
+                    <div class="formula-name">${f.name}</div>
+                    <div class="formula-eq">${f.formula}</div>
+                </div>`).join('');
+            if (window.MathJax) MathJax.typesetPromise();
+        }
+        function searchFormulas(q) {
+            const subject = document.querySelector('.formula-tab.active').dataset.subject;
+            const data = (formulaData[subject]||formulaData.algebra).filter(f=>f.name.toLowerCase().includes(q.toLowerCase()));
+            document.getElementById('formulaContent').innerHTML = data.map(f=>`<div class="formula-card"><div class="formula-name">${f.name}</div><div class="formula-eq">${f.formula}</div></div>`).join('');
+            if (window.MathJax) MathJax.typesetPromise();
+        }
+        renderFormulas('algebra');
+
+        // --- Achievements ---
+        const achievements = [
+            { icon:'🎯', name:'First Problem', desc:'Solve your first problem', earned:false },
+            { icon:'🔥', name:'On Fire', desc:'5 correct in a row', earned:false },
+            { icon:'📚', name:'Scholar', desc:'Complete 10 lessons', earned:false },
+            { icon:'⚡', name:'Speed Demon', desc:'Answer in under 10 seconds', earned:false },
+            { icon:'🏆', name:'Champion', desc:'Reach level 10', earned:false },
+            { icon:'💯', name:'Perfect Score', desc:'100% accuracy in a session', earned:false },
+        ];
+        document.getElementById('achievementsGrid').innerHTML = achievements.map(a=>`
+            <div class="achievement-card ${a.earned?'earned':'locked'}">
+                <div class="achievement-icon">${a.icon}</div>
+                <div class="achievement-name">${a.name}</div>
+                <div class="achievement-desc">${a.desc}</div>
+            </div>`).join('');
+
+        // --- Leaderboard ---
+        const leaders = [
+            { rank:1, name:'Alex Chen', xp:12450, streak:42, avatar:'🦁' },
+            { rank:2, name:'Sarah Kim', xp:11230, streak:38, avatar:'🐯' },
+            { rank:3, name:'Marco Rivera', xp:10890, streak:31, avatar:'🦊' },
+            { rank:4, name:'Priya Patel', xp:9740, streak:27, avatar:'🐺' },
+            { rank:5, name:'James O\'Brien', xp:9120, streak:22, avatar:'🦅' },
+        ];
+        document.getElementById('leaderboard').innerHTML = leaders.map(l=>`
+            <div class="leaderboard-row">
+                <span class="lb-rank ${l.rank<=3?'top-'+l.rank:''}">#${l.rank}</span>
+                <span class="lb-avatar">${l.avatar}</span>
+                <span class="lb-name">${l.name}</span>
+                <span class="lb-xp"><i class="fas fa-star"></i> ${l.xp.toLocaleString()}</span>
+                <span class="lb-streak"><i class="fas fa-fire"></i> ${l.streak}</span>
+            </div>`).join('');
+
+        // --- Testimonials ---
+        const testimonials = [
+            { name:'Emma Thompson', role:'High School Student', text:'Mathletica transformed how I understand calculus. The interactive problems are genuinely fun!', avatar:'👩‍🎓', rating:5 },
+            { name:'David Park', role:'Engineering Student', text:'The formula sheets and practice problems helped me ace my linear algebra exam. Incredible tool.', avatar:'👨‍💻', rating:5 },
+            { name:'Aisha Johnson', role:'Teacher', text:'I recommend Mathletica to all my students. The adaptive difficulty is exactly what learners need.', avatar:'👩‍🏫', rating:5 },
+        ];
+        document.getElementById('testimonialsTrack').innerHTML = testimonials.map((t,i)=>`
+            <div class="testimonial-card ${i===0?'active':''}">
+                <div class="testimonial-stars">${'★'.repeat(t.rating)}</div>
+                <p class="testimonial-text">"${t.text}"</p>
+                <div class="testimonial-author">
+                    <span class="testimonial-avatar">${t.avatar}</span>
+                    <div>
+                        <div class="testimonial-name">${t.name}</div>
+                        <div class="testimonial-role">${t.role}</div>
+                    </div>
+                </div>
+            </div>`).join('');
+        document.getElementById('testimonialDots').innerHTML = testimonials.map((_,i)=>`<button class="testimonial-dot ${i===0?'active':''}" onclick="goToTestimonial(${i})"></button>`).join('');
+
+        let testimonialIndex = 0;
+        function goToTestimonial(i) {
+            testimonialIndex = i;
+            document.querySelectorAll('.testimonial-card').forEach((c,j)=>c.classList.toggle('active',j===i));
+            document.querySelectorAll('.testimonial-dot').forEach((d,j)=>d.classList.toggle('active',j===i));
+        }
+        setInterval(()=>goToTestimonial((testimonialIndex+1)%testimonials.length), 5000);
+
+        // --- Weekly Chart ---
+        const ctx = document.getElementById('weeklyChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+                datasets: [{
+                    label: 'Problems Solved',
+                    data: [0,0,0,0,0,0,0],
+                    backgroundColor: 'rgba(99,102,241,0.7)',
+                    borderRadius: 6
+                }]
+            },
+            options: { responsive: true, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true } } }
+        });
+
+        // --- Mastery bars ---
+        const masteryItems = ['Arithmetic','Algebra','Geometry','Trigonometry','Calculus','Statistics'];
+        document.getElementById('masteryBars').innerHTML = masteryItems.map(s=>`
+            <div class="mastery-item">
+                <div class="mastery-label"><span>${s}</span><span>0%</span></div>
+                <div class="mastery-bar"><div class="mastery-fill" style="width:0%"></div></div>
+            </div>`).join('');
+
+        // --- Function Grapher ---
+        function plotGraph() {
+            const fnStr = document.getElementById('graphFn').value;
+            const canvas = document.getElementById('graphCanvas');
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            const w=canvas.width, h=canvas.height, cx=w/2, cy=h/2, scale=30;
+            ctx.strokeStyle='#e2e8f0'; ctx.lineWidth=1;
+            for(let x=0;x<w;x+=scale){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,h);ctx.stroke();}
+            for(let y=0;y<h;y+=scale){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke();}
+            ctx.strokeStyle='#94a3b8'; ctx.lineWidth=2;
+            ctx.beginPath();ctx.moveTo(0,cy);ctx.lineTo(w,cy);ctx.stroke();
+            ctx.beginPath();ctx.moveTo(cx,0);ctx.lineTo(cx,h);ctx.stroke();
+            try {
+                const fn = new Function('x', `"use strict"; const Math=window.Math; return ${fnStr.replace(/\^/g,'**')};`);
+                ctx.strokeStyle='#6366f1'; ctx.lineWidth=2.5; ctx.beginPath();
+                let started=false;
+                for(let px=0;px<w;px++){
+                    const x=(px-cx)/scale;
+                    const y=fn(x);
+                    const py=cy-y*scale;
+                    if(!isFinite(y)||Math.abs(py)>h*2){started=false;continue;}
+                    if(!started){ctx.moveTo(px,py);started=true;}else{ctx.lineTo(px,py);}
+                }
+                ctx.stroke();
+            } catch(e) { showToast('Invalid function. Try: x^2 or Math.sin(x)', 'error'); }
+        }
+        plotGraph();
+
+        // --- Unit Converter ---
+        const converterUnits = {
+            length: { m:1, km:0.001, cm:100, mm:1000, inch:39.3701, ft:3.28084, mi:0.000621371 },
+            mass: { kg:1, g:1000, mg:1e6, lb:2.20462, oz:35.274, tonne:0.001 },
+            temperature: { C:1, F:1, K:1 }, // special handling
+            area: { m2:1, km2:1e-6, cm2:1e4, ft2:10.7639, acre:0.000247105 },
+            speed: { 'ms':1, 'kmh':3.6, 'mph':2.23694, 'knot':1.94384 }
+        };
+        function updateConverterUnits() {
+            const cat = document.getElementById('converterCategory').value;
+            const units = Object.keys(converterUnits[cat]);
+            ['converterFrom','converterTo'].forEach((id,i)=>{
+                document.getElementById(id).innerHTML = units.map(u=>`<option value="${u}">${u}</option>`).join('');
+                if(i===1 && units[1]) document.getElementById(id).value = units[1];
+            });
+            convert();
+        }
+        function convert() {
+            const cat = document.getElementById('converterCategory').value;
+            const from = document.getElementById('converterFrom').value;
+            const to = document.getElementById('converterTo').value;
+            const val = parseFloat(document.getElementById('converterInput').value)||0;
+            let result;
+            if (cat === 'temperature') {
+                let celsius = from==='C'?val : from==='F'?(val-32)*5/9 : val-273.15;
+                result = to==='C'?celsius : to==='F'?celsius*9/5+32 : celsius+273.15;
+            } else {
+                const base = val / converterUnits[cat][from];
+                result = base * converterUnits[cat][to];
+            }
+            document.getElementById('converterOutput').value = +result.toFixed(6);
+        }
+        updateConverterUnits();
+
+        // --- Matrix Ops ---
+        function getMatrix() {
+            const rows = document.querySelectorAll('#matrixA .matrix-row');
+            return Array.from(rows).map(r=>Array.from(r.querySelectorAll('.matrix-cell')).map(c=>parseFloat(c.value)||0));
+        }
+        function matrixOp(op) {
+            const m = getMatrix();
+            let result = '';
+            if (op==='det') {
+                if(m.length===2) result = `det = ${m[0][0]*m[1][1]-m[0][1]*m[1][0]}`;
+                else result = 'Only 2×2 supported';
+            } else if (op==='trans') {
+                result = 'Transpose:<br>' + m[0].map((_,c)=>m.map(r=>r[c]).join('  ')).join('<br>');
+            } else if (op==='inv') {
+                const det = m[0][0]*m[1][1]-m[0][1]*m[1][0];
+                if(det===0){result='Not invertible (det=0)';}
+                else{result=`Inverse:<br>${(m[1][1]/det).toFixed(3)}  ${(-m[0][1]/det).toFixed(3)}<br>${(-m[1][0]/det).toFixed(3)}  ${(m[0][0]/det).toFixed(3)}`;}
+            }
+            document.getElementById('matrixResult').innerHTML = `<div class="formula-card">${result}</div>`;
+        }
+    </script>
+
+</body>
+</html>
