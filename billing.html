@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mathletica ... Standard 2</title>
+<title>Mathletica ... Billing</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,7 +15,7 @@
 
 <link rel="stylesheet" href="../assets/hsc.css">
 </head>
-<body data-page="std2-index">
+<body data-page="billing">
 <div id="toasts"></div>
 
 <nav id="navbar" class="page-header">
@@ -39,25 +39,17 @@
 
 <section class="page-hero">
   <div class="container">
-    <div class="breadcrumbs"><a href="../index.html">Home</a><span class="sep">/</span><span>Standard 2</span></div>
-    <h1>Mathematics Standard 2</h1>
-    <p>
-      Everything is split into lessons. Click a topic, then pick a lesson, then smash the quiz.
-      No more “one page to rule them all”.
-    </p>
+    <div class="breadcrumbs"><a href="../index.html">Home</a><span class="sep">/</span><a href="index.html">Account</a><span class="sep">/</span><span>Billing</span></div>
+    <h1>Billing</h1>
+    <p>Prototype billing controls. This is where real payments would live once you add a backend.</p>
   </div>
 </section>
 
 <div class="grid-line"></div>
 
-<section class="section">
+<section class="section" style="padding-top:24px">
   <div class="container">
-    <div class="section-header">
-      <div class="section-tag">🧭 Curriculum</div>
-      <h2 class="section-title">Topics</h2>
-      <p class="section-sub">Each topic has multiple sub-lessons (and you can add more any time).</p>
-    </div>
-    <div class="cards" id="topicCards"></div>
+    <div id="billBody"></div>
   </div>
 </section>
 

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mathletica ... Standard 2</title>
+<title>Mathletica ... Lesson</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,7 +15,7 @@
 
 <link rel="stylesheet" href="../assets/hsc.css">
 </head>
-<body data-page="std2-index">
+<body data-page="std2-lesson">
 <div id="toasts"></div>
 
 <nav id="navbar" class="page-header">
@@ -37,27 +37,61 @@
 <div class="page-shell">
 <main class="page-main">
 
-<section class="page-hero">
+<section class="page-hero" style="padding-bottom:18px">
   <div class="container">
-    <div class="breadcrumbs"><a href="../index.html">Home</a><span class="sep">/</span><span>Standard 2</span></div>
-    <h1>Mathematics Standard 2</h1>
-    <p>
-      Everything is split into lessons. Click a topic, then pick a lesson, then smash the quiz.
-      No more “one page to rule them all”.
-    </p>
+    <div class="breadcrumbs">
+      <a href="../index.html">Home</a><span class="sep">/</span>
+      <a href="index.html">Standard 2</a><span class="sep">/</span>
+      <a id="crumbBackTopic" href="index.html">Topic</a><span class="sep">/</span>
+      <span id="crumbLesson">Lesson</span>
+    </div>
+    <h1 id="lessonTitle">Lesson</h1>
+    <p id="lessonMeta" style="color:var(--text2)">Loading…</p>
   </div>
 </section>
 
 <div class="grid-line"></div>
 
-<section class="section">
+<section class="section" style="padding-top:24px">
   <div class="container">
-    <div class="section-header">
-      <div class="section-tag">🧭 Curriculum</div>
-      <h2 class="section-title">Topics</h2>
-      <p class="section-sub">Each topic has multiple sub-lessons (and you can add more any time).</p>
+    <div class="layout" id="lessonBody">
+      <aside class="panel">
+        <div class="panel-h"><h3>Video</h3></div>
+        <div class="panel-b">
+          <div class="video-wrap">
+            <iframe id="vidFrame" src="" allowfullscreen></iframe>
+          </div>
+          <div class="video-nav" id="videoNav" style="margin-top:10px"></div>
+          <div class="help">Swap these video IDs for Eddie Woo (or other NSW-aligned teachers) as you curate.</div>
+        </div>
+      </aside>
+
+      <div class="panel">
+        <div class="panel-h"><h3 id="quizTitle">Quick Quiz</h3><span class="badge" id="qBadge">0/0</span></div>
+        <div class="panel-b">
+          <div class="quiz-progress" style="margin-top:0">
+            <div class="qprog-bar"><div class="qprog-fill" id="qFill" style="width:0%"></div></div>
+            <span id="qDone">0/0 done</span>
+          </div>
+
+          <div id="qImage" style="margin:14px 0 12px"></div>
+          <div class="quiz-q" id="qText"></div>
+
+          <div class="quiz-options" id="qOpts"></div>
+          <div class="quiz-feedback" id="qFb"></div>
+
+          <div class="quiz-actions" style="margin-top:12px">
+            <button class="btn btn-amber" id="nextQBtn" style="display:none">Next question →</button>
+            <button class="btn btn-ghost btn-sm" id="hintBtn">💡 Show explanation</button>
+          </div>
+
+          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px">
+            <a class="btn btn-ghost btn-sm" id="prevLesson" href="#">← Previous lesson</a>
+            <a class="btn btn-ghost btn-sm" id="nextLesson" href="#">Next lesson →</a>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="cards" id="topicCards"></div>
   </div>
 </section>
 
