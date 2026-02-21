@@ -237,3 +237,50 @@ footer{background:var(--bg1);border-top:1px solid var(--border);padding:64px 0 3
 .footer-col a:hover{color:var(--amber)}
 .footer-bottom{border-top:1px solid var(--border);padding-top:24px;display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--text3);flex-wrap:wrap;gap:10px}
 @media(max-width:768px){.footer-grid{grid-template-columns:1fr 1fr}.footer-bottom{flex-direction:column;text-align:center}}
+
+
+/* NAV USER */
+.nav-user{
+  display:flex;align-items:center;gap:8px;
+  padding:6px 12px;border-radius:99px;
+  background:rgba(255,255,255,0.04);
+  border:1px solid var(--border);
+  font-size:12px;color:var(--text2);
+}
+.nav-user .dot{width:8px;height:8px;border-radius:50%;background:var(--green)}
+.nav-user .dot.free{background:var(--blue)}
+.nav-user .dot.admin{background:var(--amber)}
+.nav-user .mono{font-family:var(--font-mono);color:var(--text)}
+
+/* QUIZ IMAGE */
+.q-img{margin:14px 0;padding:14px;border-radius:var(--r2);background:var(--bg1);border:1px solid var(--border)}
+.q-img img{max-width:100%;display:block;border-radius:12px}
+.q-img svg{width:100%;height:auto;display:block}
+
+/* ADMIN */
+.admin-gate{
+  padding:18px 20px;border-radius:var(--r2);
+  border:1px solid var(--border2);background:var(--bg1);
+  color:var(--text2);font-size:14px;line-height:1.7;
+}
+.admin-grid{display:grid;grid-template-columns:1.3fr .7fr;gap:16px}
+.admin-card{background:var(--bg1);border:1px solid var(--border);border-radius:var(--r2);padding:22px;overflow:hidden}
+.admin-card-title{font-family:var(--font-head);font-size:14px;font-weight:800;color:var(--text2);margin-bottom:14px}
+.admin-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
+.admin-table-wrap{overflow:auto;border-radius:14px;border:1px solid var(--border);background:var(--bg2)}
+.admin-table{width:100%;border-collapse:collapse;font-size:13px}
+.admin-table th,.admin-table td{padding:12px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+.admin-table th{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--text3);background:rgba(255,255,255,0.02);text-align:left}
+.admin-table td{color:var(--text2)}
+.admin-table tr:hover td{background:rgba(255,255,255,0.02)}
+.admin-chip{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:99px;font-size:11px;font-weight:700;border:1px solid}
+.admin-chip.pro{color:var(--amber);border-color:rgba(245,166,35,.3);background:var(--amber-dim)}
+.admin-chip.free{color:var(--blue);border-color:rgba(59,130,246,.3);background:rgba(59,130,246,.08)}
+.admin-chip.trial{color:#93c5fd;border-color:rgba(59,130,246,.25);background:rgba(59,130,246,.08)}
+.admin-chip.admin{color:var(--amber);border-color:rgba(245,166,35,.3);background:var(--amber-dim)}
+.admin-chip.student{color:var(--text2);border-color:var(--border2);background:rgba(255,255,255,.03)}
+.admin-row-actions{display:flex;gap:8px;flex-wrap:wrap}
+.admin-note{margin-top:14px;font-size:12px;color:var(--text3);line-height:1.6}
+.admin-divider{height:1px;background:var(--border);margin:18px 0}
+.mono{font-family:var(--font-mono)}
+@media(max-width:900px){.admin-grid{grid-template-columns:1fr}}
