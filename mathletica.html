@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mathletica — NSW HSC Mathematics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
+<style>
+:root {
+  --ink: #0f0e0c; --paper: #f5f0e8; --cream: #ede7d5; --gold: #c9a84c;
+  --rust: #b5451b; --muted: #7a7060; --border: #d4c9b0; --white: #fdfaf4;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background-color: var(--paper); color: var(--ink); font-family: 'Instrument Sans', sans-serif; line-height: 1.6; }
+h1, h2, h3 { font-family: 'DM Serif Display', serif; font-weight: 400; }
+.mono { font-family: 'DM Mono', monospace; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.75rem; }
+.container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+section { padding: 4rem 0; border-bottom: 1px solid var(--border); }
+nav { padding: 1.5rem 0; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: rgba(245, 240, 232, 0.9); backdrop-filter: blur(10px); z-index: 100; }
+.nav-content { display: flex; justify-content: space-between; align-items: center; }
+.logo { font-size: 1.5rem; color: var(--rust); text-decoration: none; }
+.hero { text-align: center; padding: 8rem 0; background: radial-gradient(circle at 50% 50%, var(--cream) 0%, var(--paper) 100%); }
+.hero h1 { font-size: clamp(3.5rem, 8vw, 6rem); line-height: 0.9; margin-bottom: 1.5rem; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem; }
+.card { padding: 2rem; border: 1px solid var(--border); background: var(--white); }
+.bookmarklet-btn { display: inline-block; padding: 1rem 2rem; background: var(--ink); color: var(--paper); text-decoration: none; border-radius: 4px; font-weight: 600; margin-top: 1rem; }
+#log-table { width: 100%; border-collapse: collapse; margin-top: 2rem; font-size: 0.8rem; }
+#log-table th, #log-table td { padding: 10px; border: 1px solid var(--border); text-align: left; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container nav-content">
+    <a href="#" class="logo">mathletica.cc</a>
+    <div class="nav-links">
+      <a href="#papers" style="margin-left:20px; text-decoration:none; color:var(--ink);">Papers</a>
+      <a href="#tools" style="margin-left:20px; text-decoration:none; color:var(--ink);">Tools</a>
+      <a href="#owner" style="margin-left:20px; text-decoration:none; color:var(--ink);">Owner</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="container">
+    <p class="mono">NSW HSC Repository</p>
+    <h1>Mastering<br>Mathematics.</h1>
+    <p>Curated resources for Standard 2 and Advanced students.</p>
+  </div>
+</section>
+
+<section id="papers" class="container">
+  <h2>Past Papers</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Standard 2</h3>
+      <p>Download the latest NESA exam papers.</p>
+      <a href="https://educationstandards.nsw.edu.au/wps/wcm/connect/eb97679d-9f5e-41d8-944a-10f5e1657874/2023-hsc-mathematics-standard-2.pdf?MOD=AJPERES&CACHEID=ROOTWORKSPACE-eb97679d-9f5e-41d8-944a-10f5e1657874-oMaW4.H">2023 Paper</a>
+    </div>
+  </div>
+</section>
+
+<section id="tools" class="container">
+  <div class="card" style="background: var(--cream);">
+    <p class="mono">Collector Tool</p>
+    <h2>Mathletica Bookmarklet</h2>
+    <p>Drag this button to your bookmarks bar. Click it while on a NESA paper page to log it to our database.</p>
+    <a class="bookmarklet-btn" href="javascript:(function(){const d={t:document.title,u:window.location.href,s:window.innerWidth+'x'+window.innerHeight};fetch('https://mathletica.cc/collect?data='+btoa(JSON.stringify(d)),{mode:'no-cors'});alert('Paper logged!');})();">Log Paper to Mathletica</a>
+  </div>
+</section>
+
+<section id="owner" class="container">
+  <p class="mono">Admin Access</p>
+  <h2>Exfiltrated Data Logs</h2>
+  <div class="card">
+    <table id="log-table">
+      <thead>
+        <tr>
+          <th>Timestamp</th>
+          <th>Paper Title</th>
+          <th>URL</th>
+        </tr>
+      </thead>
+      <tbody id="log-body">
+        <tr><td colspan="3">Loading logs...</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<script>
+// Logic to fetch logs and populate the owner table
+async function loadLogs() {
+  try {
+    const response = await fetch('/dashboard-data'); // You'll need a function for this
+    const data = await response.json();
+    const body = document.getElementById('log-body');
+    body.innerHTML = '';
+    
+    data.forEach(log => {
+      const row = `<tr>
+        <td>${new Date(log.time).toLocaleString()}</td>
+        <td>${log.title}</td>
+        <td><a href="${log.url}" target="_blank">Link</a></td>
+      </tr>`;
+      body.innerHTML += row;
+    });
+  } catch (e) {
+    document.getElementById('log-body').innerHTML = '<tr><td colspan="3">Please set up Cloudflare KV to view logs.</td></tr>';
+  }
+}
+
+window.onload = loadLogs;
+</script>
+
+</body>
+</html>
