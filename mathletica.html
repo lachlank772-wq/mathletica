@@ -9,137 +9,3013 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
 <style>
 :root {
-  --ink: #0f0e0c; --paper: #f5f0e8; --cream: #ede7d5; --gold: #c9a84c;
-  --gold-light: #e8c96e; --rust: #b5451b; --sage: #4a6741; --slate: #3d4f5c;
-  --muted: #7a7060; --border: #d4c9b0; --white: #fdfaf4;
+  --ink: #0f0e0c;
+  --paper: #f5f0e8;
+  --cream: #ede7d5;
+  --gold: #c9a84c;
+  --gold-light: #e8c96e;
+  --rust: #b5451b;
+  --sage: #4a6741;
+  --slate: #3d4f5c;
+  --muted: #7a7060;
+  --border: #d4c9b0;
+  --white: #fdfaf4;
 }
 
-/* ── RESTORING YOUR NICE STYLES ── */
 * { margin: 0; padding: 0; box-sizing: border-box; }
+
 html { scroll-behavior: smooth; }
-body { font-family: 'Instrument Sans', sans-serif; background: var(--paper); color: var(--ink); min-height: 100vh; overflow-x: hidden; }
+
+body {
+  font-family: 'Instrument Sans', sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── TYPOGRAPHY ── */
 h1, h2, h3 { font-family: 'DM Serif Display', serif; }
 code, .mono { font-family: 'DM Mono', monospace; }
 
 body::before {
-  content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 1000; opacity: 0.4;
+  content: '';
+  position: fixed;
+  inset: 0;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1000;
+  opacity: 0.4;
 }
 
+/* ── NAV ── */
 nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 500; display: flex; align-items: center; justify-content: space-between;
-  padding: 0 3rem; height: 64px; background: rgba(245,240,232,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border);
-}
-.nav-logo { font-family: 'DM Serif Display', serif; font-size: 1.5rem; color: var(--ink); text-decoration: none; display: flex; align-items: center; gap: 0.5rem; }
-.nav-logo span { display: inline-block; width: 28px; height: 28px; background: var(--ink); color: var(--paper); border-radius: 4px; text-align: center; line-height: 28px; font-size: 0.9rem; font-family: 'DM Mono', monospace; }
-
-.hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 6rem 2rem 4rem; position: relative; overflow: hidden; }
-.hero-grid { position: absolute; inset: 0; background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 48px 48px; opacity: 0.35; mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 0%, transparent 100%); }
-.hero h1 { font-size: clamp(3.5rem, 8vw, 7rem); line-height: 1.0; text-align: center; max-width: 900px; animation: fadeUp 0.8s ease both; }
-
-/* ── ADMIN DASHBOARD STYLES (MATCHING YOUR BM-CARD STYLE) ── */
-#admin-dashboard { background: var(--ink); padding: 6rem 2rem; border-top: 1px solid rgba(255,255,255,0.1); }
-.dashboard-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 2rem; margin-top: 2rem; }
-.exfil-table { width: 100%; border-collapse: collapse; margin-top: 1.5rem; color: rgba(245,240,232,0.7); font-family: 'DM Mono', monospace; font-size: 0.85rem; }
-.exfil-table th { text-align: left; padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.1); color: var(--gold); text-transform: uppercase; font-size: 0.7rem; letter-spacing: 0.1em; }
-.exfil-table td { padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); }
-.exfil-table tr:hover { background: rgba(255,255,255,0.02); }
-.status-pill { padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; background: rgba(74,103,65,0.2); color: var(--sage); border: 1px solid var(--sage); }
-
-/* Bookmarklet button overrides */
-.bookmarklet-btn { 
-    background: var(--gold); color: var(--ink); padding: 0.6rem 1.2rem; border-radius: 6px; 
-    text-decoration: none; font-weight: 700; font-family: 'Instrument Sans', sans-serif;
-    display: inline-flex; align-items: center; gap: 0.5rem; cursor: grab;
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 3rem;
+  height: 64px;
+  background: rgba(245,240,232,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
 }
 
-@keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-.reveal { opacity: 0; transform: translateY(24px); transition: 0.6s ease; }
-.reveal.visible { opacity: 1; transform: none; }
+.nav-logo {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.5rem;
+  color: var(--ink);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nav-logo span {
+  display: inline-block;
+  width: 28px; height: 28px;
+  background: var(--ink);
+  color: var(--paper);
+  border-radius: 4px;
+  text-align: center;
+  line-height: 28px;
+  font-size: 0.9rem;
+  font-family: 'DM Mono', monospace;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+
+.nav-links a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover { color: var(--ink); }
+
+.nav-cta {
+  background: var(--ink);
+  color: var(--paper) !important;
+  padding: 0.4rem 1rem;
+  border-radius: 4px;
+  font-weight: 600 !important;
+}
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 6rem 2rem 4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(ellipse 60% 50% at 20% 50%, rgba(201,168,76,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 60% at 80% 30%, rgba(61,79,92,0.08) 0%, transparent 60%);
+}
+
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 48px 48px;
+  opacity: 0.35;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 0%, transparent 100%);
+}
+
+.hero-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.5rem;
+  animation: fadeUp 0.8s ease both;
+}
+
+.hero h1 {
+  font-size: clamp(3.5rem, 8vw, 7rem);
+  line-height: 1.0;
+  text-align: center;
+  max-width: 900px;
+  animation: fadeUp 0.8s ease 0.1s both;
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.hero-sub {
+  max-width: 560px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 1.125rem;
+  line-height: 1.7;
+  margin-top: 1.5rem;
+  animation: fadeUp 0.8s ease 0.2s both;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2.5rem;
+  animation: fadeUp 0.8s ease 0.3s both;
+}
+
+.btn-primary {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 0.75rem 2rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+  transition: all 0.2s;
+  border: 2px solid var(--ink);
+  cursor: pointer;
+  display: inline-block;
+}
+
+.btn-primary:hover { background: var(--slate); border-color: var(--slate); }
+
+.btn-secondary {
+  background: transparent;
+  color: var(--ink);
+  padding: 0.75rem 2rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9rem;
+  border: 2px solid var(--border);
+  transition: all 0.2s;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.btn-secondary:hover { border-color: var(--ink); }
+
+.hero-stats {
+  display: flex;
+  gap: 3rem;
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+  animation: fadeUp 0.8s ease 0.4s both;
+}
+
+.hero-stat {
+  text-align: center;
+}
+
+.hero-stat-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2rem;
+  color: var(--ink);
+}
+
+.hero-stat-label {
+  font-size: 0.75rem;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-family: 'DM Mono', monospace;
+}
+
+/* ── FLOATING MATH ── */
+.float-math {
+  position: absolute;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.85rem;
+  color: var(--muted);
+  opacity: 0.3;
+  pointer-events: none;
+  animation: floatAnim 8s ease-in-out infinite;
+}
+
+@keyframes floatAnim {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+
+/* ── SECTION ── */
+section { padding: 5rem 2rem; }
+
+.container { max-width: 1200px; margin: 0 auto; }
+
+.section-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.75rem;
+  display: block;
+}
+
+.section-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+
+.section-desc {
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.7;
+  max-width: 560px;
+}
+
+/* ── COURSES GRID ── */
+#courses { background: var(--cream); }
+
+.courses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
+.course-card {
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.75rem;
+  cursor: pointer;
+  transition: all 0.25s;
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.course-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  transition: all 0.3s;
+}
+
+.course-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+}
+
+.course-card.standard::before { background: var(--slate); }
+.course-card.advanced::before { background: var(--gold); }
+.course-card.ext1::before { background: var(--rust); }
+.course-card.ext2::before { background: var(--sage); }
+
+.course-badge {
+  display: inline-block;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.6rem;
+  border-radius: 3px;
+  margin-bottom: 1rem;
+}
+
+.standard .course-badge { background: rgba(61,79,92,0.12); color: var(--slate); }
+.advanced .course-badge { background: rgba(201,168,76,0.15); color: #8a6a1a; }
+.ext1 .course-badge { background: rgba(181,69,27,0.12); color: var(--rust); }
+.ext2 .course-badge { background: rgba(74,103,65,0.12); color: var(--sage); }
+
+.course-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.course-desc {
+  color: var(--muted);
+  font-size: 0.85rem;
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+}
+
+.course-topics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.topic-pill {
+  font-size: 0.7rem;
+  font-family: 'DM Mono', monospace;
+  background: var(--cream);
+  color: var(--muted);
+  padding: 0.2rem 0.55rem;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+}
+
+/* ── CONTENT PANEL ── */
+#content-panel {
+  display: none;
+  background: var(--white);
+  border-top: 2px solid var(--ink);
+}
+
+#content-panel.open { display: block; }
+
+.panel-header {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 2rem 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.panel-header h2 {
+  font-size: 1.8rem;
+}
+
+.panel-close {
+  background: none;
+  border: 1px solid rgba(255,255,255,0.3);
+  color: var(--paper);
+  padding: 0.4rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.8rem;
+  transition: all 0.2s;
+}
+
+.panel-close:hover { background: rgba(255,255,255,0.1); }
+
+.panel-body {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  min-height: 500px;
+}
+
+.panel-sidebar {
+  border-right: 1px solid var(--border);
+  padding: 1.5rem 0;
+}
+
+.panel-sidebar-item {
+  padding: 0.65rem 1.5rem;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.15s;
+  color: var(--muted);
+  border-left: 3px solid transparent;
+  font-family: 'Instrument Sans', sans-serif;
+}
+
+.panel-sidebar-item:hover { background: var(--cream); color: var(--ink); }
+.panel-sidebar-item.active { 
+  background: var(--cream); 
+  color: var(--ink); 
+  font-weight: 600;
+  border-left-color: var(--gold);
+}
+
+.panel-content {
+  padding: 2rem 3rem;
+  overflow-y: auto;
+  max-height: 70vh;
+}
+
+.topic-section { margin-bottom: 2.5rem; }
+
+.topic-section h3 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--ink);
+}
+
+.topic-section p {
+  color: var(--muted);
+  line-height: 1.75;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+}
+
+.formula-box {
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: 6px;
+  padding: 1.25rem 1.5rem;
+  margin: 1rem 0;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.9rem;
+  overflow-x: auto;
+}
+
+.formula-box .formula-label {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--gold);
+  margin-bottom: 0.5rem;
+  font-family: 'Instrument Sans', sans-serif;
+  font-weight: 600;
+}
+
+.key-points {
+  display: grid;
+  gap: 0.75rem;
+  margin: 1rem 0;
+}
+
+.key-point {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.key-point-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--gold);
+  flex-shrink: 0;
+  margin-top: 0.45rem;
+}
+
+/* ── TOOLS SECTION ── */
+#tools { background: var(--paper); }
+
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
+.tool-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.tool-header {
+  background: var(--ink);
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.tool-icon {
+  width: 36px; height: 36px;
+  background: var(--gold);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+}
+
+.tool-header h3 {
+  color: var(--paper);
+  font-size: 1rem;
+  font-family: 'Instrument Sans', sans-serif;
+  font-weight: 600;
+}
+
+.tool-body { padding: 1.5rem; }
+
+.tool-input-group {
+  margin-bottom: 1rem;
+}
+
+.tool-input-group label {
+  display: block;
+  font-size: 0.75rem;
+  font-family: 'DM Mono', monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.4rem;
+}
+
+.tool-input-group input, .tool-input-group select {
+  width: 100%;
+  padding: 0.6rem 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.875rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.tool-input-group input:focus, .tool-input-group select:focus {
+  border-color: var(--gold);
+}
+
+.tool-btn {
+  width: 100%;
+  background: var(--ink);
+  color: var(--paper);
+  border: none;
+  padding: 0.65rem;
+  border-radius: 5px;
+  font-family: 'Instrument Sans', sans-serif;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-top: 0.5rem;
+}
+
+.tool-btn:hover { background: var(--slate); }
+
+.tool-result {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: var(--cream);
+  border-radius: 5px;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.875rem;
+  min-height: 60px;
+  color: var(--slate);
+  line-height: 1.6;
+  border: 1px solid var(--border);
+  display: none;
+}
+
+.tool-result.show { display: block; }
+
+/* ── PRACTICE QUIZ ── */
+#practice { background: var(--cream); }
+
+.quiz-container {
+  max-width: 720px;
+  margin: 3rem auto 0;
+}
+
+.quiz-controls {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.quiz-select {
+  flex: 1;
+  min-width: 200px;
+  padding: 0.65rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Instrument Sans', sans-serif;
+  font-size: 0.9rem;
+  outline: none;
+  cursor: pointer;
+}
+
+.quiz-card {
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+  display: none;
+  animation: fadeUp 0.4s ease both;
+}
+
+.quiz-card.active { display: block; }
+
+.quiz-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.75rem;
+}
+
+.quiz-question {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.2rem;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+}
+
+.quiz-options {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.quiz-option {
+  padding: 0.75rem 1rem;
+  border: 1.5px solid var(--border);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: var(--white);
+}
+
+.quiz-option:hover { border-color: var(--gold); background: rgba(201,168,76,0.05); }
+.quiz-option.correct { border-color: var(--sage); background: rgba(74,103,65,0.08); color: var(--sage); }
+.quiz-option.wrong { border-color: var(--rust); background: rgba(181,69,27,0.08); color: var(--rust); }
+.quiz-option.disabled { pointer-events: none; }
+
+.quiz-opt-label {
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  background: var(--cream);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.quiz-feedback {
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  display: none;
+}
+
+.quiz-feedback.show { display: block; }
+.quiz-feedback.correct { background: rgba(74,103,65,0.1); color: var(--sage); border: 1px solid rgba(74,103,65,0.2); }
+.quiz-feedback.wrong { background: rgba(181,69,27,0.08); color: var(--rust); border: 1px solid rgba(181,69,27,0.15); }
+
+.quiz-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.quiz-score {
+  text-align: center;
+  padding: 2rem;
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  display: none;
+}
+
+.quiz-score.show { display: block; }
+
+.quiz-score-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 4rem;
+  color: var(--gold);
+}
+
+/* ── FORMULA SHEET ── */
+#formulas { background: var(--paper); }
+
+.formula-tabs {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin: 2rem 0 1.5rem;
+}
+
+.formula-tab {
+  padding: 0.5rem 1.2rem;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-family: 'DM Mono', monospace;
+  transition: all 0.2s;
+  background: var(--paper);
+  color: var(--muted);
+}
+
+.formula-tab:hover { border-color: var(--ink); color: var(--ink); }
+.formula-tab.active { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+
+.formula-sheet {
+  display: none;
+  animation: fadeUp 0.3s ease both;
+}
+
+.formula-sheet.active { display: block; }
+
+.formula-sheet-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1rem;
+}
+
+.formula-item {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.25rem;
+  transition: all 0.2s;
+}
+
+.formula-item:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+  transform: translateY(-1px);
+}
+
+.formula-item-name {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  margin-bottom: 0.5rem;
+  font-family: 'DM Mono', monospace;
+}
+
+.formula-item-eq {
+  font-size: 1rem;
+  color: var(--ink);
+  margin-bottom: 0.4rem;
+}
+
+.formula-item-desc {
+  font-size: 0.78rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+/* ── SEARCH BAR ── */
+.search-container {
+  position: relative;
+  max-width: 600px;
+  margin: 2rem auto 0;
+}
+
+.search-input {
+  width: 100%;
+  padding: 1rem 1.5rem 1rem 3rem;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  font-family: 'Instrument Sans', sans-serif;
+  font-size: 1rem;
+  background: var(--paper);
+  color: var(--ink);
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.search-input:focus { border-color: var(--gold); }
+
+.search-icon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--muted);
+  font-size: 1rem;
+}
+
+/* ── BOOKMARKLETS ── */
+#bookmarklets { background: var(--ink); color: var(--paper); }
+
+#bookmarklets .section-label { color: var(--gold); }
+#bookmarklets .section-title { color: var(--paper); }
+#bookmarklets .section-desc { color: rgba(245,240,232,0.6); }
+
+.bookmarklet-intro {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+  margin-top: 2.5rem;
+  padding: 1.75rem 2rem;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  flex-wrap: wrap;
+}
+
+.bookmarklet-intro-icon {
+  font-size: 2.5rem;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.bookmarklet-intro-text h3 {
+  font-family: 'Instrument Sans', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--paper);
+  margin-bottom: 0.4rem;
+}
+
+.bookmarklet-intro-text p {
+  font-size: 0.875rem;
+  color: rgba(245,240,232,0.55);
+  line-height: 1.65;
+}
+
+/* How-to steps */
+.bm-how-to {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.bm-step {
+  flex: 1;
+  min-width: 180px;
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.bm-step-num {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  border: 1.5px solid var(--gold);
+  color: var(--gold);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.8rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.bm-step-text {
+  font-size: 0.85rem;
+  color: rgba(245,240,232,0.65);
+  line-height: 1.55;
+  padding-top: 0.3rem;
+}
+
+.bm-step-text strong {
+  color: var(--paper);
+  display: block;
+  margin-bottom: 0.2rem;
+}
+
+/* Bookmarklet grid */
+.bookmarklet-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.25rem;
+  margin-top: 2.5rem;
+}
+
+.bm-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: border-color 0.25s, transform 0.25s;
+}
+
+.bm-card:hover {
+  border-color: rgba(201,168,76,0.4);
+  transform: translateY(-2px);
+}
+
+.bm-card-header {
+  padding: 1.25rem 1.5rem 1rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+
+.bm-card-icon {
+  width: 38px; height: 38px;
+  border-radius: 8px;
+  background: rgba(201,168,76,0.15);
+  border: 1px solid rgba(201,168,76,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.bm-card-meta { flex: 1; }
+
+.bm-card-title {
+  font-family: 'Instrument Sans', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--paper);
+  margin-bottom: 0.2rem;
+}
+
+.bm-card-subtitle {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.bm-card-body {
+  padding: 1rem 1.5rem 1.25rem;
+}
+
+.bm-card-desc {
+  font-size: 0.82rem;
+  color: rgba(245,240,232,0.5);
+  line-height: 1.6;
+  margin-bottom: 1.1rem;
+}
+
+/* THE DRAGGABLE BOOKMARKLET BUTTON */
+.bm-drag-zone {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.bm-drag-hint {
+  font-size: 0.72rem;
+  color: rgba(245,240,232,0.35);
+  font-family: 'DM Mono', monospace;
+  line-height: 1.4;
+}
+
+.bookmarklet-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1rem;
+  background: var(--gold);
+  color: var(--ink);
+  border-radius: 6px;
+  font-family: 'Instrument Sans', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-decoration: none;
+  border: none;
+  cursor: grab;
+  user-select: none;
+  white-space: nowrap;
+  transition: all 0.2s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  position: relative;
+}
+
+.bookmarklet-btn:hover {
+  background: var(--gold-light);
+  transform: scale(1.03);
+  box-shadow: 0 4px 16px rgba(201,168,76,0.35);
+}
+
+.bookmarklet-btn:active { cursor: grabbing; }
+
+.bookmarklet-btn::before {
+  content: '⠿';
+  font-size: 0.9rem;
+  opacity: 0.5;
+}
+
+/* drag affordance shimmer */
+.bookmarklet-btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.25) 50%, transparent 60%);
+  background-size: 200% 100%;
+  background-position: -100% 0;
+  border-radius: 6px;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%, 60% { background-position: -100% 0; }
+  80%, 100% { background-position: 200% 0; }
+}
+
+/* Coming soon / placeholder state */
+.bm-card.placeholder .bookmarklet-btn {
+  background: rgba(255,255,255,0.08);
+  color: rgba(245,240,232,0.4);
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.bm-card.placeholder .bookmarklet-btn::after { display: none; }
+
+.bm-card.placeholder .bm-drag-hint { color: rgba(245,240,232,0.25); }
+
+.bm-coming-badge {
+  display: inline-block;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.5rem;
+  background: rgba(255,255,255,0.07);
+  color: rgba(245,240,232,0.4);
+  border-radius: 3px;
+  border: 1px solid rgba(255,255,255,0.1);
+  margin-left: 0.5rem;
+}
+
+/* Browser bar hint illustration */
+.browser-bar-hint {
+  margin-top: 3rem;
+  padding: 1.5rem 2rem;
+  background: rgba(255,255,255,0.03);
+  border: 1px dashed rgba(255,255,255,0.12);
+  border-radius: 10px;
+  text-align: center;
+}
+
+.browser-bar-mock {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 6px;
+  padding: 0.4rem 1rem 0.4rem 0.6rem;
+  margin: 0.75rem auto;
+  font-size: 0.8rem;
+  color: rgba(245,240,232,0.4);
+  font-family: 'DM Mono', monospace;
+  max-width: 500px;
+}
+
+.browser-bar-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--gold);
+  opacity: 0.7;
+  flex-shrink: 0;
+}
+
+.browser-bar-hint p {
+  font-size: 0.8rem;
+  color: rgba(245,240,232,0.35);
+  font-family: 'DM Mono', monospace;
+  letter-spacing: 0.04em;
+}
+
+/* ── FOOTER ── */
+footer {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+.footer-logo {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2rem;
+  color: var(--gold);
+  margin-bottom: 0.5rem;
+}
+
+.footer-sub {
+  color: rgba(245,240,232,0.5);
+  font-size: 0.875rem;
+  font-family: 'DM Mono', monospace;
+  letter-spacing: 0.05em;
+  margin-bottom: 1.5rem;
+}
+
+.footer-links {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.footer-links a {
+  color: rgba(245,240,232,0.6);
+  text-decoration: none;
+  font-size: 0.85rem;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover { color: var(--gold); }
+
+.footer-copy {
+  color: rgba(245,240,232,0.3);
+  font-size: 0.75rem;
+  font-family: 'DM Mono', monospace;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ── GRAPH SECTION ── */
+.graph-wrapper {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 1rem;
+}
+
+canvas#funcGraph {
+  width: 100%;
+  height: 300px;
+  display: block;
+  cursor: crosshair;
+}
+
+.graph-controls {
+  padding: 1rem 1.5rem;
+  background: var(--cream);
+  border-top: 1px solid var(--border);
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.graph-controls input[type="text"] {
+  flex: 1;
+  min-width: 200px;
+  padding: 0.5rem 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.9rem;
+  background: var(--paper);
+  outline: none;
+}
+
+.graph-controls input:focus { border-color: var(--gold); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  nav { padding: 0 1rem; }
+  .nav-links { display: none; }
+  .hero h1 { font-size: 2.8rem; }
+  .hero-stats { gap: 1.5rem; }
+  .panel-body { grid-template-columns: 1fr; }
+  .panel-sidebar { border-right: none; border-bottom: 1px solid var(--border); }
+  .panel-content { padding: 1.5rem; }
+  section { padding: 3rem 1rem; }
+}
+
+/* ── PROGRESS BAR ── */
+.progress-bar-container {
+  background: var(--cream);
+  border-radius: 10px;
+  height: 8px;
+  overflow: hidden;
+  margin: 0.5rem 0 1.5rem;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold), var(--rust));
+  border-radius: 10px;
+  transition: width 0.5s ease;
+}
+
+/* ── STICKY CONTENT NAV ── */
+.content-nav-bar {
+  background: var(--ink);
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.content-nav-bar::-webkit-scrollbar { display: none; }
+
+.content-nav-item {
+  padding: 0.75rem 1.25rem;
+  color: rgba(245,240,232,0.55);
+  font-size: 0.8rem;
+  font-family: 'DM Mono', monospace;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s;
+  border-bottom: 2px solid transparent;
+}
+
+.content-nav-item:hover { color: var(--paper); }
+.content-nav-item.active { color: var(--gold-light); border-bottom-color: var(--gold); }
+
+/* ── DIFF EQ BOX ── */
+.example-box {
+  background: linear-gradient(135deg, rgba(201,168,76,0.05), rgba(61,79,92,0.05));
+  border: 1px solid rgba(201,168,76,0.3);
+  border-radius: 8px;
+  padding: 1.25rem;
+  margin: 1rem 0;
+}
+
+.example-box-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--gold);
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.worked-steps {
+  list-style: none;
+  counter-reset: step;
+}
+
+.worked-steps li {
+  counter-increment: step;
+  padding: 0.6rem 0 0.6rem 2.5rem;
+  position: relative;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  border-bottom: 1px solid var(--border);
+  color: var(--muted);
+}
+
+.worked-steps li:last-child { border-bottom: none; }
+
+.worked-steps li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 0.6rem;
+  width: 22px; height: 22px;
+  background: var(--gold);
+  color: var(--ink);
+  border-radius: 50%;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+}
+
 </style>
 </head>
 <body>
 
+<!-- NAV -->
 <nav>
-  <a href="#" class="nav-logo"><span>M</span> mathletica.cc</a>
-  <div class="nav-links">
-    <a href="#courses">Courses</a>
-    <a href="#formulas">Formulas</a>
-    <a href="#admin-dashboard" style="color: var(--gold);">Owner Dashboard</a>
-  </div>
+  <a href="#" class="nav-logo"><span>∑</span> Mathletica</a>
+  <ul class="nav-links">
+    <li><a href="#courses">Courses</a></li>
+    <li><a href="#tools">Tools</a></li>
+    <li><a href="#practice">Practice</a></li>
+    <li><a href="#formulas">Formulas</a></li>
+    <li><a href="#bookmarklets">Bookmarklets</a></li>
+    <li><a href="#tools" class="nav-cta">Start Studying</a></li>
+  </ul>
 </nav>
 
+<!-- HERO -->
 <section class="hero">
-    <div class="hero-grid"></div>
-    <p class="mono" style="color: var(--gold); margin-bottom: 1rem;">HSC Resource Hub</p>
-    <h1>Mastering<br><em>Mathematics.</em></h1>
-</section>
-
-<section id="admin-dashboard">
-  <div class="container">
-    <span class="mono" style="color: var(--gold); display: block; margin-bottom: 0.5rem;">System Admin</span>
-    <h2 style="color: var(--paper); font-size: 2.5rem;">Resource Exfiltration</h2>
-    
-    <div class="dashboard-card reveal">
-      <h3 style="color: var(--paper); margin-bottom: 1rem;">1. The Collector</h3>
-      <p style="color: rgba(245,240,232,0.6); font-size: 0.9rem; margin-bottom: 1.5rem;">Drag this button to your bookmarks bar. Click it while viewing any NESA PDF or Past Paper to automatically log the source here.</p>
-      <a class="bookmarklet-btn" href="javascript:(function(){const d={t:document.title,u:window.location.href,time:new Date().toISOString()};fetch('https://mathletica.cc/collect?data='+btoa(JSON.stringify(d)),{mode:'no-cors'});alert('Paper Exfiltrated!');})();">
-        ⠿ Mathletica Exfil
-      </a>
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  
+  <!-- floating math decorations -->
+  <div class="float-math" style="top:15%;left:8%;animation-delay:0s;">∫ f(x)dx</div>
+  <div class="float-math" style="top:25%;right:10%;animation-delay:1.5s;">lim<sub>x→∞</sub></div>
+  <div class="float-math" style="top:65%;left:5%;animation-delay:3s;">dy/dx</div>
+  <div class="float-math" style="bottom:20%;right:8%;animation-delay:2s;">∑ aₙrⁿ</div>
+  <div class="float-math" style="top:45%;right:3%;animation-delay:0.7s;">e<sup>iπ</sup>+1=0</div>
+  
+  <div style="position:relative;text-align:center;">
+    <div class="hero-eyebrow">NSW HSC Mathematics · All Levels</div>
+    <h1>Master <em>every</em> corner of HSC Maths</h1>
+    <p class="hero-sub">From Standard to Extension 2 — comprehensive notes, worked examples, interactive tools, and practice questions aligned to the NSW curriculum.</p>
+    <div class="hero-actions">
+      <a href="#courses" class="btn-primary">Explore Courses</a>
+      <a href="#practice" class="btn-secondary">Take a Quiz</a>
     </div>
-
-    <div class="dashboard-card reveal">
-      <h3 style="color: var(--paper); margin-bottom: 1rem;">2. Live Data Feed</h3>
-      <table class="exfil-table">
-        <thead>
-          <tr>
-            <th>Timestamp</th>
-            <th>Resource Title</th>
-            <th>Status</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody id="exfil-log">
-          <tr><td colspan="4" style="text-align: center; padding: 3rem;">Listening for incoming data...</td></tr>
-        </tbody>
-      </table>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-num">4</div>
+        <div class="hero-stat-label">Course Levels</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">80+</div>
+        <div class="hero-stat-label">Topics</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">200+</div>
+        <div class="hero-stat-label">Practice Questions</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">∞</div>
+        <div class="hero-stat-label">Free Forever</div>
+      </div>
     </div>
   </div>
 </section>
 
+<!-- COURSES -->
+<section id="courses">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-label">NSW Curriculum</span>
+      <h2 class="section-title">Choose your course</h2>
+      <p class="section-desc">All four levels of HSC Mathematics, fully covered with notes, formulas, and examples.</p>
+    </div>
+
+    <div class="courses-grid reveal">
+      <a class="course-card standard" href="#" onclick="openCourse('standard');return false;">
+        <div class="course-badge">Standard 1 &amp; 2</div>
+        <div class="course-title">Mathematics Standard</div>
+        <div class="course-desc">Practical mathematics for everyday life. Covers algebra, measurement, financial maths, statistics, and networks.</div>
+        <div class="course-topics">
+          <span class="topic-pill">Algebra</span>
+          <span class="topic-pill">Measurement</span>
+          <span class="topic-pill">Financial Maths</span>
+          <span class="topic-pill">Statistics</span>
+          <span class="topic-pill">Networks</span>
+        </div>
+      </a>
+
+      <a class="course-card advanced" href="#" onclick="openCourse('advanced');return false;">
+        <div class="course-badge">Advanced · 2U</div>
+        <div class="course-title">Mathematics Advanced</div>
+        <div class="course-desc">Core mathematics with calculus, exponential &amp; log functions, trigonometry, statistical analysis, and financial mathematics.</div>
+        <div class="course-topics">
+          <span class="topic-pill">Calculus</span>
+          <span class="topic-pill">Functions</span>
+          <span class="topic-pill">Trig</span>
+          <span class="topic-pill">Statistics</span>
+          <span class="topic-pill">Logs &amp; Exp</span>
+        </div>
+      </a>
+
+      <a class="course-card ext1" href="#" onclick="openCourse('ext1');return false;">
+        <div class="course-badge">Extension 1 · 3U</div>
+        <div class="course-title">Mathematics Ext. 1</div>
+        <div class="course-desc">Advanced content including proofs, vectors, further calculus, combinatorics, and statistical inference.</div>
+        <div class="course-topics">
+          <span class="topic-pill">Proof</span>
+          <span class="topic-pill">Vectors</span>
+          <span class="topic-pill">Combinatorics</span>
+          <span class="topic-pill">Further Calculus</span>
+          <span class="topic-pill">Inference</span>
+        </div>
+      </a>
+
+      <a class="course-card ext2" href="#" onclick="openCourse('ext2');return false;">
+        <div class="course-badge">Extension 2 · 4U</div>
+        <div class="course-title">Mathematics Ext. 2</div>
+        <div class="course-desc">The pinnacle of HSC maths. Complex numbers, further proof, mechanics, integration techniques, and vectors in 3D.</div>
+        <div class="course-topics">
+          <span class="topic-pill">Complex Numbers</span>
+          <span class="topic-pill">Mechanics</span>
+          <span class="topic-pill">Proof</span>
+          <span class="topic-pill">Integration</span>
+          <span class="topic-pill">Vectors 3D</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTENT PANEL -->
+<div id="content-panel">
+  <div class="panel-header">
+    <div>
+      <div style="font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(245,240,232,0.5);margin-bottom:0.25rem;" id="panel-eyebrow">Mathematics Advanced</div>
+      <h2 id="panel-title">Course Notes</h2>
+    </div>
+    <button class="panel-close" onclick="closeCourse()">✕ Close</button>
+  </div>
+  <div class="content-nav-bar" id="topicNavBar"></div>
+  <div class="panel-body">
+    <div class="panel-sidebar" id="panelSidebar"></div>
+    <div class="panel-content" id="panelContent"></div>
+  </div>
+</div>
+
+<!-- TOOLS -->
+<section id="tools">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-label">Interactive Tools</span>
+      <h2 class="section-title">Mathematical tools</h2>
+      <p class="section-desc">Powerful calculators and visualisers to help you explore and understand mathematical concepts.</p>
+    </div>
+
+    <div class="tools-grid reveal" style="margin-top:2rem;">
+      <!-- Quadratic Solver -->
+      <div class="tool-card">
+        <div class="tool-header">
+          <div class="tool-icon">𝑥²</div>
+          <h3>Quadratic Solver</h3>
+        </div>
+        <div class="tool-body">
+          <p style="font-size:0.85rem;color:var(--muted);margin-bottom:1rem;">Solve ax² + bx + c = 0 using the quadratic formula</p>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.5rem;">
+            <div class="tool-input-group">
+              <label>a</label>
+              <input type="number" id="qa" value="1" step="any">
+            </div>
+            <div class="tool-input-group">
+              <label>b</label>
+              <input type="number" id="qb" value="-5" step="any">
+            </div>
+            <div class="tool-input-group">
+              <label>c</label>
+              <input type="number" id="qc" value="6" step="any">
+            </div>
+          </div>
+          <button class="tool-btn" onclick="solveQuadratic()">Solve</button>
+          <div class="tool-result" id="quadResult"></div>
+        </div>
+      </div>
+
+      <!-- Function Grapher -->
+      <div class="tool-card" style="grid-column: span 1;">
+        <div class="tool-header">
+          <div class="tool-icon">📈</div>
+          <h3>Function Grapher</h3>
+        </div>
+        <div class="tool-body" style="padding:0;">
+          <canvas id="funcGraph" height="260"></canvas>
+          <div class="graph-controls">
+            <input type="text" id="funcInput" value="x^2 - 3*x + 2" placeholder="e.g. Math.sin(x) * x">
+            <button class="tool-btn" style="width:auto;padding:0.5rem 1.2rem;" onclick="drawGraph()">Plot</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Derivative Finder -->
+      <div class="tool-card">
+        <div class="tool-header">
+          <div class="tool-icon">d/dx</div>
+          <h3>Derivative Reference</h3>
+        </div>
+        <div class="tool-body">
+          <p style="font-size:0.85rem;color:var(--muted);margin-bottom:1rem;">Select a function to see its derivative and anti-derivative.</p>
+          <div class="tool-input-group">
+            <label>Function type</label>
+            <select id="derivSelect" onchange="showDerivative()">
+              <option value="">-- Select --</option>
+              <option value="poly">Polynomial xⁿ</option>
+              <option value="sin">sin(x)</option>
+              <option value="cos">cos(x)</option>
+              <option value="tan">tan(x)</option>
+              <option value="exp">eˣ</option>
+              <option value="ln">ln(x)</option>
+              <option value="chain">Chain Rule</option>
+              <option value="product">Product Rule</option>
+              <option value="quotient">Quotient Rule</option>
+            </select>
+          </div>
+          <div class="tool-result show" id="derivResult" style="display:block;">Select a function above to see derivative rules.</div>
+        </div>
+      </div>
+
+      <!-- Statistics Calculator -->
+      <div class="tool-card">
+        <div class="tool-header">
+          <div class="tool-icon">σ</div>
+          <h3>Statistics Calculator</h3>
+        </div>
+        <div class="tool-body">
+          <p style="font-size:0.85rem;color:var(--muted);margin-bottom:1rem;">Enter comma-separated values to compute statistical measures.</p>
+          <div class="tool-input-group">
+            <label>Data values</label>
+            <input type="text" id="statsData" value="4, 7, 13, 2, 1, 8, 4, 7" placeholder="e.g. 3, 7, 12, 4, 9">
+          </div>
+          <button class="tool-btn" onclick="calcStats()">Calculate</button>
+          <div class="tool-result" id="statsResult"></div>
+        </div>
+      </div>
+
+      <!-- Financial Maths -->
+      <div class="tool-card">
+        <div class="tool-header">
+          <div class="tool-icon">💰</div>
+          <h3>Financial Maths</h3>
+        </div>
+        <div class="tool-body">
+          <div class="tool-input-group">
+            <label>Type</label>
+            <select id="finType">
+              <option value="simple">Simple Interest</option>
+              <option value="compound">Compound Interest</option>
+              <option value="annuity">Future Value Annuity</option>
+            </select>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;">
+            <div class="tool-input-group">
+              <label>Principal ($)</label>
+              <input type="number" id="finP" value="10000" step="any">
+            </div>
+            <div class="tool-input-group">
+              <label>Rate (% p.a.)</label>
+              <input type="number" id="finR" value="5" step="any">
+            </div>
+            <div class="tool-input-group">
+              <label>Time (years)</label>
+              <input type="number" id="finT" value="3" step="any">
+            </div>
+            <div class="tool-input-group">
+              <label>Compounds/yr</label>
+              <input type="number" id="finN" value="12" step="1">
+            </div>
+          </div>
+          <button class="tool-btn" onclick="calcFinance()">Calculate</button>
+          <div class="tool-result" id="finResult"></div>
+        </div>
+      </div>
+
+      <!-- Complex Numbers (EXT2) -->
+      <div class="tool-card">
+        <div class="tool-header">
+          <div class="tool-icon" style="background:var(--sage)">ℂ</div>
+          <h3>Complex Numbers</h3>
+        </div>
+        <div class="tool-body">
+          <p style="font-size:0.85rem;color:var(--muted);margin-bottom:1rem;">Operations on complex numbers in rectangular form.</p>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;">
+            <div class="tool-input-group">
+              <label>z₁ real</label>
+              <input type="number" id="z1r" value="3" step="any">
+            </div>
+            <div class="tool-input-group">
+              <label>z₁ imaginary</label>
+              <input type="number" id="z1i" value="4" step="any">
+            </div>
+            <div class="tool-input-group">
+              <label>z₂ real</label>
+              <input type="number" id="z2r" value="1" step="any">
+            </div>
+            <div class="tool-input-group">
+              <label>z₂ imaginary</label>
+              <input type="number" id="z2i" value="-2" step="any">
+            </div>
+          </div>
+          <div class="tool-input-group">
+            <label>Operation</label>
+            <select id="complexOp">
+              <option value="add">Addition (z₁ + z₂)</option>
+              <option value="sub">Subtraction (z₁ − z₂)</option>
+              <option value="mul">Multiplication (z₁ × z₂)</option>
+              <option value="div">Division (z₁ ÷ z₂)</option>
+              <option value="mod">Modulus |z₁|</option>
+              <option value="arg">Argument arg(z₁)</option>
+            </select>
+          </div>
+          <button class="tool-btn" onclick="calcComplex()">Calculate</button>
+          <div class="tool-result" id="complexResult"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRACTICE QUIZ -->
+<section id="practice">
+  <div class="container">
+    <div class="reveal" style="text-align:center;">
+      <span class="section-label">Test yourself</span>
+      <h2 class="section-title">Practice Questions</h2>
+      <p class="section-desc" style="margin:0 auto;">Challenge yourself with curriculum-aligned questions across all topics and difficulty levels.</p>
+    </div>
+
+    <div class="quiz-container">
+      <div class="quiz-controls reveal">
+        <select class="quiz-select" id="quizTopic" onchange="loadQuiz()">
+          <option value="all">All Topics</option>
+          <option value="calculus">Calculus</option>
+          <option value="trig">Trigonometry</option>
+          <option value="algebra">Algebra</option>
+          <option value="stats">Statistics</option>
+          <option value="financial">Financial Maths</option>
+          <option value="complex">Complex Numbers</option>
+        </select>
+        <select class="quiz-select" id="quizLevel" onchange="loadQuiz()">
+          <option value="all">All Levels</option>
+          <option value="standard">Standard</option>
+          <option value="advanced">Advanced</option>
+          <option value="ext1">Extension 1</option>
+          <option value="ext2">Extension 2</option>
+        </select>
+        <button class="btn-primary" onclick="loadQuiz()">New Quiz</button>
+      </div>
+
+      <div id="quizArea"></div>
+      <div class="quiz-score" id="quizScore">
+        <div class="quiz-score-num" id="scoreDisplay">0/5</div>
+        <div style="font-size:1.1rem;margin:0.5rem 0;" id="scoreMsg"></div>
+        <button class="btn-primary" onclick="loadQuiz()" style="margin-top:1rem;">Try Another Quiz</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORMULA SHEET -->
+<section id="formulas">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-label">Quick Reference</span>
+      <h2 class="section-title">Formula Sheet</h2>
+      <p class="section-desc">All key formulas organised by topic. Bookmark this page for quick exam-day reference.</p>
+    </div>
+
+    <div class="formula-tabs reveal">
+      <button class="formula-tab active" onclick="showFormulaSheet('algebra')">Algebra</button>
+      <button class="formula-tab" onclick="showFormulaSheet('trig')">Trigonometry</button>
+      <button class="formula-tab" onclick="showFormulaSheet('calculus')">Calculus</button>
+      <button class="formula-tab" onclick="showFormulaSheet('stats')">Statistics</button>
+      <button class="formula-tab" onclick="showFormulaSheet('financial')">Financial</button>
+      <button class="formula-tab" onclick="showFormulaSheet('sequences')">Sequences</button>
+      <button class="formula-tab" onclick="showFormulaSheet('complex')">Complex Numbers</button>
+      <button class="formula-tab" onclick="showFormulaSheet('vectors')">Vectors</button>
+    </div>
+
+    <div id="formulaDisplay" class="reveal"></div>
+  </div>
+</section>
+
+<!-- BOOKMARKLETS -->
+<section id="bookmarklets">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-label">NESA Curriculum Tools</span>
+      <h2 class="section-title">Bookmarklets</h2>
+      <p class="section-desc">Drag a bookmarklet to your browser's bookmark bar, then activate it on any NESA curriculum page to interact with it directly.</p>
+    </div>
+
+    <div class="bookmarklet-intro reveal">
+      <div class="bookmarklet-intro-icon">🔖</div>
+      <div class="bookmarklet-intro-text">
+        <h3>What is a bookmarklet?</h3>
+        <p>A bookmarklet is a small JavaScript program saved as a browser bookmark. When you click it on any webpage, it runs instantly — no extensions, no installs. These are built specifically for <strong style="color:var(--paper)">syllabus.nesa.nsw.edu.au</strong> and the official NESA HSC Mathematics pages, letting you pull curriculum outcomes directly into your study workflow.</p>
+      </div>
+    </div>
+
+    <!-- How to use -->
+    <div class="bm-how-to reveal">
+      <div class="bm-step">
+        <div class="bm-step-num">1</div>
+        <div class="bm-step-text"><strong>Show your bookmark bar</strong>Press Cmd+Shift+B (Mac) or Ctrl+Shift+B (Windows) to make it visible.</div>
+      </div>
+      <div class="bm-step">
+        <div class="bm-step-num">2</div>
+        <div class="bm-step-text"><strong>Drag to the bar</strong>Click and drag the gold button below directly into your bookmark bar.</div>
+      </div>
+      <div class="bm-step">
+        <div class="bm-step-num">3</div>
+        <div class="bm-step-text"><strong>Visit a NESA page</strong>Go to any HSC Mathematics syllabus page on syllabus.nesa.nsw.edu.au.</div>
+      </div>
+      <div class="bm-step">
+        <div class="bm-step-num">4</div>
+        <div class="bm-step-text"><strong>Click the bookmarklet</strong>Hit it in your bar — the script activates on the current page instantly.</div>
+      </div>
+    </div>
+
+    <!-- Browser bar illustration -->
+    <div class="browser-bar-hint reveal">
+      <p>YOUR BOOKMARK BAR WILL LOOK LIKE THIS AFTER DRAGGING ↓</p>
+      <div class="browser-bar-mock">
+        <div class="browser-bar-dot"></div>
+        <span>mathletica.cc</span>
+        <span style="margin:0 0.5rem;opacity:0.3;">|</span>
+        <span style="color:var(--gold-light);opacity:0.9;">⠿ NESA Highlighter</span>
+        <span style="margin:0 0.25rem;opacity:0.3;">·</span>
+        <span style="color:var(--gold-light);opacity:0.9;">⠿ Outcome Extractor</span>
+        <span style="margin:0 0.25rem;opacity:0.3;">·</span>
+        <span style="opacity:0.3;">Add your tools here…</span>
+      </div>
+      <p>Each gold button is a draggable bookmarklet — drag, don't click</p>
+    </div>
+
+    <!-- Bookmarklet cards grid -->
+    <div class="bookmarklet-grid reveal">
+
+      <!-- SLOT 1 — Your JS goes here -->
+      <div class="bm-card">
+        <div class="bm-card-header">
+          <div class="bm-card-icon">🎯</div>
+          <div class="bm-card-meta">
+            <div class="bm-card-title">NESA Outcome Highlighter</div>
+            <div class="bm-card-subtitle">syllabus.nesa.nsw.edu.au</div>
+          </div>
+        </div>
+        <div class="bm-card-body">
+          <p class="bm-card-desc">Highlights all syllabus outcomes on the current NESA Mathematics page, colour-coded by strand. Hover any outcome to see its full descriptor.</p>
+          <div class="bm-drag-zone">
+            <!-- ↓↓↓ REPLACE href WITH YOUR javascript: URL ↓↓↓ -->
+            <a class="bookmarklet-btn" href="javascript:void(0);" title="Drag me to your bookmarks bar">
+              NESA Highlighter
+            </a>
+            <div class="bm-drag-hint">← Drag to<br>bookmark bar</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLOT 2 -->
+      <div class="bm-card">
+        <div class="bm-card-header">
+          <div class="bm-card-icon">📋</div>
+          <div class="bm-card-meta">
+            <div class="bm-card-title">Outcome Extractor</div>
+            <div class="bm-card-subtitle">syllabus.nesa.nsw.edu.au</div>
+          </div>
+        </div>
+        <div class="bm-card-body">
+          <p class="bm-card-desc">Scrapes all dot-point outcomes from the current syllabus page and copies them to your clipboard as a formatted checklist.</p>
+          <div class="bm-drag-zone">
+            <!-- ↓↓↓ REPLACE href WITH YOUR javascript: URL ↓↓↓ -->
+            <a class="bookmarklet-btn" href="javascript:void(0);" title="Drag me to your bookmarks bar">
+              Outcome Extractor
+            </a>
+            <div class="bm-drag-hint">← Drag to<br>bookmark bar</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLOT 3 -->
+      <div class="bm-card">
+        <div class="bm-card-header">
+          <div class="bm-card-icon">🔍</div>
+          <div class="bm-card-meta">
+            <div class="bm-card-title">Topic Scope Viewer</div>
+            <div class="bm-card-subtitle">syllabus.nesa.nsw.edu.au</div>
+          </div>
+        </div>
+        <div class="bm-card-body">
+          <p class="bm-card-desc">Overlays a collapsible panel listing all topics and subtopics in scope for the current HSC Mathematics course syllabus page.</p>
+          <div class="bm-drag-zone">
+            <!-- ↓↓↓ REPLACE href WITH YOUR javascript: URL ↓↓↓ -->
+            <a class="bookmarklet-btn" href="javascript:void(0);" title="Drag me to your bookmarks bar">
+              Scope Viewer
+            </a>
+            <div class="bm-drag-hint">← Drag to<br>bookmark bar</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLOT 4 -->
+      <div class="bm-card">
+        <div class="bm-card-header">
+          <div class="bm-card-icon">✅</div>
+          <div class="bm-card-meta">
+            <div class="bm-card-title">Syllabus Checklist</div>
+            <div class="bm-card-subtitle">syllabus.nesa.nsw.edu.au</div>
+          </div>
+        </div>
+        <div class="bm-card-body">
+          <p class="bm-card-desc">Adds interactive checkboxes next to each syllabus dot point so you can track which outcomes you've studied. Progress saves in localStorage.</p>
+          <div class="bm-drag-zone">
+            <!-- ↓↓↓ REPLACE href WITH YOUR javascript: URL ↓↓↓ -->
+            <a class="bookmarklet-btn" href="javascript:void(0);" title="Drag me to your bookmarks bar">
+              Syllabus Checklist
+            </a>
+            <div class="bm-drag-hint">← Drag to<br>bookmark bar</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLOT 5 -->
+      <div class="bm-card">
+        <div class="bm-card-header">
+          <div class="bm-card-icon">🔗</div>
+          <div class="bm-card-meta">
+            <div class="bm-card-title">Send to Mathletica</div>
+            <div class="bm-card-subtitle">Any NESA page</div>
+          </div>
+        </div>
+        <div class="bm-card-body">
+          <p class="bm-card-desc">Detects the current NESA syllabus topic and jumps you straight to the matching notes and worked examples here on Mathletica.</p>
+          <div class="bm-drag-zone">
+            <!-- ↓↓↓ REPLACE href WITH YOUR javascript: URL ↓↓↓ -->
+            <a class="bookmarklet-btn" href="javascript:void(0);" title="Drag me to your bookmarks bar">
+              Open in Mathletica
+            </a>
+            <div class="bm-drag-hint">← Drag to<br>bookmark bar</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLOT 6 — Placeholder / add more -->
+      <div class="bm-card placeholder">
+        <div class="bm-card-header">
+          <div class="bm-card-icon" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.08);">+</div>
+          <div class="bm-card-meta">
+            <div class="bm-card-title" style="color:rgba(245,240,232,0.3);">More coming soon</div>
+            <div class="bm-card-subtitle" style="color:rgba(245,240,232,0.2);">In development</div>
+          </div>
+        </div>
+        <div class="bm-card-body">
+          <p class="bm-card-desc" style="color:rgba(245,240,232,0.25);">Additional bookmarklets for past paper navigation, worked solution overlays, and more are in development.</p>
+          <div class="bm-drag-zone">
+            <a class="bookmarklet-btn" href="javascript:void(0);" style="cursor:not-allowed;background:rgba(255,255,255,0.06);color:rgba(245,240,232,0.25);box-shadow:none;">
+              Coming Soon
+            </a>
+            <div class="bm-drag-hint">Watch<br>this space</div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /bookmarklet-grid -->
+
+    <!-- Dev note -->
+    <div style="margin-top:2rem;padding:1rem 1.5rem;background:rgba(201,168,76,0.07);border:1px solid rgba(201,168,76,0.2);border-radius:8px;" class="reveal">
+      <div style="font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:0.4rem;">Developer Note</div>
+      <p style="font-size:0.82rem;color:rgba(245,240,232,0.5);line-height:1.65;">To wire up a bookmarklet, replace the <code style="background:rgba(255,255,255,0.08);padding:0.1rem 0.4rem;border-radius:3px;font-family:'DM Mono',monospace;">href="javascript:void(0);"</code> on each gold button with your minified <code style="background:rgba(255,255,255,0.08);padding:0.1rem 0.4rem;border-radius:3px;font-family:'DM Mono',monospace;">javascript:(function(){...})()</code> code. The button is already draggable — the browser will save whatever is in the href as the bookmark URL.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Mathletica</div>
+  <div class="footer-sub">mathletica.cc — NSW HSC Mathematics</div>
+  <div class="footer-links">
+    <a href="#courses">Courses</a>
+    <a href="#tools">Tools</a>
+    <a href="#practice">Practice</a>
+    <a href="#formulas">Formulas</a>
+    <a href="#bookmarklets">Bookmarklets</a>
+  </div>
+  <div class="footer-copy">Aligned to the NSW Education Standards Authority (NESA) HSC Mathematics Curriculum. Free for all students.</div>
+</footer>
+
 <script>
-// --- LIVE DASHBOARD REFRESH ---
-async function refreshDashboard() {
-  try {
-    const response = await fetch('/dashboard-data'); // Calls your Cloudflare KV Function
-    const data = await response.json();
-    const logBody = document.getElementById('exfil-log');
-    
-    if (data.length > 0) {
-      logBody.innerHTML = data.map(entry => `
-        <tr>
-          <td>${new Date(entry.time).toLocaleTimeString()}</td>
-          <td style="color: var(--paper)">${entry.t}</td>
-          <td><span class="status-pill">Collected</span></td>
-          <td><a href="${entry.u}" target="_blank" style="color: var(--gold); text-decoration: none;">View Source</a></td>
-        </tr>
-      `).join('');
-    }
-  } catch (err) {
-    console.log("KV Database not yet initialized or reachable.");
+// ══════════════════════════════════════════
+//  COURSE DATA
+// ══════════════════════════════════════════
+const courseData = {
+  standard: {
+    title: "Mathematics Standard",
+    eyebrow: "Standard 1 & 2",
+    topics: [
+      {
+        id: "algebra_std",
+        name: "Algebra",
+        subtopics: ["Linear Equations", "Formulas & Substitution", "Simultaneous Equations", "Non-linear Relationships"],
+        content: `
+          <div class="topic-section">
+            <h3>Linear Equations &amp; Formulas</h3>
+            <p>Linear equations involve a variable raised to the power of 1. Standard students must be able to solve linear equations, substitute into formulas, and rearrange formulas to change the subject.</p>
+            <div class="formula-box">
+              <div class="formula-label">General Form</div>
+              ax + b = c → x = (c − b) / a
+            </div>
+            <div class="key-points">
+              <div class="key-point"><div class="key-point-dot"></div><div>Perform the same operation to both sides to maintain balance.</div></div>
+              <div class="key-point"><div class="key-point-dot"></div><div>To make a variable the subject, isolate it using inverse operations.</div></div>
+              <div class="key-point"><div class="key-point-dot"></div><div>Always check your solution by substituting back into the original equation.</div></div>
+            </div>
+            <div class="example-box">
+              <div class="example-box-label">Worked Example — Solve 3x − 7 = 14</div>
+              <ol class="worked-steps">
+                <li>Add 7 to both sides: 3x = 21</li>
+                <li>Divide both sides by 3: x = 7</li>
+                <li>Check: 3(7) − 7 = 21 − 7 = 14 ✓</li>
+              </ol>
+            </div>
+          </div>
+          <div class="topic-section">
+            <h3>Simultaneous Equations</h3>
+            <p>Two equations with two unknowns, solved by substitution or elimination.</p>
+            <div class="formula-box">
+              <div class="formula-label">Elimination Method</div>
+              Make coefficients equal, then add/subtract equations to eliminate one variable.
+            </div>
+            <div class="example-box">
+              <div class="example-box-label">Worked Example — Solve 2x + y = 7 and x − y = 2</div>
+              <ol class="worked-steps">
+                <li>Add equations: 3x = 9, so x = 3</li>
+                <li>Substitute x = 3 into eq 1: 6 + y = 7, so y = 1</li>
+                <li>Solution: (3, 1)</li>
+              </ol>
+            </div>
+          </div>
+        `
+      },
+      {
+        id: "measurement_std",
+        name: "Measurement",
+        subtopics: ["Area & Perimeter", "Volume & Surface Area", "Right-angled Triangles", "Rates & Ratios"],
+        content: `
+          <div class="topic-section">
+            <h3>Area &amp; Perimeter</h3>
+            <p>Key formulas for common shapes tested in Standard.</p>
+            <div class="formula-sheet-grid" style="margin:1rem 0;">
+              <div class="formula-item"><div class="formula-item-name">Rectangle</div><div class="formula-item-eq">A = lw, P = 2(l+w)</div></div>
+              <div class="formula-item"><div class="formula-item-name">Triangle</div><div class="formula-item-eq">A = ½bh</div></div>
+              <div class="formula-item"><div class="formula-item-name">Circle</div><div class="formula-item-eq">A = πr², C = 2πr</div></div>
+              <div class="formula-item"><div class="formula-item-name">Trapezium</div><div class="formula-item-eq">A = ½(a+b)h</div></div>
+              <div class="formula-item"><div class="formula-item-name">Sector</div><div class="formula-item-eq">A = (θ/360)πr²</div></div>
+              <div class="formula-item"><div class="formula-item-name">Composite Shapes</div><div class="formula-item-eq">Divide into known shapes, sum areas</div></div>
+            </div>
+          </div>
+          <div class="topic-section">
+            <h3>Right-angled Triangles</h3>
+            <div class="formula-box"><div class="formula-label">Pythagoras Theorem</div>a² + b² = c² (c = hypotenuse)</div>
+            <div class="formula-box"><div class="formula-label">SOH CAH TOA</div>sin θ = opp/hyp  |  cos θ = adj/hyp  |  tan θ = opp/adj</div>
+            <div class="key-points">
+              <div class="key-point"><div class="key-point-dot"></div><div>Use Pythagoras to find a missing side when two sides are known.</div></div>
+              <div class="key-point"><div class="key-point-dot"></div><div>Use trig ratios to find angles or sides in right-angled triangles.</div></div>
+              <div class="key-point"><div class="key-point-dot"></div><div>Angles of elevation and depression are measured from the horizontal.</div></div>
+            </div>
+          </div>
+        `
+      },
+      {
+        id: "financial_std",
+        name: "Financial Maths",
+        subtopics: ["Simple Interest", "Compound Interest", "Loans & Annuities", "Depreciation"],
+        content: `
+          <div class="topic-section">
+            <h3>Simple Interest</h3>
+            <div class="formula-box"><div class="formula-label">Formula</div>I = Prn<br>where P = principal, r = rate (as decimal), n = time in years</div>
+            <div class="example-box">
+              <div class="example-box-label">Example — $5000 at 4% p.a. for 3 years</div>
+              <ol class="worked-steps">
+                <li>I = 5000 × 0.04 × 3 = $600</li>
+                <li>Total = P + I = $5600</li>
+              </ol>
+            </div>
+          </div>
+          <div class="topic-section">
+            <h3>Compound Interest</h3>
+            <div class="formula-box"><div class="formula-label">Formula</div>A = P(1 + r/n)^(nt)<br>A = future amount, r = annual rate, n = compounds per year, t = years</div>
+            <div class="key-points">
+              <div class="key-point"><div class="key-point-dot"></div><div>Compound interest earns interest on interest — always greater than simple interest (for same rate &amp; time).</div></div>
+              <div class="key-point"><div class="key-point-dot"></div><div>For depreciation: A = P(1 − r)^n (declining balance method)</div></div>
+              <div class="key-point"><div class="key-point-dot"></div><div>Future value annuity: FV = M × [(1+r)^n − 1] / r</div></div>
+            </div>
+          </div>
+        `
+      },
+      {
+        id: "stats_std",
+        name: "Statistics & Probability",
+        subtopics: ["Data Displays", "Summary Statistics", "Probability", "Bivariate Data"],
+        content: `
+          <div class="topic-section">
+            <h3>Summary Statistics</h3>
+            <div class="formula-sheet-grid" style="margin:1rem 0;">
+              <div class="formula-item"><div class="formula-item-name">Mean</div><div class="formula-item-eq">x̄ = Σx / n</div></div>
+              <div class="formula-item"><div class="formula-item-name">Median</div><div class="formula-item-eq">Middle value when ordered</div></div>
+              <div class="formula-item"><div class="formula-item-name">Mode</div><div class="formula-item-eq">Most frequent value</div></div>
+              <div class="formula-item"><div class="formula-item-name">Range</div><div class="formula-item-eq">Max − Min</div></div>
+              <div class="formula-item"><div class="formula-item-name">IQR</div><div class="formula-item-eq">Q3 − Q1</div></div>
+              <div class="formula-item"><div class="formula-item-name">Std Dev</div><div class="formula-item-eq">σ = √[Σ(x−x̄)²/n]</div></div>
+            </div>
+          </div>
+          <div class="topic-section">
+            <h3>Probability</h3>
+            <div class="formula-box"><div class="formula-label">Key Rules</div>P(A) = favourable outcomes / total outcomes<br>0 ≤ P(A) ≤ 1<br>P(A') = 1 − P(A)</div>
+            <div class="key-points">
+              <div class="key-point"><div class="key-point-dot"></div><div>Relative frequency ≈ probability for large samples (Law of Large Numbers)</div></div>
+              <div class="key-point"><div class="key-point-dot"></div><div>Use two-way tables for conditional probability problems</div></div>
+              <div class="key-point"><div class="key-point-dot"></div><div>Tree diagrams multiply along branches, add between branches</div></div>
+            </div>
+          </div>
+        `
+      },
+      {
+        id: "networks_std",
+        name: "Networks",
+        subtopics: ["Graph Theory", "Shortest Path", "Minimum Spanning Tree", "Critical Path"],
+        content: `
+          <div class="topic-section">
+            <h3>Graph Theory Basics</h3>
+            <p>A network (graph) consists of vertices (nodes) and edges (arcs). Networks are used to model real-world situations such as roads, communications, and project scheduling.</p>
+            <div class="formula-box"><div class="formula-label">Key Terms</div>Degree of a vertex: number of edges connected to it<br>Euler's Rule: V − E + F = 2 (planar graphs)<br>Sum of degrees = 2 × number of edges</div>
+            <div class="key-points">
+              <div class="key-point"><div class="key-point-dot"></div><div>An Euler path visits every edge exactly once. Exists if exactly 0 or 2 vertices have odd degree.</div></div>
+              <div class="key-point"><div class="key-point-dot"></div><div>Dijkstra's algorithm finds the shortest path between two vertices.</div></div>
+              <div class="key-point"><div class="key-point-dot"></div><div>Prim's/Kruskal's algorithm finds the minimum spanning tree.</div></div>
+              <div class="key-point"><div class="key-point-dot"></div><div>Critical path analysis: forward scan (EST), backward scan (LST), float = LST − EST.</div></div>
+            </div>
+          </div>
+        `
+      }
+    ]
+  },
+  advanced: {
+    title: "Mathematics Advanced",
+    eyebrow: "Advanced · 2 Unit",
+    topics: [
+      {
+        id: "functions_adv",
+        name: "Functions",
+        subtopics: ["Function Notation", "Domain & Range", "Transformations", "Inverse Functions"],
+        content: `
+          <div class="topic-section">
+            <h3>Function Notation &amp; Concepts</h3>
+            <p>A function is a rule that assigns exactly one output to each input. We write f(x) for the output when the input is x.</p>
+            <div class="formula-box"><div class="formula-label">Key Definitions</div>Domain: set of all valid inputs (x-values)<br>Range: set of all possible outputs (y-values)<br>f⁻¹(x): inverse function (reflect over y = x)</div>
+            <div class="key-points">
+              <div class="key-point"><div class="key-point-dot"></div><div>Vertical line test: a curve represents a function if every vertical line crosses it at most once.</div></div>
+              <div class="key-point"><div class="key-point-dot"></div><div>Horizontal line test: a function has an inverse if every horizontal line crosses it at most once.</div></div>
+              <div class="key-point"><div class="key-point-dot"></div><div>Odd function: f(−x) = −f(x). Even function: f(−x) = f(x).</div></div>
+            </div>
+          </div>
+          <div class="topic-section">
+            <h3>Transformations</h3>
+            <div class="formula-sheet-grid" style="margin:1rem 0;">
+              <div class="formula-item"><div class="formula-item-name">y = f(x) + c</div><div class="formula-item-desc">Vertical shift up by c</div></div>
+              <div class="formula-item"><div class="formula-item-name">y = f(x − h)</div><div class="formula-item-desc">Horizontal shift right by h</div></div>
+              <div class="formula-item"><div class="formula-item-name">y = af(x)</div><div class="formula-item-desc">Vertical stretch by factor a</div></div>
+              <div class="formula-item"><div class="formula-item-name">y = f(bx)</div><div class="formula-item-desc">Horizontal compression by factor b</div></div>
+              <div class="formula-item"><div class="formula-item-name">y = −f(x)</div><div class="formula-item-desc">Reflection in x-axis</div></div>
+              <div class="formula-item"><div class="formula-item-name">y = f(−x)</div><div class="formula-item-desc">Reflection in y-axis</div></div>
+            </div>
+          </div>
+        `
+      },
+      {
+        id: "trig_adv",
+        name: "Trigonometry",
+        subtopics: ["Radian Measure", "Trig Functions", "Sine & Cosine Rule", "Trig Identities"],
+        content: `
+          <div class="topic-section">
+            <h3>Radian Measure</h3>
+            <div class="formula-box"><div class="formula-label">Conversion</div>π radians = 180°<br>To convert: degrees × π/180 = radians<br>Arc length: l = rθ &nbsp;&nbsp; Sector area: A = ½r²θ</div>
+          </div>
+          <div class="topic-section">
+            <h3>Sine &amp; Cosine Rules</h3>
+            <div class="formula-box"><div class="formula-label">Sine Rule</div>a/sin A = b/sin B = c/sin C<br>Area = ½ab sin C</div>
+            <div class="formula-box"><div class="formula-label">Cosine Rule</div>c² = a² + b² − 2ab cos C<br>cos C = (a² + b² − c²) / (2ab)</div>
+          </div>
+          <div class="topic-section">
+            <h3>Trig Identities</h3>
+            <div class="formula-sheet-grid" style="margin:1rem 0;">
+              <div class="formula-item"><div class="formula-item-name">Pythagorean Identity</div><div class="formula-item-eq">sin²θ + cos²θ = 1</div></div>
+              <div class="formula-item"><div class="formula-item-name">Tangent</div><div class="formula-item-eq">tan θ = sin θ / cos θ</div></div>
+              <div class="formula-item"><div class="formula-item-name">Double Angle (sin)</div><div class="formula-item-eq">sin 2A = 2 sin A cos A</div></div>
+              <div class="formula-item"><div class="formula-item-name">Double Angle (cos)</div><div class="formula-item-eq">cos 2A = cos²A − sin²A</div></div>
+            </div>
+          </div>
+        `
+      },
+      {
+        id: "calculus_adv",
+        name: "Calculus",
+        subtopics: ["Limits & Derivatives", "Rules of Differentiation", "Applications of Calculus", "Integration"],
+        content: `
+          <div class="topic-section">
+            <h3>Differentiation Rules</h3>
+            <div class="formula-sheet-grid" style="margin:1rem 0;">
+              <div class="formula-item"><div class="formula-item-name">Power Rule</div><div class="formula-item-eq">d/dx[xⁿ] = nxⁿ⁻¹</div></div>
+              <div class="formula-item"><div class="formula-item-name">Chain Rule</div><div class="formula-item-eq">dy/dx = dy/du · du/dx</div></div>
+              <div class="formula-item"><div class="formula-item-name">Product Rule</div><div class="formula-item-eq">d/dx[uv] = u'v + uv'</div></div>
+              <div class="formula-item"><div class="formula-item-name">Quotient Rule</div><div class="formula-item-eq">d/dx[u/v] = (u'v − uv')/v²</div></div>
+              <div class="formula-item"><div class="formula-item-name">d/dx[sin x]</div><div class="formula-item-eq">= cos x</div></div>
+              <div class="formula-item"><div class="formula-item-name">d/dx[cos x]</div><div class="formula-item-eq">= −sin x</div></div>
+              <div class="formula-item"><div class="formula-item-name">d/dx[eˣ]</div><div class="formula-item-eq">= eˣ</div></div>
+              <div class="formula-item"><div class="formula-item-name">d/dx[ln x]</div><div class="formula-item-eq">= 1/x</div></div>
+            </div>
+          </div>
+          <div class="topic-section">
+            <h3>Integration</h3>
+            <div class="formula-box"><div class="formula-label">Indefinite Integral</div>∫xⁿ dx = xⁿ⁺¹/(n+1) + C &nbsp;(n ≠ −1)</div>
+            <div class="formula-box"><div class="formula-label">Definite Integral &amp; Area</div>Area = ∫ₐᵇ f(x) dx<br>If below x-axis: take absolute value of the integral</div>
+            <div class="formula-sheet-grid" style="margin:1rem 0;">
+              <div class="formula-item"><div class="formula-item-name">∫sin x dx</div><div class="formula-item-eq">= −cos x + C</div></div>
+              <div class="formula-item"><div class="formula-item-name">∫cos x dx</div><div class="formula-item-eq">= sin x + C</div></div>
+              <div class="formula-item"><div class="formula-item-name">∫eˣ dx</div><div class="formula-item-eq">= eˣ + C</div></div>
+              <div class="formula-item"><div class="formula-item-name">∫(1/x) dx</div><div class="formula-item-eq">= ln|x| + C</div></div>
+            </div>
+          </div>
+          <div class="topic-section">
+            <h3>Applications of Calculus</h3>
+            <div class="key-points">
+              <div class="key-point"><div class="key-point-dot"></div><div>Stationary points: f'(x) = 0. Local max if f''(x) &lt; 0, local min if f''(x) > 0.</div></div>
+              <div class="key-point"><div class="key-point-dot"></div><div>Inflection points: f''(x) = 0 and sign changes.</div></div>
+              <div class="key-point"><div class="key-point-dot"></div><div>Velocity = ds/dt, Acceleration = dv/dt = d²s/dt²</div></div>
+              <div class="key-point"><div class="key-point-dot"></div><div>Exponential growth/decay: dN/dt = kN → N = N₀eᵏᵗ</div></div>
+            </div>
+          </div>
+        `
+      },
+      {
+        id: "exp_log_adv",
+        name: "Exponentials & Logs",
+        subtopics: ["Laws of Logarithms", "Exponential Functions", "Applications"],
+        content: `
+          <div class="topic-section">
+            <h3>Laws of Logarithms</h3>
+            <div class="formula-sheet-grid" style="margin:1rem 0;">
+              <div class="formula-item"><div class="formula-item-name">Product Law</div><div class="formula-item-eq">log(AB) = log A + log B</div></div>
+              <div class="formula-item"><div class="formula-item-name">Quotient Law</div><div class="formula-item-eq">log(A/B) = log A − log B</div></div>
+              <div class="formula-item"><div class="formula-item-name">Power Law</div><div class="formula-item-eq">log(Aⁿ) = n log A</div></div>
+              <div class="formula-item"><div class="formula-item-name">Change of Base</div><div class="formula-item-eq">log_b(x) = ln x / ln b</div></div>
+              <div class="formula-item"><div class="formula-item-name">Natural Log</div><div class="formula-item-eq">ln(eˣ) = x, e^(ln x) = x</div></div>
+              <div class="formula-item"><div class="formula-item-name">Special Values</div><div class="formula-item-eq">log 1 = 0, log_b(b) = 1</div></div>
+            </div>
+          </div>
+          <div class="topic-section">
+            <h3>Exponential Growth &amp; Decay</h3>
+            <div class="formula-box"><div class="formula-label">General Model</div>P(t) = P₀ · eᵏᵗ<br>k > 0: growth, k &lt; 0: decay<br>Half-life: t½ = ln(2) / |k|</div>
+          </div>
+        `
+      },
+      {
+        id: "stats_adv",
+        name: "Statistical Analysis",
+        subtopics: ["Normal Distribution", "z-scores", "Correlation", "Regression"],
+        content: `
+          <div class="topic-section">
+            <h3>Normal Distribution</h3>
+            <p>A symmetric, bell-shaped distribution characterised by its mean (μ) and standard deviation (σ).</p>
+            <div class="formula-box"><div class="formula-label">68-95-99.7 Rule (Empirical Rule)</div>~68% of data lies within 1σ of the mean<br>~95% within 2σ<br>~99.7% within 3σ</div>
+            <div class="formula-box"><div class="formula-label">z-score</div>z = (x − μ) / σ<br>Converts any normal variable to the standard normal (μ=0, σ=1)</div>
+          </div>
+          <div class="topic-section">
+            <h3>Correlation &amp; Regression</h3>
+            <div class="key-points">
+              <div class="key-point"><div class="key-point-dot"></div><div>Pearson's r: measures strength and direction of linear relationship (−1 ≤ r ≤ 1)</div></div>
+              <div class="key-point"><div class="key-point-dot"></div><div>Least-squares regression line: ŷ = a + bx minimises Σ(y − ŷ)²</div></div>
+              <div class="key-point"><div class="key-point-dot"></div><div>Correlation ≠ Causation. Always consider lurking variables.</div></div>
+              <div class="key-point"><div class="key-point-dot"></div><div>Interpolation (within data range) is more reliable than extrapolation.</div></div>
+            </div>
+          </div>
+        `
+      }
+    ]
+  },
+  ext1: {
+    title: "Mathematics Extension 1",
+    eyebrow: "Extension 1 · 3 Unit",
+    topics: [
+      {
+        id: "proof_e1",
+        name: "Proof",
+        subtopics: ["Mathematical Induction", "Inequalities", "Divisibility Proofs"],
+        content: `
+          <div class="topic-section">
+            <h3>Mathematical Induction</h3>
+            <p>Induction proves a statement P(n) is true for all positive integers n by proving a base case and an inductive step.</p>
+            <div class="formula-box"><div class="formula-label">Steps</div>1. Base case: Prove P(1) is true<br>2. Assume P(k) is true (inductive hypothesis)<br>3. Prove P(k+1) is true using the assumption<br>4. Conclude by induction</div>
+            <div class="example-box">
+              <div class="example-box-label">Example — Prove 1+2+3+...+n = n(n+1)/2</div>
+              <ol class="worked-steps">
+                <li>Base case (n=1): LHS = 1, RHS = 1(2)/2 = 1 ✓</li>
+                <li>Assume: 1+2+...+k = k(k+1)/2</li>
+                <li>Prove for k+1: 1+2+...+k+(k+1) = k(k+1)/2 + (k+1) = (k+1)(k+2)/2 ✓</li>
+                <li>True for all n ∈ ℤ⁺ by induction</li>
+              </ol>
+            </div>
+          </div>
+        `
+      },
+      {
+        id: "vectors_e1",
+        name: "Vectors",
+        subtopics: ["Vector Operations", "Dot Product", "Projectile Motion"],
+        content: `
+          <div class="topic-section">
+            <h3>Vector Operations</h3>
+            <div class="formula-sheet-grid" style="margin:1rem 0;">
+              <div class="formula-item"><div class="formula-item-name">Magnitude</div><div class="formula-item-eq">|v| = √(x² + y²)</div></div>
+              <div class="formula-item"><div class="formula-item-name">Unit Vector</div><div class="formula-item-eq">v̂ = v / |v|</div></div>
+              <div class="formula-item"><div class="formula-item-name">Dot Product</div><div class="formula-item-eq">a·b = |a||b|cos θ = a₁b₁ + a₂b₂</div></div>
+              <div class="formula-item"><div class="formula-item-name">Perpendicular</div><div class="formula-item-eq">a·b = 0 ↔ a ⊥ b</div></div>
+              <div class="formula-item"><div class="formula-item-name">Projection</div><div class="formula-item-eq">proj_b a = (a·b/|b|²)b</div></div>
+              <div class="formula-item"><div class="formula-item-name">Parallel</div><div class="formula-item-eq">a = λb for some scalar λ</div></div>
+            </div>
+          </div>
+          <div class="topic-section">
+            <h3>Projectile Motion</h3>
+            <div class="formula-box"><div class="formula-label">Equations (no air resistance)</div>x = V cos α · t<br>y = V sin α · t − ½gt²<br>Range = V²sin(2α)/g<br>Max Height = V²sin²α / (2g)</div>
+          </div>
+        `
+      },
+      {
+        id: "combinatorics_e1",
+        name: "Combinatorics",
+        subtopics: ["Permutations", "Combinations", "Binomial Theorem", "Pigeonhole Principle"],
+        content: `
+          <div class="topic-section">
+            <h3>Counting Principles</h3>
+            <div class="formula-sheet-grid" style="margin:1rem 0;">
+              <div class="formula-item"><div class="formula-item-name">Permutations</div><div class="formula-item-eq">ⁿPᵣ = n! / (n−r)!</div></div>
+              <div class="formula-item"><div class="formula-item-name">Combinations</div><div class="formula-item-eq">ⁿCᵣ = n! / [r!(n−r)!]</div></div>
+              <div class="formula-item"><div class="formula-item-name">Arrangement with repeats</div><div class="formula-item-eq">n! / (n₁! n₂! ... nₖ!)</div></div>
+              <div class="formula-item"><div class="formula-item-name">Binomial Theorem</div><div class="formula-item-eq">(a+b)ⁿ = Σ ⁿCₖ aⁿ⁻ᵏ bᵏ</div></div>
+            </div>
+            <div class="key-points">
+              <div class="key-point"><div class="key-point-dot"></div><div>Permutations: ORDER matters. Combinations: order does NOT matter.</div></div>
+              <div class="key-point"><div class="key-point-dot"></div><div>Restriction problems: deal with the restrictions first, then count remaining.</div></div>
+              <div class="key-point"><div class="key-point-dot"></div><div>Pigeonhole: if n items are placed into m containers with n > m, at least one container has ≥ 2 items.</div></div>
+            </div>
+          </div>
+        `
+      },
+      {
+        id: "further_calc_e1",
+        name: "Further Calculus",
+        subtopics: ["Integration by Substitution", "Related Rates", "Inverse Trig Derivatives"],
+        content: `
+          <div class="topic-section">
+            <h3>Integration by Substitution</h3>
+            <div class="formula-box"><div class="formula-label">Method</div>Let u = g(x), then du = g'(x)dx<br>∫f(g(x))g'(x)dx = ∫f(u)du</div>
+            <div class="example-box">
+              <div class="example-box-label">Example — ∫2x(x²+1)³ dx</div>
+              <ol class="worked-steps">
+                <li>Let u = x² + 1, so du = 2x dx</li>
+                <li>∫u³ du = u⁴/4 + C</li>
+                <li>Substitute back: (x²+1)⁴/4 + C</li>
+              </ol>
+            </div>
+          </div>
+          <div class="topic-section">
+            <h3>Inverse Trig Derivatives</h3>
+            <div class="formula-sheet-grid" style="margin:1rem 0;">
+              <div class="formula-item"><div class="formula-item-name">d/dx[sin⁻¹x]</div><div class="formula-item-eq">= 1/√(1−x²)</div></div>
+              <div class="formula-item"><div class="formula-item-name">d/dx[cos⁻¹x]</div><div class="formula-item-eq">= −1/√(1−x²)</div></div>
+              <div class="formula-item"><div class="formula-item-name">d/dx[tan⁻¹x]</div><div class="formula-item-eq">= 1/(1+x²)</div></div>
+              <div class="formula-item"><div class="formula-item-name">∫ 1/√(a²−x²) dx</div><div class="formula-item-eq">= sin⁻¹(x/a) + C</div></div>
+              <div class="formula-item"><div class="formula-item-name">∫ 1/(a²+x²) dx</div><div class="formula-item-eq">= (1/a)tan⁻¹(x/a) + C</div></div>
+            </div>
+          </div>
+        `
+      },
+      {
+        id: "inference_e1",
+        name: "Statistical Inference",
+        subtopics: ["Sampling Distributions", "Confidence Intervals", "Hypothesis Testing"],
+        content: `
+          <div class="topic-section">
+            <h3>Sampling Distributions</h3>
+            <p>The sample proportion p̂ is an estimate of the population proportion p. For large samples, p̂ is approximately normally distributed.</p>
+            <div class="formula-box"><div class="formula-label">Standard Error of Sample Proportion</div>SE(p̂) = √(p(1−p)/n)</div>
+            <div class="formula-box"><div class="formula-label">95% Confidence Interval</div>p̂ ± 2√(p̂(1−p̂)/n)</div>
+            <div class="key-points">
+              <div class="key-point"><div class="key-point-dot"></div><div>A 95% CI means: if we repeated sampling many times, 95% of intervals would contain the true p.</div></div>
+              <div class="key-point"><div class="key-point-dot"></div><div>Larger sample size → narrower confidence interval → more precise estimate.</div></div>
+            </div>
+          </div>
+        `
+      }
+    ]
+  },
+  ext2: {
+    title: "Mathematics Extension 2",
+    eyebrow: "Extension 2 · 4 Unit",
+    topics: [
+      {
+        id: "complex_e2",
+        name: "Complex Numbers",
+        subtopics: ["Rectangular & Polar Forms", "De Moivre's Theorem", "Roots of Unity", "Loci"],
+        content: `
+          <div class="topic-section">
+            <h3>Complex Number Forms</h3>
+            <div class="formula-sheet-grid" style="margin:1rem 0;">
+              <div class="formula-item"><div class="formula-item-name">Rectangular</div><div class="formula-item-eq">z = x + iy</div></div>
+              <div class="formula-item"><div class="formula-item-name">Polar / Mod-Arg</div><div class="formula-item-eq">z = r(cos θ + i sin θ) = r cis θ</div></div>
+              <div class="formula-item"><div class="formula-item-name">Euler's Form</div><div class="formula-item-eq">z = re^(iθ)</div></div>
+              <div class="formula-item"><div class="formula-item-name">Modulus</div><div class="formula-item-eq">|z| = r = √(x²+y²)</div></div>
+              <div class="formula-item"><div class="formula-item-name">Argument</div><div class="formula-item-eq">arg(z) = θ = tan⁻¹(y/x) [adjust for quadrant]</div></div>
+              <div class="formula-item"><div class="formula-item-name">Conjugate</div><div class="formula-item-eq">z̄ = x − iy, |z|² = zz̄</div></div>
+            </div>
+          </div>
+          <div class="topic-section">
+            <h3>De Moivre's Theorem</h3>
+            <div class="formula-box"><div class="formula-label">Theorem</div>(r cis θ)ⁿ = rⁿ cis(nθ)<br>Used for powers and roots of complex numbers</div>
+            <div class="formula-box"><div class="formula-label">nth Roots of Unity</div>The n solutions to zⁿ = 1 are:<br>z_k = cis(2πk/n) for k = 0, 1, ..., n−1<br>They form a regular n-gon on the unit circle.</div>
+          </div>
+          <div class="topic-section">
+            <h3>Loci in the Complex Plane</h3>
+            <div class="key-points">
+              <div class="key-point"><div class="key-point-dot"></div><div>|z − a| = r : circle centred at a with radius r</div></div>
+              <div class="key-point"><div class="key-point-dot"></div><div>|z − a| = |z − b| : perpendicular bisector of a and b</div></div>
+              <div class="key-point"><div class="key-point-dot"></div><div>arg(z − a) = θ : ray from a at angle θ (not including a)</div></div>
+              <div class="key-point"><div class="key-point-dot"></div><div>Re(z) = c : vertical line; Im(z) = c : horizontal line</div></div>
+            </div>
+          </div>
+        `
+      },
+      {
+        id: "proof_e2",
+        name: "Proof",
+        subtopics: ["Mathematical Induction (adv)", "Inequalities", "Divisibility", "Geometric Proofs"],
+        content: `
+          <div class="topic-section">
+            <h3>Advanced Induction</h3>
+            <p>Extension 2 induction includes more complex sum/product formulas, inequalities, and divisibility statements.</p>
+            <div class="example-box">
+              <div class="example-box-label">Divisibility Example — Prove 3 | (n³ − n) for all n ∈ ℤ⁺</div>
+              <ol class="worked-steps">
+                <li>Note: n³ − n = n(n−1)(n+1) = product of 3 consecutive integers</li>
+                <li>Among any 3 consecutive integers, at least one is divisible by 3</li>
+                <li>Therefore 3 | n(n−1)(n+1) for all positive integers n ∎</li>
+              </ol>
+            </div>
+            <div class="key-points">
+              <div class="key-point"><div class="key-point-dot"></div><div>AM-GM inequality: (a+b)/2 ≥ √(ab) for a, b ≥ 0, equality iff a = b</div></div>
+              <div class="key-point"><div class="key-point-dot"></div><div>Cauchy-Schwarz: (a₁b₁ + a₂b₂)² ≤ (a₁² + a₂²)(b₁² + b₂²)</div></div>
+              <div class="key-point"><div class="key-point-dot"></div><div>Triangle inequality: |a + b| ≤ |a| + |b|</div></div>
+            </div>
+          </div>
+        `
+      },
+      {
+        id: "vectors3d_e2",
+        name: "Vectors in 3D",
+        subtopics: ["3D Coordinates", "Cross Product", "Lines & Planes"],
+        content: `
+          <div class="topic-section">
+            <h3>3D Vectors</h3>
+            <div class="formula-sheet-grid" style="margin:1rem 0;">
+              <div class="formula-item"><div class="formula-item-name">Magnitude</div><div class="formula-item-eq">|v| = √(x²+y²+z²)</div></div>
+              <div class="formula-item"><div class="formula-item-name">Dot Product</div><div class="formula-item-eq">a·b = a₁b₁+a₂b₂+a₃b₃</div></div>
+              <div class="formula-item"><div class="formula-item-name">Cross Product</div><div class="formula-item-eq">a×b = (a₂b₃−a₃b₂, a₃b₁−a₁b₃, a₁b₂−a₂b₁)</div></div>
+              <div class="formula-item"><div class="formula-item-name">|a×b|</div><div class="formula-item-eq">= |a||b|sin θ = area of parallelogram</div></div>
+            </div>
+            <div class="formula-box"><div class="formula-label">Equation of a Plane</div>ax + by + cz = d where (a, b, c) is the normal vector<br>Vector form: r = r₀ + λu + μv</div>
+          </div>
+        `
+      },
+      {
+        id: "integration_e2",
+        name: "Integration Techniques",
+        subtopics: ["By Parts", "Partial Fractions", "Trig Substitution", "Reduction Formulae"],
+        content: `
+          <div class="topic-section">
+            <h3>Integration by Parts</h3>
+            <div class="formula-box"><div class="formula-label">Formula (LIATE: choose u to differentiate first)</div>∫u dv = uv − ∫v du</div>
+            <div class="example-box">
+              <div class="example-box-label">Example — ∫x eˣ dx</div>
+              <ol class="worked-steps">
+                <li>Let u = x → du = dx; let dv = eˣ dx → v = eˣ</li>
+                <li>∫x eˣ dx = x eˣ − ∫eˣ dx = x eˣ − eˣ + C</li>
+                <li>= eˣ(x − 1) + C</li>
+              </ol>
+            </div>
+          </div>
+          <div class="topic-section">
+            <h3>Partial Fractions</h3>
+            <div class="formula-box"><div class="formula-label">Decomposition</div>P(x)/[(ax+b)(cx+d)] = A/(ax+b) + B/(cx+d)<br>Solve for A, B by substituting roots or equating coefficients.</div>
+          </div>
+          <div class="topic-section">
+            <h3>Trig Substitution</h3>
+            <div class="formula-sheet-grid" style="margin:1rem 0;">
+              <div class="formula-item"><div class="formula-item-name">√(a²−x²)</div><div class="formula-item-eq">x = a sin θ</div></div>
+              <div class="formula-item"><div class="formula-item-name">√(a²+x²)</div><div class="formula-item-eq">x = a tan θ</div></div>
+              <div class="formula-item"><div class="formula-item-name">√(x²−a²)</div><div class="formula-item-eq">x = a sec θ</div></div>
+            </div>
+          </div>
+        `
+      },
+      {
+        id: "mechanics_e2",
+        name: "Mechanics",
+        subtopics: ["SHM", "Circular Motion", "Resisted Motion", "Conical Pendulum"],
+        content: `
+          <div class="topic-section">
+            <h3>Simple Harmonic Motion</h3>
+            <div class="formula-box"><div class="formula-label">Defining Equation</div>ẍ = −n²x &nbsp;(acceleration proportional and opposite to displacement)</div>
+            <div class="formula-sheet-grid" style="margin:1rem 0;">
+              <div class="formula-item"><div class="formula-item-name">Displacement</div><div class="formula-item-eq">x = a cos(nt + α)</div></div>
+              <div class="formula-item"><div class="formula-item-name">Velocity</div><div class="formula-item-eq">ẋ = −an sin(nt + α)</div></div>
+              <div class="formula-item"><div class="formula-item-name">v² in terms of x</div><div class="formula-item-eq">v² = n²(a²−x²)</div></div>
+              <div class="formula-item"><div class="formula-item-name">Period</div><div class="formula-item-eq">T = 2π/n</div></div>
+              <div class="formula-item"><div class="formula-item-name">Amplitude</div><div class="formula-item-eq">a (max displacement)</div></div>
+            </div>
+          </div>
+          <div class="topic-section">
+            <h3>Circular Motion</h3>
+            <div class="formula-box"><div class="formula-label">Key Equations</div>v = rω &nbsp;&nbsp; a = v²/r = rω² (centripetal)<br>F_c = mv²/r (centripetal force toward centre)<br>Angular velocity: ω = 2π/T = 2πf</div>
+          </div>
+        `
+      }
+    ]
+  }
+};
+
+// ══════════════════════════════════════════
+//  COURSE PANEL
+// ══════════════════════════════════════════
+let currentCourse = null;
+let currentTopicIdx = 0;
+
+function openCourse(level) {
+  currentCourse = courseData[level];
+  currentTopicIdx = 0;
+  
+  document.getElementById('panel-eyebrow').textContent = currentCourse.eyebrow;
+  document.getElementById('panel-title').textContent = currentCourse.title;
+  
+  buildTopicNav();
+  buildSidebar();
+  showTopic(0);
+  
+  const panel = document.getElementById('content-panel');
+  panel.classList.add('open');
+  panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function closeCourse() {
+  document.getElementById('content-panel').classList.remove('open');
+}
+
+function buildTopicNav() {
+  const nav = document.getElementById('topicNavBar');
+  nav.innerHTML = currentCourse.topics.map((t, i) =>
+    `<div class="content-nav-item ${i===0?'active':''}" onclick="selectTopicFromNav(${i})">${t.name}</div>`
+  ).join('');
+}
+
+function buildSidebar() {
+  const sidebar = document.getElementById('panelSidebar');
+  sidebar.innerHTML = currentCourse.topics.map((t, i) =>
+    `<div class="panel-sidebar-item ${i===0?'active':''}" onclick="showTopic(${i})">
+      ${t.name}
+    </div>`
+  ).join('');
+}
+
+function selectTopicFromNav(i) {
+  showTopic(i);
+}
+
+function showTopic(idx) {
+  currentTopicIdx = idx;
+  const topic = currentCourse.topics[idx];
+  
+  // Update sidebar active state
+  document.querySelectorAll('.panel-sidebar-item').forEach((el, i) => {
+    el.classList.toggle('active', i === idx);
+  });
+  
+  // Update nav bar
+  document.querySelectorAll('.content-nav-item').forEach((el, i) => {
+    el.classList.toggle('active', i === idx);
+  });
+  
+  // Render content
+  const subtopicsList = topic.subtopics.map(s => 
+    `<div class="key-point"><div class="key-point-dot"></div><div>${s}</div></div>`
+  ).join('');
+  
+  document.getElementById('panelContent').innerHTML = `
+    <div style="margin-bottom:1.5rem;">
+      <div style="font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem;">Subtopics</div>
+      <div class="key-points">${subtopicsList}</div>
+    </div>
+    ${topic.content}
+  `;
+}
+
+// ══════════════════════════════════════════
+//  TOOLS
+// ══════════════════════════════════════════
+function solveQuadratic() {
+  const a = parseFloat(document.getElementById('qa').value);
+  const b = parseFloat(document.getElementById('qb').value);
+  const c = parseFloat(document.getElementById('qc').value);
+  const disc = b*b - 4*a*c;
+  const el = document.getElementById('quadResult');
+  el.classList.add('show');
+  
+  if(a === 0) { el.innerHTML = 'a cannot be 0 (not a quadratic).'; return; }
+  
+  let html = `Equation: ${a}x² ${b>=0?'+':''}${b}x ${c>=0?'+':''}${c} = 0\n`;
+  html += `Discriminant: Δ = ${b}² − 4(${a})(${c}) = ${disc.toFixed(4)}\n\n`;
+  
+  if(disc > 0) {
+    const x1 = (-b + Math.sqrt(disc)) / (2*a);
+    const x2 = (-b - Math.sqrt(disc)) / (2*a);
+    html += `Two real roots:\n  x = ${x1.toFixed(4)}\n  x = ${x2.toFixed(4)}`;
+  } else if(disc === 0) {
+    const x = -b / (2*a);
+    html += `One repeated root:\n  x = ${x.toFixed(4)}`;
+  } else {
+    const re = (-b / (2*a)).toFixed(4);
+    const im = (Math.sqrt(-disc) / (2*a)).toFixed(4);
+    html += `Complex roots (Δ < 0):\n  x = ${re} ± ${im}i`;
+  }
+  el.textContent = html;
+}
+
+function drawGraph() {
+  const canvas = document.getElementById('funcGraph');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.offsetWidth * window.devicePixelRatio || 600;
+  const H = 260 * window.devicePixelRatio || 260;
+  canvas.width = W; canvas.height = H;
+  
+  const expr = document.getElementById('funcInput').value;
+  const xMin = -10, xMax = 10;
+  const yMin = -8, yMax = 8;
+  const toCanvasX = x => (x - xMin) / (xMax - xMin) * W;
+  const toCanvasY = y => H - (y - yMin) / (yMax - yMin) * H;
+  
+  // Background
+  ctx.fillStyle = '#fdfaf4';
+  ctx.fillRect(0,0,W,H);
+  
+  // Grid
+  ctx.strokeStyle = '#d4c9b0';
+  ctx.lineWidth = 0.5;
+  for(let x = Math.ceil(xMin); x <= xMax; x++) {
+    ctx.beginPath(); ctx.moveTo(toCanvasX(x),0); ctx.lineTo(toCanvasX(x),H); ctx.stroke();
+  }
+  for(let y = Math.ceil(yMin); y <= yMax; y++) {
+    ctx.beginPath(); ctx.moveTo(0,toCanvasY(y)); ctx.lineTo(W,toCanvasY(y)); ctx.stroke();
+  }
+  
+  // Axes
+  ctx.strokeStyle = '#3d4f5c';
+  ctx.lineWidth = 1.5;
+  ctx.beginPath(); ctx.moveTo(toCanvasX(0),0); ctx.lineTo(toCanvasX(0),H); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(0,toCanvasY(0)); ctx.lineTo(W,toCanvasY(0)); ctx.stroke();
+  
+  // Labels
+  ctx.fillStyle = '#7a7060';
+  ctx.font = `${11 * window.devicePixelRatio}px DM Mono`;
+  for(let x = -8; x <= 8; x += 2) {
+    if(x !== 0) ctx.fillText(x, toCanvasX(x)-8, toCanvasY(0)+14*window.devicePixelRatio);
+  }
+  
+  // Plot
+  const safeExpr = expr.replace(/\^/g, '**').replace(/sin/g,'Math.sin').replace(/cos/g,'Math.cos')
+    .replace(/tan/g,'Math.tan').replace(/sqrt/g,'Math.sqrt').replace(/abs/g,'Math.abs')
+    .replace(/log/g,'Math.log').replace(/exp/g,'Math.exp').replace(/pi/g,'Math.PI').replace(/e(?![x])/g,'Math.E');
+  
+  const fn = x => {
+    try { return Function('x', 'return ' + safeExpr)(x); } catch(e) { return NaN; }
+  };
+  
+  ctx.strokeStyle = '#b5451b';
+  ctx.lineWidth = 2.5;
+  ctx.beginPath();
+  let started = false;
+  const steps = W * 2;
+  for(let i = 0; i <= steps; i++) {
+    const x = xMin + (xMax - xMin) * i / steps;
+    const y = fn(x);
+    if(!isFinite(y) || y < yMin - 1 || y > yMax + 1) { started = false; continue; }
+    if(!started) { ctx.moveTo(toCanvasX(x), toCanvasY(y)); started = true; }
+    else ctx.lineTo(toCanvasX(x), toCanvasY(y));
+  }
+  ctx.stroke();
+}
+
+function showDerivative() {
+  const v = document.getElementById('derivSelect').value;
+  const el = document.getElementById('derivResult');
+  const rules = {
+    poly: `f(x) = xⁿ\nf'(x) = nxⁿ⁻¹\n∫xⁿ dx = xⁿ⁺¹/(n+1) + C\n\nExample: d/dx[x⁴] = 4x³\nExample: ∫x³ dx = x⁴/4 + C`,
+    sin: `f(x) = sin(x)\nf'(x) = cos(x)\n∫sin(x) dx = −cos(x) + C`,
+    cos: `f(x) = cos(x)\nf'(x) = −sin(x)\n∫cos(x) dx = sin(x) + C`,
+    tan: `f(x) = tan(x)\nf'(x) = sec²(x)\n∫tan(x) dx = ln|sec(x)| + C`,
+    exp: `f(x) = eˣ\nf'(x) = eˣ\n∫eˣ dx = eˣ + C\n\nFor y = eᵃˣ:\ny' = aeᵃˣ`,
+    ln: `f(x) = ln(x)\nf'(x) = 1/x\n∫(1/x) dx = ln|x| + C`,
+    chain: `Chain Rule:\nd/dx[f(g(x))] = f'(g(x)) · g'(x)\n\nExample: d/dx[sin(x²)] = cos(x²) · 2x`,
+    product: `Product Rule:\nd/dx[uv] = u'v + uv'\n\nExample: d/dx[x·sin(x)] = sin(x) + x·cos(x)`,
+    quotient: `Quotient Rule:\nd/dx[u/v] = (u'v − uv') / v²\n\nExample: d/dx[x/cos(x)] = (cos(x) + x·sin(x)) / cos²(x)`,
+  };
+  el.classList.add('show');
+  el.textContent = rules[v] || 'Select a function above.';
+}
+
+function calcStats() {
+  const raw = document.getElementById('statsData').value;
+  const nums = raw.split(',').map(x => parseFloat(x.trim())).filter(x => !isNaN(x));
+  if(nums.length === 0) { document.getElementById('statsResult').textContent = 'Invalid data.'; return; }
+  
+  const n = nums.length;
+  const sorted = [...nums].sort((a,b)=>a-b);
+  const mean = nums.reduce((a,b)=>a+b,0)/n;
+  const median = n%2===0 ? (sorted[n/2-1]+sorted[n/2])/2 : sorted[Math.floor(n/2)];
+  const variance = nums.reduce((a,b)=>a+(b-mean)**2,0)/n;
+  const std = Math.sqrt(variance);
+  const min = sorted[0], max = sorted[n-1];
+  const q1 = sorted[Math.floor(n/4)];
+  const q3 = sorted[Math.floor(3*n/4)];
+  
+  const el = document.getElementById('statsResult');
+  el.classList.add('show');
+  el.textContent = `n = ${n}\nMean x̄ = ${mean.toFixed(4)}\nMedian = ${median.toFixed(4)}\nMin = ${min}, Max = ${max}\nQ1 = ${q1}, Q3 = ${q3}, IQR = ${(q3-q1).toFixed(4)}\nStd Dev σ = ${std.toFixed(4)}\nVariance σ² = ${variance.toFixed(4)}`;
+}
+
+function calcFinance() {
+  const type = document.getElementById('finType').value;
+  const P = parseFloat(document.getElementById('finP').value);
+  const r = parseFloat(document.getElementById('finR').value)/100;
+  const t = parseFloat(document.getElementById('finT').value);
+  const n = parseFloat(document.getElementById('finN').value);
+  const el = document.getElementById('finResult');
+  el.classList.add('show');
+  
+  if(type === 'simple') {
+    const I = P*r*t;
+    el.textContent = `Simple Interest:\nI = P × r × t\nI = ${P} × ${r} × ${t} = $${I.toFixed(2)}\nTotal Amount = $${(P+I).toFixed(2)}`;
+  } else if(type === 'compound') {
+    const A = P * Math.pow(1 + r/n, n*t);
+    el.textContent = `Compound Interest:\nA = P(1 + r/n)^(nt)\nA = ${P}(1 + ${(r/n).toFixed(6)})^(${n*t})\nA = $${A.toFixed(2)}\nInterest Earned = $${(A-P).toFixed(2)}`;
+  } else {
+    const M = P;
+    const rPer = r/n;
+    const periods = n*t;
+    const FV = M * (Math.pow(1+rPer, periods)-1)/rPer;
+    el.textContent = `Future Value Annuity:\nFV = M × [(1+r)^n − 1] / r\nFV = ${M} × [(1+${rPer.toFixed(6)})^${periods} − 1] / ${rPer.toFixed(6)}\nFV = $${FV.toFixed(2)}`;
   }
 }
 
-// --- SCROLL REVEAL ---
+function calcComplex() {
+  const z1r = parseFloat(document.getElementById('z1r').value);
+  const z1i = parseFloat(document.getElementById('z1i').value);
+  const z2r = parseFloat(document.getElementById('z2r').value);
+  const z2i = parseFloat(document.getElementById('z2i').value);
+  const op = document.getElementById('complexOp').value;
+  const el = document.getElementById('complexResult');
+  el.classList.add('show');
+  
+  const fmt = (r,i) => `${r.toFixed(4)} ${i>=0?'+':'-'} ${Math.abs(i).toFixed(4)}i`;
+  const z1s = fmt(z1r,z1i), z2s = fmt(z2r,z2i);
+  
+  let result='', detail='';
+  if(op==='add') {
+    result = fmt(z1r+z2r, z1i+z2i);
+    detail = `(${z1s}) + (${z2s}) = ${result}`;
+  } else if(op==='sub') {
+    result = fmt(z1r-z2r, z1i-z2i);
+    detail = `(${z1s}) − (${z2s}) = ${result}`;
+  } else if(op==='mul') {
+    const rr = z1r*z2r - z1i*z2i, ri = z1r*z2i + z1i*z2r;
+    result = fmt(rr,ri);
+    detail = `(${z1s}) × (${z2s}) = ${result}\n\nUsing (a+bi)(c+di) = (ac−bd) + (ad+bc)i`;
+  } else if(op==='div') {
+    const denom = z2r**2 + z2i**2;
+    if(denom===0) { el.textContent = 'Division by zero'; return; }
+    const rr = (z1r*z2r+z1i*z2i)/denom, ri = (z1i*z2r-z1r*z2i)/denom;
+    result = fmt(rr,ri);
+    detail = `(${z1s}) ÷ (${z2s})\nMultiply by conjugate z̄₂ = ${fmt(z2r,-z2i)}\n= ${result}`;
+  } else if(op==='mod') {
+    const mod = Math.sqrt(z1r**2+z1i**2);
+    detail = `|z₁| = √(${z1r}² + ${z1i}²) = √${(z1r**2+z1i**2).toFixed(2)} = ${mod.toFixed(4)}`;
+  } else if(op==='arg') {
+    const arg = Math.atan2(z1i,z1r);
+    detail = `arg(z₁) = atan2(${z1i}, ${z1r})\n= ${arg.toFixed(6)} radians\n= ${(arg*180/Math.PI).toFixed(4)}°`;
+  }
+  el.textContent = detail;
+}
+
+// ══════════════════════════════════════════
+//  QUIZ
+// ══════════════════════════════════════════
+const allQuestions = [
+  { topic:'calculus', level:'advanced', q:"Find dy/dx when y = x³ − 6x² + 5x.", opts:["3x² − 12x + 5","3x² + 5","x³ − 12x","3x² − 12x"], ans:0, exp:"Using the power rule: d/dx[xⁿ] = nxⁿ⁻¹, differentiate term by term." },
+  { topic:'calculus', level:'advanced', q:"Evaluate ∫(2x + 3) dx.", opts:["x² + 3x + C","2x² + 3x + C","x² + C","2 + C"], ans:0, exp:"∫2x dx = x², ∫3 dx = 3x. Always add +C for indefinite integrals." },
+  { topic:'trig', level:'advanced', q:"Solve sin θ = 0.5 for 0 ≤ θ ≤ 360°.", opts:["30°, 150°","30°, 330°","60°, 120°","45°, 135°"], ans:0, exp:"sin 30° = 0.5. In the second quadrant: 180° − 30° = 150°. So θ = 30°, 150°." },
+  { topic:'algebra', level:'advanced', q:"Simplify log₂(32).", opts:["5","4","6","2"], ans:0, exp:"32 = 2⁵, so log₂(32) = 5." },
+  { topic:'stats', level:'advanced', q:"A dataset has mean 50 and std dev 10. What z-score corresponds to x = 65?", opts:["1.5","0.65","15","6.5"], ans:0, exp:"z = (x − μ)/σ = (65 − 50)/10 = 15/10 = 1.5" },
+  { topic:'complex', level:'ext2', q:"If z = 3 + 4i, what is |z|?", opts:["5","7","25","√7"], ans:0, exp:"|z| = √(3² + 4²) = √(9 + 16) = √25 = 5" },
+  { topic:'calculus', level:'ext1', q:"Using integration by substitution, find ∫2x(x²+1)⁴ dx.", opts:["(x²+1)⁵/5 + C","(x²+1)⁵ + C","2x(x²+1)⁵ + C","x²(x²+1)⁴ + C"], ans:0, exp:"Let u = x²+1, du = 2x dx. ∫u⁴ du = u⁵/5 + C = (x²+1)⁵/5 + C" },
+  { topic:'financial', level:'standard', q:"$8000 is invested at 3% p.a. simple interest for 4 years. What is the total interest earned?", opts:["$960","$240","$480","$1200"], ans:0, exp:"I = Prn = 8000 × 0.03 × 4 = $960" },
+  { topic:'algebra', level:'ext1', q:"How many ways can 5 books be arranged on a shelf?", opts:["120","24","60","100"], ans:0, exp:"5! = 5 × 4 × 3 × 2 × 1 = 120" },
+  { topic:'trig', level:'advanced', q:"What is the exact value of cos(60°)?", opts:["1/2","√3/2","1/√2","√3"], ans:0, exp:"From the unit circle, cos(60°) = 1/2. Remember: sin(30°) = cos(60°) = 1/2." },
+  { topic:'calculus', level:'advanced', q:"A function has f'(x) = 0 and f''(x) < 0 at x = a. What is x = a?", opts:["Local maximum","Local minimum","Inflection point","Undefined"], ans:0, exp:"f'(a) = 0 → stationary point. f''(a) < 0 → concave down → local maximum." },
+  { topic:'stats', level:'advanced', q:"In a normal distribution, approximately what % of data lies within 2 standard deviations of the mean?", opts:["95%","68%","99.7%","50%"], ans:0, exp:"The 68-95-99.7 empirical rule: 95% within ±2σ, 68% within ±1σ, 99.7% within ±3σ." },
+  { topic:'complex', level:'ext2', q:"What is the argument of z = −1 + i?", opts:["3π/4","π/4","−π/4","5π/4"], ans:0, exp:"z is in quadrant 2. arg(z) = π − arctan(1/1) = π − π/4 = 3π/4" },
+  { topic:'financial', level:'standard', q:"$5000 is invested at 6% p.a. compounded monthly for 2 years. Which formula gives the amount?", opts:["5000(1+0.005)²⁴","5000(1.06)²","5000×0.06×2","5000(1.06)²⁴"], ans:0, exp:"Compound formula: A = P(1+r/n)^(nt) = 5000(1+0.06/12)^(12×2) = 5000(1.005)^24" },
+  { topic:'algebra', level:'standard', q:"Solve 4x − 3 = 17.", opts:["x = 5","x = 4","x = 7","x = 3.5"], ans:0, exp:"4x = 17 + 3 = 20, so x = 20/4 = 5" },
+];
+
+let currentQuestions = [];
+let currentQ = 0;
+let score = 0;
+let answered = false;
+
+function loadQuiz() {
+  const topic = document.getElementById('quizTopic').value;
+  const level = document.getElementById('quizLevel').value;
+  
+  let filtered = allQuestions.filter(q => 
+    (topic === 'all' || q.topic === topic) &&
+    (level === 'all' || q.level === level)
+  );
+  
+  if(filtered.length === 0) filtered = allQuestions;
+  
+  // Shuffle and take 5
+  currentQuestions = filtered.sort(() => Math.random() - 0.5).slice(0, 5);
+  currentQ = 0; score = 0;
+  
+  document.getElementById('quizScore').classList.remove('show');
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const area = document.getElementById('quizArea');
+  if(currentQ >= currentQuestions.length) {
+    area.innerHTML = '';
+    const scoreEl = document.getElementById('quizScore');
+    scoreEl.classList.add('show');
+    document.getElementById('scoreDisplay').textContent = `${score}/${currentQuestions.length}`;
+    const pct = score/currentQuestions.length;
+    document.getElementById('scoreMsg').textContent = pct >= 0.8 ? '🎉 Excellent work!' : pct >= 0.6 ? '👍 Good effort — keep practising!' : '📚 Review the material and try again!';
+    return;
+  }
+  
+  const q = currentQuestions[currentQ];
+  answered = false;
+  const labels = ['A','B','C','D'];
+  
+  area.innerHTML = `
+    <div class="quiz-card active">
+      <div class="quiz-num">Question ${currentQ+1} of ${currentQuestions.length} &nbsp;·&nbsp; ${q.topic} &nbsp;·&nbsp; ${q.level}</div>
+      <div class="progress-bar-container">
+        <div class="progress-bar" style="width:${(currentQ/currentQuestions.length)*100}%"></div>
+      </div>
+      <div class="quiz-question">${q.q}</div>
+      <div class="quiz-options">
+        ${q.opts.map((o,i) => `
+          <div class="quiz-option" onclick="selectAnswer(${i}, ${q.ans})">
+            <div class="quiz-opt-label">${labels[i]}</div>
+            <span>${o}</span>
+          </div>`).join('')}
+      </div>
+      <div class="quiz-feedback" id="qFeedback"></div>
+      <div class="quiz-nav" style="margin-top:1rem;">
+        <span style="font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--muted);">Score: ${score}/${currentQ}</span>
+        <button class="btn-secondary" id="nextBtn" onclick="nextQuestion()" style="display:none;padding:0.5rem 1.25rem;font-size:0.85rem;">Next →</button>
+      </div>
+    </div>`;
+}
+
+function selectAnswer(chosen, correct) {
+  if(answered) return;
+  answered = true;
+  
+  const opts = document.querySelectorAll('.quiz-option');
+  const feedback = document.getElementById('qFeedback');
+  const q = currentQuestions[currentQ];
+  
+  opts.forEach((o,i) => {
+    o.classList.add('disabled');
+    if(i === correct) o.classList.add('correct');
+    else if(i === chosen && chosen !== correct) o.classList.add('wrong');
+  });
+  
+  if(chosen === correct) {
+    score++;
+    feedback.className = 'quiz-feedback show correct';
+    feedback.innerHTML = `✓ Correct! ${q.exp}`;
+  } else {
+    feedback.className = 'quiz-feedback show wrong';
+    feedback.innerHTML = `✗ Incorrect. The answer was ${['A','B','C','D'][correct]}: ${q.opts[correct]}. ${q.exp}`;
+  }
+  
+  document.getElementById('nextBtn').style.display = 'inline-block';
+}
+
+function nextQuestion() {
+  currentQ++;
+  renderQuestion();
+}
+
+// ══════════════════════════════════════════
+//  FORMULA SHEETS
+// ══════════════════════════════════════════
+const formulaSheets = {
+  algebra: [
+    { name:"Quadratic Formula", eq:"x = (−b ± √(b²−4ac)) / 2a", desc:"Solves ax² + bx + c = 0" },
+    { name:"Discriminant", eq:"Δ = b² − 4ac", desc:"Δ>0: two roots, Δ=0: one root, Δ<0: complex roots" },
+    { name:"Difference of Squares", eq:"a² − b² = (a−b)(a+b)", desc:"Key factorisation identity" },
+    { name:"Perfect Square", eq:"(a±b)² = a² ± 2ab + b²", desc:"Expanding perfect squares" },
+    { name:"Sum of Cubes", eq:"a³+b³ = (a+b)(a²−ab+b²)", desc:"Factor sum of cubes" },
+    { name:"Difference of Cubes", eq:"a³−b³ = (a−b)(a²+ab+b²)", desc:"Factor difference of cubes" },
+    { name:"Completing the Square", eq:"x²+bx = (x+b/2)² − (b/2)²", desc:"Used to convert to vertex form" },
+    { name:"Log Laws: Product", eq:"log(AB) = log A + log B", desc:"Logs of products" },
+    { name:"Log Laws: Quotient", eq:"log(A/B) = log A − log B", desc:"Logs of quotients" },
+    { name:"Log Laws: Power", eq:"log(Aⁿ) = n·log A", desc:"Logs of powers" },
+  ],
+  trig: [
+    { name:"SOH CAH TOA", eq:"sin=opp/hyp, cos=adj/hyp, tan=opp/adj", desc:"Right-angled triangles" },
+    { name:"Pythagorean Identity", eq:"sin²θ + cos²θ = 1", desc:"Fundamental trig identity" },
+    { name:"Tangent Identity", eq:"tan θ = sin θ / cos θ", desc:"Relationship between ratios" },
+    { name:"Sine Rule", eq:"a/sin A = b/sin B = c/sin C", desc:"For any triangle" },
+    { name:"Cosine Rule", eq:"c² = a² + b² − 2ab cos C", desc:"For any triangle" },
+    { name:"Area of Triangle", eq:"A = ½ab sin C", desc:"Using two sides and included angle" },
+    { name:"Double Angle (sin)", eq:"sin 2A = 2 sin A cos A", desc:"Double angle formula" },
+    { name:"Double Angle (cos)", eq:"cos 2A = cos²A − sin²A = 1−2sin²A = 2cos²A−1", desc:"Three equivalent forms" },
+    { name:"Compound (sin)", eq:"sin(A±B) = sinAcosB ± cosAsinB", desc:"Addition formula" },
+    { name:"Compound (cos)", eq:"cos(A±B) = cosAcosB ∓ sinAsinB", desc:"Addition formula" },
+    { name:"Arc Length", eq:"l = rθ", desc:"θ in radians" },
+    { name:"Sector Area", eq:"A = ½r²θ", desc:"θ in radians" },
+  ],
+  calculus: [
+    { name:"Power Rule", eq:"d/dx[xⁿ] = nxⁿ⁻¹", desc:"Differentiate polynomial terms" },
+    { name:"Chain Rule", eq:"dy/dx = dy/du · du/dx", desc:"Composite functions" },
+    { name:"Product Rule", eq:"(uv)' = u'v + uv'", desc:"Product of two functions" },
+    { name:"Quotient Rule", eq:"(u/v)' = (u'v − uv') / v²", desc:"Quotient of two functions" },
+    { name:"d/dx[sin x]", eq:"cos x", desc:"Trig derivative" },
+    { name:"d/dx[cos x]", eq:"−sin x", desc:"Trig derivative" },
+    { name:"d/dx[tan x]", eq:"sec²x", desc:"Trig derivative" },
+    { name:"d/dx[eˣ]", eq:"eˣ", desc:"Exponential derivative" },
+    { name:"d/dx[ln x]", eq:"1/x (x>0)", desc:"Log derivative" },
+    { name:"∫xⁿ dx", eq:"xⁿ⁺¹/(n+1) + C, n≠−1", desc:"Power rule for integration" },
+    { name:"∫sin x dx", eq:"−cos x + C", desc:"Trig integral" },
+    { name:"∫cos x dx", eq:"sin x + C", desc:"Trig integral" },
+    { name:"∫eˣ dx", eq:"eˣ + C", desc:"Exponential integral" },
+    { name:"∫1/x dx", eq:"ln|x| + C", desc:"Log integral" },
+    { name:"Integration by Parts", eq:"∫u dv = uv − ∫v du", desc:"For products — Ext 2" },
+    { name:"Definite Integral", eq:"∫ₐᵇ f(x) dx = F(b) − F(a)", desc:"Fundamental theorem of calculus" },
+  ],
+  stats: [
+    { name:"Mean", eq:"x̄ = Σx / n", desc:"Average of dataset" },
+    { name:"Standard Deviation", eq:"σ = √(Σ(x−x̄)²/n)", desc:"Population std dev" },
+    { name:"z-score", eq:"z = (x − μ) / σ", desc:"Standardised value" },
+    { name:"Binomial P(X=k)", eq:"P(X=k) = ⁿCₖ pᵏ(1−p)ⁿ⁻ᵏ", desc:"Binomial distribution" },
+    { name:"Binomial Mean", eq:"μ = np", desc:"Expected value" },
+    { name:"Binomial Variance", eq:"σ² = np(1−p)", desc:"Variance" },
+    { name:"95% CI (proportion)", eq:"p̂ ± 2√(p̂(1−p̂)/n)", desc:"Ext 1 confidence interval" },
+    { name:"Correlation r", eq:"−1 ≤ r ≤ 1", desc:"Pearson's correlation coefficient" },
+    { name:"IQR", eq:"Q3 − Q1", desc:"Interquartile range" },
+    { name:"Outlier Test", eq:"x < Q1 − 1.5·IQR or x > Q3 + 1.5·IQR", desc:"Mild outlier criterion" },
+  ],
+  financial: [
+    { name:"Simple Interest", eq:"I = Prn", desc:"P=principal, r=rate, n=years" },
+    { name:"Compound Interest", eq:"A = P(1 + r/n)^(nt)", desc:"n=compounds per year" },
+    { name:"Present Value", eq:"PV = FV / (1+r)ⁿ", desc:"Discounting future value" },
+    { name:"Future Value Annuity", eq:"FV = M[(1+r)ⁿ−1]/r", desc:"M = regular payment" },
+    { name:"Present Value Annuity", eq:"PV = M[1−(1+r)⁻ⁿ]/r", desc:"Loan repayment formula" },
+    { name:"Depreciation (straight)", eq:"V = P − Dn", desc:"D = amount per year" },
+    { name:"Depreciation (declining)", eq:"V = P(1−r)ⁿ", desc:"r = depreciation rate" },
+  ],
+  sequences: [
+    { name:"AP: nth term", eq:"Tₙ = a + (n−1)d", desc:"a=first term, d=common difference" },
+    { name:"AP: Sum", eq:"Sₙ = n/2[2a + (n−1)d] = n(a+l)/2", desc:"l = last term" },
+    { name:"GP: nth term", eq:"Tₙ = arⁿ⁻¹", desc:"a=first term, r=common ratio" },
+    { name:"GP: Sum", eq:"Sₙ = a(rⁿ−1)/(r−1)", desc:"r ≠ 1" },
+    { name:"GP: Infinite Sum", eq:"S∞ = a/(1−r), |r|<1", desc:"Converges when |r| < 1" },
+    { name:"Sigma Notation", eq:"Σᵢ₌₁ⁿ i = n(n+1)/2", desc:"Sum of first n integers" },
+    { name:"Sum of squares", eq:"Σᵢ₌₁ⁿ i² = n(n+1)(2n+1)/6", desc:"Used in Extension 1 proofs" },
+  ],
+  complex: [
+    { name:"Rectangular form", eq:"z = x + iy", desc:"Real part x, imaginary part y" },
+    { name:"Polar / mod-arg", eq:"z = r cis θ = r(cos θ + i sin θ)", desc:"r = modulus, θ = argument" },
+    { name:"Euler form", eq:"z = re^(iθ)", desc:"Connects trig and exponentials" },
+    { name:"Modulus", eq:"|z| = √(x²+y²)", desc:"Distance from origin in Argand diagram" },
+    { name:"Conjugate", eq:"z̄ = x − iy, |z|² = zz̄", desc:"Conjugate product = modulus²" },
+    { name:"Multiplication (polar)", eq:"z₁z₂ = r₁r₂ cis(θ₁+θ₂)", desc:"Multiply moduli, add arguments" },
+    { name:"Division (polar)", eq:"z₁/z₂ = (r₁/r₂) cis(θ₁−θ₂)", desc:"Divide moduli, subtract arguments" },
+    { name:"De Moivre's Theorem", eq:"(r cis θ)ⁿ = rⁿ cis(nθ)", desc:"Powers of complex numbers" },
+    { name:"nth Roots of Unity", eq:"z_k = cis(2πk/n), k=0,1,...,n−1", desc:"n solutions to zⁿ = 1" },
+  ],
+  vectors: [
+    { name:"Magnitude 2D", eq:"|v| = √(v₁²+v₂²)", desc:"Length of vector in 2D" },
+    { name:"Magnitude 3D", eq:"|v| = √(v₁²+v₂²+v₃²)", desc:"Length of vector in 3D" },
+    { name:"Unit vector", eq:"v̂ = v / |v|", desc:"Direction vector with magnitude 1" },
+    { name:"Dot product", eq:"a·b = a₁b₁+a₂b₂ = |a||b|cos θ", desc:"Also = sum of products of components" },
+    { name:"Cross product", eq:"a×b = (a₂b₃−a₃b₂, a₃b₁−a₁b₃, a₁b₂−a₂b₁)", desc:"Ext 2 — 3D vectors" },
+    { name:"|a×b|", eq:"|a||b|sin θ = area of parallelogram", desc:"Geometric meaning" },
+    { name:"Projection of a onto b", eq:"proj_b a = (a·b/|b|²)b", desc:"Component of a in direction of b" },
+    { name:"Perpendicular condition", eq:"a·b = 0", desc:"Vectors a and b are perpendicular" },
+  ],
+};
+
+function showFormulaSheet(topic) {
+  // Update tab active state
+  document.querySelectorAll('.formula-tab').forEach(t => {
+    t.classList.toggle('active', t.textContent.toLowerCase().includes(topic.toLowerCase()) || 
+      (topic==='sequences' && t.textContent==='Sequences') ||
+      (topic==='complex' && t.textContent.includes('Complex')) ||
+      (topic==='vectors' && t.textContent==='Vectors') ||
+      (topic==='financial' && t.textContent==='Financial') ||
+      (topic==='stats' && t.textContent==='Statistics') ||
+      (topic==='calculus' && t.textContent==='Calculus') ||
+      (topic==='trig' && t.textContent==='Trigonometry') ||
+      (topic==='algebra' && t.textContent==='Algebra')
+    );
+  });
+  
+  const sheet = formulaSheets[topic];
+  if(!sheet) return;
+  
+  document.getElementById('formulaDisplay').innerHTML = `
+    <div class="formula-sheet active">
+      <div class="formula-sheet-grid">
+        ${sheet.map(f => `
+          <div class="formula-item">
+            <div class="formula-item-name">${f.name}</div>
+            <div class="formula-item-eq">${f.eq}</div>
+            <div class="formula-item-desc">${f.desc}</div>
+          </div>`).join('')}
+      </div>
+    </div>`;
+}
+
+// ══════════════════════════════════════════
+//  SCROLL REVEAL
+// ══════════════════════════════════════════
 const observer = new IntersectionObserver(entries => {
   entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.1 });
+
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-// Refresh feed every 15 seconds
-setInterval(refreshDashboard, 15000);
-window.onload = refreshDashboard;
-</script>
+// ══════════════════════════════════════════
+//  INIT
+// ══════════════════════════════════════════
+window.addEventListener('DOMContentLoaded', () => {
+  drawGraph();
+  loadQuiz();
+  showFormulaSheet('algebra');
+  showDerivative();
+});
 
+window.addEventListener('resize', () => {
+  if(document.getElementById('funcGraph')) drawGraph();
+});
+</script>
 </body>
 </html>
